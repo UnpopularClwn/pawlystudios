@@ -24,7 +24,7 @@ html {
 }
 
 body {
-  background: var(--color-white);
+  background: var(--color-paper);
   color: var(--text-body);
   font-family: var(--font-body);
   font-weight: var(--weight-body);
@@ -82,11 +82,11 @@ button {
 }
 
 .section--sand {
-  background: var(--color-sand);
+  background: var(--color-surface-warm);
 }
 
 .section--pine {
-  background: var(--color-pine);
+  background: var(--color-brand);
   color: var(--color-white);
 }
 
@@ -110,7 +110,7 @@ button {
   position: absolute;
   left: 12px;
   top: -60px;
-  background: var(--color-pine);
+  background: var(--color-brand);
   color: var(--color-white);
   padding: 10px 16px;
   border-radius: var(--radius-sm);
@@ -127,7 +127,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--color-pine);
+  outline: 2px solid var(--color-brand);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }

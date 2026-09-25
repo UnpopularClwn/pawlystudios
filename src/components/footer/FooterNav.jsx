@@ -1,19 +1,18 @@
 import Link from 'next/link'
 
 const FOOTER_NAV_LINKS = [
-  { label: 'Web Development', href: '/services/web-development' },
+  { label: 'Work', href: '/#work' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Web Development', href: '/services/web-development' },
+  { label: 'FAQ', href: '/#faq' },
 ]
 
 export default function FooterNav() {
   return (
-    <nav className="footer-nav" aria-label="Footer">
+    <nav className="footer-nav" aria-label="Footer navigation">
       <ul className="footer-nav-list">
         {FOOTER_NAV_LINKS.map((link) => (
-          <li key={link.href}>
-            <Link href={link.href}>{link.label}</Link>
-          </li>
+          <li key={link.href}><Link href={link.href}>{link.label}</Link></li>
         ))}
       </ul>
     </nav>

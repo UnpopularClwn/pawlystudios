@@ -1,153 +1,108 @@
 .site-header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 20;
   background: var(--color-white);
-  border-bottom: 1px solid var(--color-mist);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.site-header:has(.site-navigation--home) {
+  background: var(--color-brand);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
 }
 
 .site-navigation {
-  min-height: 76px;
   display: flex;
+  min-height: 72px;
   align-items: center;
-  gap: 28px;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .site-header-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  color: var(--color-pine);
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: var(--weight-heading);
-}
-
-.site-header-logo-plate {
-  display: inline-flex;
-  padding: 5px 7px;
-  background: var(--color-lime-wash);
-  border-radius: var(--radius-sm);
-}
-
-.site-header-logo {
-  width: 28px;
-  height: 28px;
-}
-
-.site-navigation-menu {
   display: flex;
-  align-items: center;
-  gap: 28px;
-  margin-left: auto;
+  min-height: 44px;
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--color-brand);
+  font-family: var(--font-heading);
+  line-height: 1.1;
+}
+
+.site-header-name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.site-header-signature {
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .site-navigation-links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: clamp(2px, 1.5vw, 16px);
   list-style: none;
 }
 
 .site-navigation-link {
   display: inline-flex;
-  align-items: center;
+  min-width: 44px;
   min-height: 44px;
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
   color: var(--text-secondary);
   font-size: 14px;
   font-weight: var(--weight-body-medium);
+  transition: color var(--duration-fast) var(--ease-standard);
 }
 
-.site-navigation-link[aria-current='page'] {
-  background: var(--color-lime-wash);
-  color: var(--color-pine);
+.site-navigation--home .site-header-brand,
+.site-navigation--home .site-navigation-link {
+  color: var(--color-white);
+}
+
+.site-navigation--home .site-header-signature {
+  color: var(--color-secondary);
+}
+
+.site-navigation--home :focus-visible {
+  outline-color: var(--color-secondary);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .site-header-brand:hover,
   .site-navigation-link:hover {
-    color: var(--color-pine);
+    color: var(--color-brand);
+  }
+
+  .site-navigation--home .site-navigation-link:hover {
+    color: var(--color-secondary);
   }
 }
 
-.site-navigation-toggle {
-  display: none;
-  width: 44px;
-  height: 44px;
-  margin-left: auto;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--color-sage);
-  border-radius: var(--radius-sm);
-  background: var(--color-white);
-  color: var(--color-pine);
-  cursor: pointer;
-}
-
-.site-navigation-toggle-icon {
-  display: grid;
-  gap: 6px;
-}
-
-.site-navigation-toggle-icon span {
-  display: block;
-  width: 20px;
-  height: 2px;
-  border-radius: var(--radius-pill);
-  background: currentColor;
-}
-
-@media (max-width: 820px) {
+@media (max-width: 540px) {
   .site-navigation {
-    min-height: 68px;
-    flex-wrap: wrap;
-    gap: 0;
+    min-height: 64px;
+    gap: 8px;
   }
 
-  .site-navigation-toggle {
-    display: inline-flex;
-  }
-
-  .site-navigation-menu {
+  .site-header-signature {
     display: none;
-    flex: 0 0 100%;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    margin-left: 0;
-    padding: 8px 0 20px;
-    border-top: 1px solid var(--color-mist);
   }
 
-  .site-navigation-menu--open {
-    display: flex;
-  }
-
-  .site-navigation-links {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 2px;
+  .site-header-name {
+    font-size: 15px;
   }
 
   .site-navigation-link {
-    width: 100%;
-    padding-inline: 10px;
-  }
-
-  .site-navigation-cta {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 420px) {
-  .site-header-brand {
-    font-size: 16px;
-  }
-
-  .site-header-logo {
-    width: 24px;
-    height: 24px;
+    padding-inline: 5px;
+    font-size: 13px;
   }
 }

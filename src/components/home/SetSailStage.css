@@ -1,0 +1,159 @@
+.ss {
+  position: relative;
+  z-index: 2;
+  overflow-x: clip;
+  min-height: calc(var(--ss-w) * 0.53 + 88px);
+  padding: clamp(64px, 6.5vw, 96px) 0 clamp(72px, 7vw, 104px);
+  background: var(--color-surface-warm);
+  /* Land on #work with the rising laptop in view. */
+  scroll-margin-top: calc(var(--ss-lift) + 24px);
+}
+
+.ss-copy {
+  position: relative;
+  z-index: 3;
+  max-width: 520px;
+}
+
+.ss-eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--weight-body-medium);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.ss-title {
+  margin-bottom: 28px;
+  font-weight: 600;
+  font-size: clamp(3.5rem, 2rem + 5.4vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.ss-description {
+  max-width: 50ch;
+  color: var(--text-body);
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.125rem);
+  line-height: 1.65;
+}
+
+.ss-description p {
+  margin-bottom: 1.1em;
+  text-wrap: pretty;
+}
+
+.ss-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* "Those problems became SetSail." is the narrative pivot from problem to
+   product: same sentence, isolated as its own beat rather than another
+   paragraph in the run. Mirrors the accent treatment used for the About
+   section's own pivot line (.about-paul-turn). */
+.ss-description p.ss-pivot {
+  margin: 1.6em 0;
+  padding-left: 20px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-brand);
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.ss-actions {
+  margin-top: 40px;
+}
+
+/* ---------- Devices sit directly on the page (transparent mockups) ---------- */
+.ss-devices {
+  position: absolute;
+  z-index: 3;
+  top: calc(var(--ss-lift) * -1);
+  right: calc(var(--ss-bleed) * -1);
+  width: var(--ss-w);
+  pointer-events: none;
+}
+
+.ss-phone {
+  position: absolute;
+  z-index: 4;
+  top: 8px;
+  right: calc(var(--ss-bleed) * -1 + var(--ss-w) * 0.68);
+  width: calc(var(--ss-w) * 0.26);
+  pointer-events: none;
+}
+
+.ss-figure {
+  display: block;
+}
+
+.ss-device {
+  width: 100%;
+  height: auto;
+  /* One restrained shadow follows the device outline across both surfaces. */
+  filter: drop-shadow(0 18px 24px rgba(29, 47, 88, 0.26));
+}
+
+/* ---------- Tablet: the laptop rises into the hero above the copy ---------- */
+@media (max-width: 1180px) {
+  .ss {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    padding: 0 0 72px;
+  }
+
+  .ss-inner {
+    width: 100%;
+    padding-top: calc(var(--ss-w) * 0.32 + 24px);
+  }
+
+  .ss-devices {
+    position: relative;
+    top: auto;
+    right: auto;
+    order: -1;
+    margin: calc(var(--ss-lift) * -1) calc(var(--ss-bleed) * -1) 0 auto;
+  }
+}
+
+/* ---------- Mobile: laptop only above the copy, phone rises below it ---------- */
+@media (max-width: 640px) {
+  .ss {
+    padding-bottom: 64px;
+  }
+
+  .ss-inner {
+    padding-top: 32px;
+  }
+
+  .ss-phone {
+    position: relative;
+    top: auto;
+    right: auto;
+    order: 1;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+  }
+
+  .ss-phone-inner {
+    width: min(190px, 52vw);
+  }
+
+  .ss-actions,
+  .ss-actions .btn {
+    width: 100%;
+  }
+
+  .ss-actions .btn {
+    justify-content: center;
+  }
+}

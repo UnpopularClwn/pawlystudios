@@ -1,0 +1,124 @@
+.wib-intro {
+  max-width: 640px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.wib-intro h2 {
+  text-wrap: balance;
+}
+
+.wib-list {
+  list-style: none;
+}
+
+.wib-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  grid-template-areas:
+    'num prompt'
+    '.   answer';
+  column-gap: 24px;
+  padding-block: clamp(32px, 4vw, 48px);
+  border-top: 1px solid var(--card-border);
+}
+
+.wib-list li.wib-row:last-child {
+  border-bottom: 1px solid var(--card-border);
+}
+
+.wib-row-number {
+  grid-area: num;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-weight: var(--weight-body-medium);
+  font-size: 14px;
+}
+
+.wib-prompt {
+  grid-area: prompt;
+  max-width: 22ch;
+  color: var(--color-brand);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+.wib-answer {
+  grid-area: answer;
+  display: grid;
+  grid-template-columns: minmax(160px, 240px) minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+  align-items: start;
+}
+
+.wib-title {
+  color: var(--text-heading);
+  font-family: var(--font-body);
+  font-weight: var(--weight-body-medium);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.wib-description {
+  max-width: 52ch;
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.wib-cta {
+  margin-top: clamp(40px, 5vw, 56px);
+}
+
+.wib-cta-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--color-brand);
+  color: var(--color-brand);
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.wib-cta-link span {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .wib-cta-link:hover span {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* ---------- Tablet: answer column drops to a single stack ---------- */
+@media (max-width: 760px) {
+  .wib-answer {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* ---------- Mobile: number sits above the prompt ---------- */
+@media (max-width: 560px) {
+  .wib-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'num'
+      'prompt'
+      'answer';
+    row-gap: 12px;
+    padding-block: 28px;
+  }
+
+  .wib-answer {
+    margin-top: 4px;
+  }
+}

@@ -9,7 +9,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: clamp(16px, 3vw, 44px);
-  background: rgba(14, 42, 37, 0.78);
+  background: rgba(29, 47, 88, 0.78);
   border: 0;
 }
 
@@ -25,7 +25,7 @@
   background: var(--color-white);
   border-radius: var(--radius-md);
   color: var(--text-body);
-  box-shadow: 0 8px 24px rgba(14, 42, 37, 0.24);
+  box-shadow: 0 8px 24px rgba(29, 47, 88, 0.24);
 }
 
 .setsail-dialog-close {
@@ -221,14 +221,13 @@
 .setsail-dialog-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 8px 16px;
   list-style: none;
 }
 
 .setsail-dialog-list li {
-  padding: 7px 11px;
-  background: var(--color-lime-wash);
-  border-radius: var(--radius-pill);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--color-border);
   color: var(--text-heading);
   font-size: 13px;
 }

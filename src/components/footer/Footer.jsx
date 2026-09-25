@@ -1,89 +1,80 @@
-import Image from 'next/image'
 import { contact } from '../../data/contact.js'
-import { logo, BRAND_NAME } from '../../data/brand.js'
-import Reveal from '../shared/Reveal.jsx'
 import Container from '../shared/Container.jsx'
 import FooterNav from './FooterNav.jsx'
-import { MailIcon, WhatsAppIcon, LinkedInIcon } from './SocialIcons.jsx'
+import LanyardBadge from '../lanyard/LanyardBadge.jsx'
 import './Footer.css'
 
-export default function Footer() {
+// The footer is the homepage's final contact/conversion point: a heading and
+// dominant email link do the asking, WhatsApp and LinkedIn sit underneath as
+// secondary channels, and the identity/nav/copyright row below stays close to
+// a conventional footer. `withLanyard` is homepage-only: it adds the
+// interactive React Bits Lanyard badge beside the copy without loading the
+// WebGL/physics stack on every other route that reuses this same Footer.
+export default function Footer({ withLanyard = false }) {
   const year = new Date().getFullYear()
-  const hasContactLinks = contact.email || contact.whatsapp || contact.linkedin
+
+  const contacts = (
+    <div className="footer-contacts">
+      {contact.email && (
+        <a className="footer-contact-email" href={`mailto:${contact.email}`}>
+          {contact.email}
+        </a>
+      )}
+      <div className="footer-contact-secondary">
+        {contact.whatsapp && (
+          <a href={contact.whatsapp} target="_blank" rel="noreferrer noopener">
+            Message me on WhatsApp
+          </a>
+        )}
+        {contact.linkedin && (
+          <a href={contact.linkedin} target="_blank" rel="noreferrer noopener">
+            Niño Paul Cabiles
+          </a>
+        )}
+      </div>
+    </div>
+  )
 
   return (
     <footer className="site-footer">
       <Container>
-        <Reveal
-          as="div"
-          className="footer-panel"
-          selector=".footer-identity, .footer-nav, .footer-bottom"
-          preset="content"
-          y={16}
-        >
-          <div className="footer-top-divider" aria-hidden="true" />
-
-          <div className="footer-identity">
-            <div className="footer-brand-lockup">
-              <span className="footer-logo-plate">
-                <Image
-                  src={logo.src}
-                  alt=""
-                  width={logo.width}
-                  height={logo.height}
-                  sizes="24px"
-                  className="footer-logo"
-                />
-              </span>
-              <p className="footer-name">{BRAND_NAME}</p>
+        {withLanyard ? (
+          <div className="footer-cta footer-cta--lanyard" id="contact">
+            <div className="footer-cta-copy">
+              <h2 className="footer-cta-heading">Have a website in mind? Let&rsquo;s talk.</h2>
+              <p className="footer-cta-lead">
+                If you&rsquo;re starting a new website, rebuilding an existing one, or need a landing page for
+                something specific, tell me what you have in mind.
+              </p>
+              {contacts}
             </div>
-            <p className="footer-tagline">Digital Experiences &amp; Creative</p>
-          </div>
 
+            <div className="footer-lanyard-stage" aria-hidden="true">
+              <LanyardBadge />
+            </div>
+          </div>
+        ) : (
+          <div className="footer-cta" id="contact">
+            <h2 className="footer-cta-heading">Have a website in mind? Let&rsquo;s talk.</h2>
+            <p className="footer-cta-lead">
+              If you&rsquo;re starting a new website, rebuilding an existing one, or need a landing page for
+              something specific, tell me what you have in mind.
+            </p>
+            {contacts}
+          </div>
+        )}
+
+        <div className="footer-main">
+          <div className="footer-identity">
+            <p className="footer-name">Niño Paul Cabiles</p>
+            <p className="footer-signature">pawlystudios.</p>
+          </div>
           <FooterNav />
+        </div>
 
-          <div className="footer-divider" aria-hidden="true" />
-
-          <div className="footer-bottom">
-            <p className="footer-copyright">&copy; {year} Paul Cabiles</p>
-
-            {hasContactLinks && (
-              <ul className="footer-contact-links">
-                {contact.email && (
-                  <li>
-                    <a href={`mailto:${contact.email}`} aria-label="Email Paul Cabiles">
-                      <MailIcon className="footer-contact-icon" />
-                    </a>
-                  </li>
-                )}
-                {contact.whatsapp && (
-                  <li>
-                    <a
-                      href={contact.whatsapp}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label="Contact Paul Cabiles on WhatsApp"
-                    >
-                      <WhatsAppIcon className="footer-contact-icon" />
-                    </a>
-                  </li>
-                )}
-                {contact.linkedin && (
-                  <li>
-                    <a
-                      href={contact.linkedin}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      aria-label="Paul Cabiles on LinkedIn"
-                    >
-                      <LinkedInIcon className="footer-contact-icon" />
-                    </a>
-                  </li>
-                )}
-              </ul>
-            )}
-          </div>
-        </Reveal>
+        <div className="footer-bottom">
+          <p className="footer-copyright">© {year} Niño Paul Cabiles &middot; pawlystudios.</p>
+        </div>
       </Container>
     </footer>
   )

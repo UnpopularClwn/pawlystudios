@@ -11,7 +11,7 @@ function ProfileCardComponent({
   iconUrl = '',
   innerGradient = 'linear-gradient(145deg, var(--color-pine-soft), var(--color-pine))',
   behindGlowEnabled = true,
-  behindGlowColor = 'rgba(198, 231, 158, 0.35)',
+  behindGlowColor = 'rgba(254, 238, 166, 0.35)',
   behindGlowSize = '56%',
   className = '',
   enableTilt = true,

@@ -1,0 +1,54 @@
+.experience-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+}
+
+.experience-mark {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.experience-mark span {
+  color: var(--color-border);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(6rem, 4rem + 6vw, 10.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+}
+
+.experience-copy {
+  max-width: 64ch;
+}
+
+.experience-copy h2 {
+  max-width: 20ch;
+  margin: 16px 0 28px;
+  text-wrap: balance;
+}
+
+.experience-copy p {
+  margin-bottom: 1.4em;
+  color: var(--text-body);
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.experience-copy p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 760px) {
+  .experience-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .experience-mark span {
+    font-size: 4rem;
+  }
+}

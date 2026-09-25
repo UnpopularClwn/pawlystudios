@@ -33,27 +33,27 @@
 }
 
 .btn--primary {
-  background: var(--color-lime);
+  background: var(--color-secondary);
   color: var(--text-heading);
-  border: 1px solid var(--color-lime);
+  border: 1px solid var(--color-secondary);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn--primary:hover {
-    background: var(--color-lime-deep);
+    background: var(--color-secondary-hover);
   }
 }
 
 .btn--secondary {
   background: transparent;
   color: var(--text-heading);
-  border: 1px solid var(--color-sage);
+  border: 1px solid var(--color-border);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn--secondary:hover {
     border-color: var(--text-secondary);
-    background: var(--color-mist);
+    background: var(--color-surface-cool);
   }
 }
 
@@ -64,7 +64,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--color-pine);
-  color: var(--color-lime);
+  background: var(--color-brand);
+  color: var(--color-secondary);
   font-size: 13px;
 }

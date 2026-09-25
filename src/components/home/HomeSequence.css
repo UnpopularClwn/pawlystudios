@@ -1,0 +1,23 @@
+/* Shared geometry for the hero -> SetSail hand-off.
+   --ss-w      laptop width
+   --ss-lift   how far the laptop rises above the hero/stage boundary
+   --ss-bleed  how far the laptop runs past the right edge of the viewport */
+.home-sequence {
+  --ss-w: min(52vw, 920px);
+  --ss-lift: calc(var(--ss-w) * 0.3);
+  --ss-bleed: 8vw;
+}
+
+@media (max-width: 1180px) {
+  .home-sequence {
+    --ss-w: 92vw;
+    --ss-bleed: 12vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-sequence {
+    --ss-w: 116vw;
+    --ss-bleed: 22vw;
+  }
+}

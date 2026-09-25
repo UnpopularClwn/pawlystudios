@@ -7,6 +7,7 @@ export const tools = {
     { category: 'Design & UI', items: ['CSS', 'Figma', 'shadcn/ui'] },
     { category: 'Motion', items: ['GSAP', 'Motion Primitives'] },
     { category: 'Deployment & Workflow', items: ['Vercel', 'GitHub'] },
+    { category: 'AI Tools', items: ['Claude Code', 'ChatGPT'] },
   ],
 }
 
@@ -24,4 +25,6 @@ export const toolLogos = {
   'Motion Primitives': '/logos/motion-primitives.svg',
   Vercel: '/logos/vercel.svg',
   GitHub: '/logos/github.svg',
+  'Claude Code': '/logos/claude-code.svg',
+  ChatGPT: '/logos/chatgpt.svg',
 }

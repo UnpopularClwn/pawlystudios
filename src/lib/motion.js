@@ -13,6 +13,9 @@ export function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+// Homepage movement stays close to the final layout and finishes quickly.
+export const HOME_MOTION = { distance: 8, duration: 0.38, stagger: 0.05, ease: 'power2.out' }
+
 // Timing hierarchy: small interaction (hover/micro) lives in CSS via
 // --duration-fast; these presets cover scroll-triggered Reveal entrances.
 export const MOTION = {

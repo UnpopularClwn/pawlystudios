@@ -1,0 +1,133 @@
+.faq-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(48px, 7vw, 96px);
+  align-items: start;
+}
+
+.faq-intro {
+  position: sticky;
+  top: 96px;
+  max-width: 40ch;
+}
+
+.faq-intro h2 {
+  max-width: 12ch;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+
+.faq-intro p {
+  color: var(--color-on-brand-muted);
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.faq-list .faq-item:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.faq-item-heading {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.faq-question {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 4px;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--color-secondary);
+  border-radius: 1px;
+}
+
+.faq-icon::before {
+  width: 100%;
+  height: 2px;
+}
+
+.faq-icon::after {
+  width: 2px;
+  height: 100%;
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.faq-question[aria-expanded='true'] .faq-icon::after {
+  transform: scaleY(0);
+}
+
+.faq-answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-base) var(--ease-standard);
+}
+
+.faq-answer-wrap[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faq-answer p {
+  max-width: 62ch;
+  padding: 0 4px 22px;
+  color: var(--color-on-brand-muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.faq-answer p:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+@media (max-width: 860px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .faq-intro {
+    position: static;
+    max-width: none;
+  }
+}

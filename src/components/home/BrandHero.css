@@ -1,179 +1,82 @@
-.brand-hero-section {
-  padding: 32px 0 40px;
-}
-
-.brand-hero-section > .container {
-  max-width: calc(1440px + var(--container-pad) + var(--container-pad));
-}
-
-.brand-hero-panel {
+.brand-hero {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.48fr);
-  align-items: center;
-  gap: clamp(40px, 6vw, 80px);
-  overflow: hidden;
-  min-height: 560px;
-  padding: clamp(48px, 7vw, 88px) clamp(28px, 6vw, 72px);
-  background: var(--color-pine);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-lg);
+  z-index: 1;
+  padding: clamp(28px, 3vw, 44px) 0 clamp(24px, 2.5vw, 36px);
+  background: var(--color-brand);
+}
+
+.brand-hero :focus-visible {
+  outline-color: var(--color-secondary);
+  outline-width: 3px;
 }
 
 .brand-hero-copy {
-  position: relative;
-  z-index: 1;
   display: flex;
-  max-width: 780px;
+  max-width: 600px;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.brand-hero-logo-plate {
-  display: inline-flex;
-  padding: 7px 9px;
-  margin-bottom: 20px;
-  background: var(--color-lime-wash);
-  border-radius: var(--radius-sm);
+/* Identity is a small kicker line: name plus a one-line role, never competing
+   with the headline below it. */
+.brand-hero-identity {
+  color: var(--color-secondary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(0.9375rem, 0.88rem + 0.3vw, 1.0625rem);
+  letter-spacing: 0.01em;
 }
 
-.brand-hero-logo {
-  width: auto;
-  height: 26px;
-}
-
-.brand-hero-eyebrow {
-  margin-bottom: 18px;
-  color: var(--color-lime);
-  font-size: 12px;
-  font-weight: var(--weight-body-medium);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.brand-hero-heading {
-  max-width: 24ch;
-  margin-bottom: 24px;
+/* The headline carries the statement of what Paul builds: full-sentence H1,
+   sized from the shared display scale rather than a bespoke clamp. Width is
+   governed by .brand-hero-copy so it wraps into a deliberate 2-3 line break
+   instead of a narrow column. */
+.brand-hero-headline {
+  max-width: 100%;
+  margin-top: clamp(10px, 1.2vw, 16px);
   color: var(--color-white);
-  line-height: 1.12;
+  font-size: var(--text-h1);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
   text-wrap: balance;
 }
 
 .brand-hero-lead {
-  max-width: 58ch;
-  margin-bottom: 32px;
-  color: var(--color-lime-wash);
-  font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.1875rem);
-  font-weight: var(--weight-body-medium);
-  line-height: 1.55;
+  max-width: 46ch;
+  margin-top: 16px;
+  color: var(--color-on-brand-muted);
+  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.125rem);
+  line-height: 1.6;
   text-wrap: pretty;
+}
+
+.brand-hero-lead + .brand-hero-lead {
+  margin-top: 10px;
 }
 
 .brand-hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: 28px;
 }
 
-.brand-hero-secondary-cta {
-  border-color: rgba(255, 255, 255, 0.38);
-  color: var(--color-white);
-}
+/* Stacked layouts: reserve room under the actions for the laptop that rises
+   into this section from the SetSail stage. */
+@media (max-width: 1180px) {
+  .brand-hero {
+    padding-bottom: calc(var(--ss-lift) + 32px);
+  }
 
-@media (hover: hover) and (pointer: fine) {
-  .brand-hero-secondary-cta:hover {
-    border-color: var(--color-white);
-    background: rgba(255, 255, 255, 0.08);
+  .brand-hero-copy {
+    max-width: 560px;
   }
 }
 
-.brand-hero-composition {
-  position: relative;
-  height: 320px;
-}
-
-.brand-hero-plane,
-.brand-hero-axis {
-  position: absolute;
-  display: block;
-}
-
-.brand-hero-plane {
-  border: 1px solid rgba(230, 243, 212, 0.34);
-  border-radius: var(--radius-md);
-  background: rgba(230, 243, 212, 0.06);
-}
-
-.brand-hero-plane--wide {
-  top: 46px;
-  right: 18px;
-  width: min(100%, 250px);
-  aspect-ratio: 16 / 10;
-  transform: rotate(4deg);
-}
-
-.brand-hero-plane--tall {
-  right: 34%;
-  bottom: 24px;
-  width: 104px;
-  aspect-ratio: 9 / 16;
-  transform: rotate(-6deg);
-  background: rgba(198, 231, 158, 0.1);
-}
-
-.brand-hero-axis {
-  top: 50%;
-  right: 0;
-  width: 82%;
-  height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--color-lime);
-  opacity: 0.45;
-}
-
-@media (max-width: 960px) {
-  .brand-hero-section {
-    padding: 24px 0 32px;
-  }
-
-  .brand-hero-panel {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding: 52px 40px;
-  }
-
-  .brand-hero-composition {
-    display: none;
-  }
-}
-
-@media (max-width: 720px) {
-  .brand-hero-section {
-    padding: 16px 0 24px;
-  }
-
-  .brand-hero-panel {
-    padding: 28px 20px;
-    border-radius: var(--radius-md);
-  }
-
-  .brand-hero-logo-plate {
-    padding: 6px 8px;
-    margin-bottom: 16px;
-  }
-
-  .brand-hero-logo {
-    height: 22px;
-  }
-
-  .brand-hero-heading {
-    max-width: none;
-    margin-bottom: 16px;
-    font-size: clamp(2.125rem, 9vw, 2.25rem);
-  }
-
-  .brand-hero-lead {
-    font-size: 16px;
+@media (max-width: 640px) {
+  .brand-hero {
+    padding-top: 32px;
+    padding-bottom: calc(var(--ss-lift) + 24px);
   }
 
   .brand-hero-actions,

@@ -34,7 +34,7 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--color-pine);
-  box-shadow: 0 8px 20px rgba(14, 42, 37, 0.26);
+  box-shadow: 0 8px 20px rgba(29, 47, 88, 0.26);
   transform: rotateX(var(--pc-rotate-x)) rotateY(var(--pc-rotate-y));
   transform-style: preserve-3d;
   transition: transform 220ms var(--ease-standard);

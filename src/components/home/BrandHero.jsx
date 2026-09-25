@@ -1,55 +1,36 @@
-import Image from 'next/image'
 import Container from '../shared/Container.jsx'
 import Button from '../shared/Button.jsx'
-import HeroMotion from '../hero/HeroMotion.jsx'
-import { BRAND_NAME, logo } from '../../data/brand.js'
+import BrandHeroMotion from './BrandHeroMotion.jsx'
 import './BrandHero.css'
 
+// Opens the homepage sequence. The hero carries identity only; the SetSail
+// stage that follows owns the product imagery and lifts its laptop up across
+// this section's bottom edge (see HomeSequence).
 export default function BrandHero() {
   return (
-    <section className="brand-hero-section" aria-labelledby="brand-hero-heading">
+    <section className="brand-hero" aria-labelledby="brand-hero-heading">
       <Container>
-        <HeroMotion>
-          <div className="brand-hero-panel" data-hero="panel">
-            <div className="brand-hero-copy">
-              <span className="brand-hero-logo-plate" data-hero="brand">
-                <Image
-                  src={logo.src}
-                  alt={BRAND_NAME}
-                  width={logo.width}
-                  height={logo.height}
-                  sizes="(max-width: 480px) 22px, 26px"
-                  className="brand-hero-logo"
-                  priority
-                />
-              </span>
-              <p className="brand-hero-eyebrow" data-hero="eyebrow">
-                Paul Cabiles / {BRAND_NAME}
-              </p>
-              <h1 className="brand-hero-heading" id="brand-hero-heading" data-hero="heading">
-                I build things for the web, and sometimes beyond it.
-              </h1>
-              <p className="brand-hero-lead" data-hero="lead">
-                I’m Paul, the person behind {BRAND_NAME} I work across web development and digital products, usually
-                following an idea far enough to see what I can make from it.
-              </p>
-              <div className="brand-hero-actions" data-hero="cta">
-                <Button href="#work" arrow>
-                  View My Work
-                </Button>
-                <Button href="/about" variant="secondary" className="brand-hero-secondary-cta">
-                  About Me
-                </Button>
-              </div>
-            </div>
-
-            <div className="brand-hero-composition" data-hero="motif" aria-hidden="true">
-              <span className="brand-hero-plane brand-hero-plane--wide" />
-              <span className="brand-hero-plane brand-hero-plane--tall" />
-              <span className="brand-hero-axis" />
-            </div>
+        <BrandHeroMotion className="brand-hero-copy">
+          <p className="brand-hero-identity" data-hero="identity">
+            Niño Paul Cabiles <span aria-hidden="true">·</span> AI-forward builder
+          </p>
+          <h1 className="brand-hero-headline" id="brand-hero-heading" data-hero="headline">
+            I build modern websites and landing pages for businesses.
+          </h1>
+          <p className="brand-hero-lead" data-hero="body1">
+            Maybe you need your first website. Maybe your current one feels outdated, doesn&rsquo;t show your work
+            well, or no longer represents what your business has become.
+          </p>
+          <p className="brand-hero-lead" data-hero="body2">
+            I build websites that make your business easy to understand, your work easy to find, and what you offer
+            clear to the people visiting.
+          </p>
+          <div className="brand-hero-actions" data-hero="actions">
+            <Button href="#contact" arrow>
+              Have something you need to solve?
+            </Button>
           </div>
-        </HeroMotion>
+        </BrandHeroMotion>
       </Container>
     </section>
   )

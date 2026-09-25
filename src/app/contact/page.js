@@ -9,7 +9,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
-      <ContactSection standalone />
+      <ContactSection />
       <Footer />
     </>
   )

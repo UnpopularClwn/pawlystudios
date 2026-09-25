@@ -33,7 +33,7 @@
   z-index: 1;
 }
 
-/* Scrubbed Lime progress path, behind the node column. */
+/* Scrubbed secondary progress path, behind the node column. */
 .roadmap-line {
   position: absolute;
   left: var(--roadmap-line-x);
@@ -148,7 +148,7 @@
 .roadmap-step:last-child .roadmap-node-fill {
   width: 11px;
   height: 11px;
-  box-shadow: 0 0 0 6px var(--color-lime-wash), 0 0 18px 2px rgba(198, 231, 158, 0.55);
+  box-shadow: 0 0 0 6px var(--color-lime-wash), 0 0 18px 2px rgba(254, 238, 166, 0.55);
 }
 
 .roadmap-step:last-child .roadmap-content {

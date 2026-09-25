@@ -16,12 +16,12 @@
 }
 
 /* Restrained abstract structure — a faint dot grid fading into the copy side,
-   plus a single thin Lime line. Never a focal object; the H1 stays dominant. */
+   plus a single thin warm line. Never a focal object; the H1 stays dominant. */
 .hero-motif {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgba(230, 243, 212, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(254, 238, 166, 0.1) 1px, transparent 1px);
   background-size: 28px 28px;
   background-position: right 8% top 30%;
   -webkit-mask-image: linear-gradient(to left, black, transparent 62%);

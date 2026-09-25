@@ -1,21 +1,42 @@
 :root {
-  /* ---------- Color: surfaces ---------- */
-  --color-pine: #183a33;
-  --color-pine-deep: #0e2a25;
-  --color-pine-soft: #22483f;
-  --color-lime: #c6e79e;
-  --color-lime-deep: #aeda7e;
-  --color-lime-wash: #f1f7e8;
-  --color-sage: #c9d2ce;
-  --color-mist: #e7eae8;
-  --color-sand: #f9f9f9;
+  /* ---------- Brand core ---------- */
+  --color-brand: #2a3f73;
+  --color-secondary: #feeea6;
+  --color-accent: #d82c31;
+
+  /* ---------- Supporting surfaces and states ---------- */
+  --color-brand-deep: #1d2f58;
+  --color-brand-soft: #405888;
+  --color-secondary-hover: #f7e38f;
+  --color-secondary-wash: #fff9e7;
+  --color-paper: #fffdf8;
+  --color-surface-warm: #f8f6f0;
+  --color-surface-cool: #f2f4f8;
+  --color-border: #c9cfdb;
+  --color-border-soft: #e7eaf0;
   --color-white: #ffffff;
+  --color-on-brand-muted: #e4e8f3;
+  --color-error: #a5222a;
+  --color-error-on-brand: #ffc0c0;
+  --color-error-surface: #fff2f1;
+  --color-error-border: #d78687;
+
+  /* Legacy aliases keep the existing secondary pages on the same palette. */
+  --color-pine: var(--color-brand);
+  --color-pine-deep: var(--color-brand-deep);
+  --color-pine-soft: var(--color-brand-soft);
+  --color-lime: var(--color-secondary);
+  --color-lime-deep: var(--color-secondary-hover);
+  --color-lime-wash: var(--color-secondary-wash);
+  --color-sage: var(--color-border);
+  --color-mist: var(--color-border-soft);
+  --color-sand: var(--color-surface-warm);
 
   /* ---------- Color: text ---------- */
-  --text-heading: #183a33;
-  --text-body: #333333;
-  --text-secondary: #5a5f5c;
-  --text-muted: #6b726e;
+  --text-heading: var(--color-brand);
+  --text-body: #2b3242;
+  --text-secondary: #49566f;
+  --text-muted: #5a657b;
 
   /* ---------- Typography ---------- */
   /* --font-general-sans / --font-inter are injected by next/font in app/layout.js */
@@ -45,10 +66,10 @@
   --radius-lg: 28px;
   --radius-pill: 999px;
 
-  /* ---------- Shadow (pine-tinted, never pure black) ---------- */
-  --shadow-sm: 0 2px 8px rgba(24, 58, 51, 0.06);
-  --shadow-md: 0 8px 24px rgba(24, 58, 51, 0.1);
-  --shadow-lg: 0 16px 48px rgba(24, 58, 51, 0.14);
+  /* ---------- Shadow ---------- */
+  --shadow-sm: 0 2px 8px rgba(42, 63, 115, 0.06);
+  --shadow-md: 0 8px 24px rgba(42, 63, 115, 0.1);
+  --shadow-lg: 0 16px 48px rgba(42, 63, 115, 0.14);
 
   /* ---------- Card ---------- */
   --card-border: var(--color-mist);
@@ -57,5 +78,5 @@
   --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
   --duration-fast: 0.2s;
   --duration-base: 0.5s;
-  --hover-lift: -3px;
+  --hover-lift: -1px;
 }

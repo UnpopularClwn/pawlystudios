@@ -21,7 +21,7 @@
 .creative-strategy-loop-frame {
   position: relative;
   padding: 8px 0 28px;
-  border-bottom: 1px solid rgba(230, 243, 212, 0.32);
+  border-bottom: 1px solid rgba(254, 238, 166, 0.32);
 }
 
 .creative-strategy-loop {
@@ -39,7 +39,7 @@
   left: 10px;
   right: 10px;
   height: 1px;
-  background: rgba(230, 243, 212, 0.32);
+  background: rgba(254, 238, 166, 0.32);
 }
 
 .creative-strategy-step {
@@ -69,7 +69,7 @@
   border: 3px solid var(--color-pine);
   border-radius: 50%;
   background: var(--color-lime);
-  box-shadow: 0 0 0 1px rgba(230, 243, 212, 0.55);
+  box-shadow: 0 0 0 1px rgba(254, 238, 166, 0.55);
 }
 
 .creative-strategy-step h3 {
@@ -102,9 +102,9 @@
   align-items: start;
   margin-top: 64px;
   padding: 32px;
-  border: 1px solid rgba(230, 243, 212, 0.24);
+  border: 1px solid rgba(254, 238, 166, 0.24);
   border-radius: var(--radius-md);
-  background: rgba(230, 243, 212, 0.05);
+  background: rgba(254, 238, 166, 0.05);
 }
 
 .creative-strategy-principle h3 {
