@@ -29,16 +29,18 @@
 .wib-row-number {
   grid-area: num;
   color: var(--text-muted);
-  font-family: var(--font-body);
-  font-weight: var(--weight-body-medium);
-  font-size: 14px;
+  font-family: var(--font-expressive);
+  font-weight: 300;
+  font-size: var(--type-number-sm);
+  line-height: 1;
+  letter-spacing: 0.04em;
 }
 
 .wib-prompt {
   grid-area: prompt;
   max-width: 22ch;
   color: var(--color-brand);
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   font-weight: 500;
   font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
   line-height: 1.15;
@@ -57,17 +59,15 @@
 
 .wib-title {
   color: var(--text-heading);
-  font-family: var(--font-body);
-  font-weight: var(--weight-body-medium);
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: var(--type-body);
 }
 
 .wib-description {
   max-width: 52ch;
   color: var(--text-secondary);
-  font-size: 16px;
+  font-size: var(--type-body);
   line-height: 1.7;
   text-wrap: pretty;
 }
@@ -83,9 +83,9 @@
   gap: 12px;
   border-bottom: 1px solid var(--color-brand);
   color: var(--color-brand);
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 500;
+  font-family: var(--font-ui);
+  font-size: var(--type-body);
+  font-weight: var(--weight-body-medium);
 }
 
 .wib-cta-link span {
@@ -95,6 +95,34 @@
 @media (hover: hover) and (pointer: fine) {
   .wib-cta-link:hover span {
     transform: translate(2px, -2px);
+  }
+}
+
+/* ---------- Desktop: number | question | answer on one line ----------
+   Rows use the full width and read as a compact list, instead of a tall stack
+   that only fills the left half of the canvas. */
+@media (min-width: 900px) {
+  .wib-row {
+    grid-template-columns: clamp(64px, 6vw, 88px) minmax(0, 5fr) minmax(0, 6fr);
+    grid-template-areas: 'num prompt answer';
+    column-gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+    padding-block: clamp(28px, 3vw, 40px);
+  }
+
+  .wib-prompt {
+    max-width: none;
+  }
+
+  .wib-answer {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 0;
+    padding-top: 0.35em;
+  }
+
+  .wib-cta {
+    margin-top: 32px;
   }
 }
 
@@ -120,5 +148,16 @@
 
   .wib-answer {
     margin-top: 4px;
+  }
+}
+
+/* Rhythm: a confident opener after SetSail, tighter close before Tools. */
+@media (min-width: 901px) {
+  .section.wib-section {
+    padding: 88px 0 72px;
+  }
+
+  .wib-intro {
+    margin-bottom: 40px;
   }
 }

@@ -2,272 +2,296 @@
 
 ## Current Checkpoint
 
-The multi-page `pawlystudios.` portfolio is at its architecture-integration checkpoint. The visible experience, first Vercel
-production deployment, social-preview artwork, and all useful QA that does not require a custom domain or inquiry
-provider are complete. Custom-domain work, inquiry delivery, approved commercial prices,
-and launch activation remain intentionally pending. This project folder is the only source of truth. Do not create a
-duplicate app or experimental copy.
+The `pawlystudios.` portfolio (Niño Paul Cabiles) is a single-homepage, capability-first portfolio. The creative
+refinement phase (Lanyard, three-role typography, homepage composition, SetSail Featured Build and `/work/setsail`,
+privacy cleanup) is CLOSED and committed locally on the working branch. It has not been pushed or deployed.
+Pre-launch: `SITE_IS_LAUNCHED` is `false`, the site is `noindex`, inquiry delivery is not configured, and there is no
+custom domain. This project folder is the only source of truth. Do not create a duplicate app or experimental copy.
 
-Read `docs/implementation-status.md` before resuming. Older briefs, plans, and decision records are preserved under
-`docs/archive/` for history; current code and the status document take precedence when they conflict.
+Read `PRODUCT.md` (product, positioning, design direction) and `docs/implementation-status.md` (state, launch order)
+before resuming. Everything under `docs/archive/` is historical; it is not a source of truth and may describe earlier
+versions of the site. Current code, `PRODUCT.md`, and the status document take precedence over it.
+
+## Identity and Positioning
+
+- Person: **Niño Paul Cabiles**. `pawlystudios.` is his creative identity / signature, not a multi-person agency.
+- Primary work: Business Websites, Website Rebuilds, Landing Pages.
+- SetSail demonstrates deeper product/build capability. It does not redefine the primary service offering.
+- **AI Ad Creative is parked** and is not part of the active portfolio direction (see **Parked Work** below).
+- Do not reposition around web portals, SaaS, AI consulting, marketing services, or broad agency services.
+- Identity naming: the canonical full identity "Niño Paul Cabiles" is used in the header, footer, About profile card,
+  metadata, the Person schema and the social preview. Informal copy ("Hi, I'm Paul.") is intentional.
 
 ## Repository State (read this before touching git)
 
-`main` / `origin/main` are identical and are production, at commit `29219b3907a275afdbc221fe85540856a6cf6e6a`. The
-current branch (`portfolio-first-restructure`) is **8 commits ahead of `main`, 0 behind**, and all eight are
-committed but unmerged — none of them are on production yet, and nothing has been pushed or deployed:
+Facts from git (use `git log` for the exact checkpoint commit):
 
-1. **LIVE / PRODUCTION** — `main`/`origin/main` at `29219b3`. Service-first homepage structure, Services nav dropdown,
-   About portrait/story. This is what a visitor sees today.
-2. **COMMITTED BUT UNMERGED — portfolio-first content pass** — `8a4345e` (feat: shift site copy toward portfolio
-   positioning). Homepage Hero headline/CTA copy, Hero `line-height: 1.12`, homepage capability descriptions, About
-   Preview copy, and the AI Ad Creative hero lead.
-3. **COMMITTED BUT UNMERGED — site restructure** — `09fcb44` (feat: restructure site around portfolio work) and
-   `10ef7d2` (fix: align hero identity with portfolio positioning). Navigation simplification (Services dropdown →
-   direct Web/AI Creative links), homepage section reorder, the "Selected Work" Featured Work rebuild, "What I Do"
-   structural changes (id/heading/link-label rework), Web Development and AI Ad Creative section reorders, and Home
-   CTA copy changes. See **Current Branch Architecture** below for the resulting page structure.
-4. **COMMITTED BUT UNMERGED — SetSail redesign** — `5d67e0a` (feat: redesign SetSail case study). `SetSailDialog.jsx`/
-   `.css` and `src/data/setsail.js` rebuilt with cover/experience/build sections; three new screenshots
-   (`(2).png`, `(3).png`, `(11).png`) committed and referenced. See **Asset State** below.
-5. **COMMITTED BUT UNMERGED — docs checkpoint** — `3906e07` (docs: update repository state after portfolio
-   restructure). Documentation-only, no application code.
-6. **COMMITTED BUT UNMERGED — web-only public scope** — `baa2a19` (refactor: narrow public portfolio to web
-   development). Removes AI Ad Creative from public navigation, the homepage Selected Work and What I Do sections,
-   Contact project types, public SEO/social-preview copy, and the launch-gated JSON-LD schema. Does not delete the AI
-   Ad Creative implementation. See **Public Launch Scope** below.
-7. **COMMITTED BUT UNMERGED — Next.js security patch** — `a96da75` (chore: patch Next.js security vulnerability).
-   `next` `16.3.1` → `16.3.3`, resolving a critical unauthenticated-RCE advisory. `react`/`react-dom` unchanged. See
-   **Next.js Security State** below.
-8. **COMMITTED BUT UNMERGED — pre-launch checkpoint (this housekeeping pause)** — `a274a76` (docs: save pre-launch
-   project checkpoint), the prior documentation-only checkpoint commit, plus this current housekeeping pass.
-   Documentation-only, no application code.
+- Active branch: the Orca worktree branch `UnpopularClwn/project-synchronization-review`
+  (`~/orca/workspaces/Portfolio/bladderwrack`). Its latest commit is the local "finalize pawlystudios. portfolio
+  experience" checkpoint, on top of `8938684` ("feat: rebuild pawlystudios portfolio experience").
+- Local `main` and `origin/main` are identical at `9c3f2139fdbcd10ef390ba0146eefa7618840ea1`. The working branch is
+  ahead of them and has NOT been pushed.
+- **Not verified:** what the live Vercel production deployment serves. Pushes to `main` trigger production
+  deployments; check the deployment before describing anything as live.
+- `personal-portfolio-redesign` (original worktree `~/Documents/Projects/Portfolio`) points at `8938684`. Do not
+  modify it or that worktree. It holds three intentional untracked items that are not part of this repository state:
+  `portfolio logo transparent.svg`, `portfolio logo.png`, `public/images/new_img/` (unredacted SetSail screenshots;
+  never move them into `public/`). Do not delete, stage, move, or modify them.
+- Do not merge, push, or deploy without explicit approval.
+- Do not rewrite Git history. See the SetSail section for the open history-privacy decision.
 
-None of layers 2–8 are shipped, approved for production, merged, or deployed. Do not merge, push, or deploy
-`portfolio-first-restructure` until this work has its own explicit review/approval.
+## Current Homepage Architecture
 
-## Current Branch Architecture (committed, unmerged — `portfolio-first-restructure`)
+`src/app/page.js` renders, in order:
 
-This is the current state on the branch's first 7 commits (layer 8 is documentation-only), not on production. Do not
-describe it as live until merged.
+1. `HomeSequence` = `BrandHero` + `SetSailStage` (SetSail Featured Build; two separate moments, no shared device
+   geometry any more)
+2. `WhatIBuild`
+3. `ToolsSection` (homepage variant)
+4. `Experience`
+5. `HowIWork`
+6. `AboutPaul`
+7. `Faq`
+8. `Footer withLanyard` (contact-focused footer with the React Bits Lanyard)
 
-- **Navigation**: Web, About, Contact, Start a Project (flat links, no Services dropdown, no AI Creative link).
-- **Homepage**: Hero → Selected Work (SetSail only) → What I Do (Web Development only) → About Preview → Final CTA →
-  Footer.
-- **Web Development** (`/services/web-development`): Hero → SetSail case study → What I Build / Services → Process →
-  Maintenance → Tools → CTA.
-- **AI Ad Creative** (`/services/ai-ad-creative`): Hero → Selected Creative → remaining strategy/methodology content →
-  CTA. Implementation intact; parked with no public navigation path. See **Public Launch Scope** below.
-- **About** (`/about`): unchanged from the production About implementation, aside from the metadata description no
-  longer mentioning AI ad creative work.
-- **Contact** (`/contact`): unchanged aside from the project-type options (AI Ad Creative removed).
-- **`/work`**: absent / intentionally 404.
-- **SetSail**: the redesigned case study (cover/experience/build sections) is committed in `5d67e0a`, not on
-  production.
+Navigation: Work, About, Contact (in-page anchors). Footer navigation: Work, About, Web Development, FAQ.
+Routes: `/`, `/work/setsail`, `/about`, `/contact`, `/services/web-development`, `/social-preview`, parked
+`/services/ai-ad-creative`. `/work` (an index) does NOT exist and intentionally 404s. Copy is data-driven from
+`src/data/` (`whatIBuild.js`, `homeProcess.js`, `faq.js`, `tools.js`, `setsail.js`). Approved content stays as written
+unless a task says otherwise. Header wordmark, footer and the About profile card use the full identity "Niño Paul
+Cabiles"; conversational copy ("Hi, I'm Paul.") is intentionally informal.
 
-## Public Launch Scope
+Tools section: the marquee is titled "Tools I Use". It lists shadcn/ui and Motion Primitives as tools the owner uses
+in his work; they are NOT dependencies of this repository and nothing in the copy says the portfolio is built with
+them. Keep it that way; the owner should confirm those two entries.
 
-The upcoming public launch is narrowed to **Web Development only**. AI Ad Creative is intentionally parked, not
-deleted:
+Supporting pages (`/about`, `/services/web-development`, `/contact`) still exist. `/about` and
+`/services/web-development` predate the current positioning (the web-development metadata and the schema Service
+description still mention "web portals") and are queued for a consistency review. `/contact` and its inquiry form are
+preserved even though the homepage does not use the form.
 
-- Public navigation (header `SiteNavigation.jsx`, footer `FooterNav.jsx`), the homepage Selected Work and What I Do
-  sections, and the Contact project-type options no longer reference or link to AI Ad Creative.
-- The `/services/ai-ad-creative` route, its page, all of its section components (`AiAdCreativeHero`,
-  `SelectedCreative`, `CreativeTypes`, `CreativePipeline`, `AudienceSection`, `WorkingTogether`, `AiAdCreativeCta`),
-  and its data (`src/data/ai-ad-creative.js`, including the YouTube spec-creative embed and thumbnail fields) remain
-  fully intact and unchanged. The route is not redirected and has no "Coming Soon" placeholder — it is a parked draft
-  reachable only by direct URL.
-- `next.config.js`'s `images.remotePatterns` entry for `i.ytimg.com` was removed: it existed only to let `next/image`
-  optimize the AI Ad Creative thumbnail on the homepage card, and that card no longer renders. The AI page's own
-  `SelectedCreative` component embeds the YouTube player directly via `embedUrl` (an iframe), not `next/image`, so
-  nothing in the current runtime needs that remote pattern. If AI Ad Creative content is ever restored to a page that
-  renders `thumbnailUrl` through `next/image`, re-add this remote pattern.
-- Restoring AI Ad Creative to the public site later should not require rebuilding the feature — it means re-adding
-  the nav links, the homepage cards, and the Contact project-type option, and (if needed) the `next.config.js` remote
-  pattern.
-- `src/lib/schema.js` still models `AI Ad Creative` as a `Service` inside the JSON-LD `@graph`, but the whole graph is
-  gated off by `SITE_IS_LAUNCHED` (currently `false`) and was intentionally left unchanged here — it isn't live and
-  its launch-time scope is a separate decision from this parking change.
+## Design System
 
-## Page Architecture (production, `main`)
+Three font roles; every typography rule maps to one of them (tokens in `src/styles/tokens.css`):
 
-Homepage: Brand Hero → Primary Services → Featured Work (SetSail) → About Preview → Final CTA → Footer.
+- **UI** (`--font-ui`): `-apple-system, BlinkMacSystemFont, Inter, "Segoe UI", Roboto, sans-serif`. Apple's SF is
+  never bundled. Inter is loaded through `next/font` with preload off, so Apple devices never download it.
+- **DISPLAY** (`--font-display`): General Sans, self-hosted (Medium and SemiBold).
+- **EXPRESSIVE** (`--font-expressive`): Sofia Sans Extra Condensed via `next/font/google` (300 and 400). Labels,
+  metadata, and oversized numbers only; never paragraphs.
+- `--font-body` and `--font-heading` remain as aliases of UI and DISPLAY for secondary pages.
+- Homepage type scale tokens: `--type-h3`, `--type-lead`, `--type-body`, `--type-ui`, `--type-small`, `--type-label`,
+  `--type-number`, `--type-number-sm`. `SectionEyebrow` has `expressive` and `quiet` variants (default unchanged).
+- Container: `--container-max: clamp(1180px, 86vw, 1320px)`. Text stays on this grid; visuals may bleed past it.
+- Layout intent: intentional density, varied section rhythm, no macro-whitespace, no bento default, no card soup, no
+  glassmorphism, no decorative interaction without purpose.
+- Motion: GSAP with ScrollTrigger is the motion system (`src/lib/motion.js`, `Reveal`, `useReveal`, hero entrance).
+  Reduced motion is respected. React Three Fiber, Three.js, `@react-three/drei`, `@react-three/rapier`, and `meshline`
+  exist for the Lanyard. Motion, Tailwind, shadcn/ui, and Motion Primitives are not installed and must not be added
+  without a new approved requirement.
+- Server components are the default; client boundaries are isolated to browser behavior; static rendering is retained
+  where possible.
 
-Detailed Web Development and AI Ad Creative content lives on their approved `/services/web-development` and
-`/services/ai-ad-creative` routes. The Web Development route also contains the full SetSail showcase. About and
-Contact live at `/about` and `/contact`. Shared navigation is a Services disclosure (Web Development, AI Ad Creative)
-alongside About, Contact, and Start a Project.
+## Lanyard (technical implementation done; final artwork undecided)
 
-The branch work in its current state (see **Current Branch Architecture** above) changes this to: Hero → Selected
-Work (SetSail only) → What I Do (Web Development only) → About Preview → Final CTA → Footer, with flat
-Web/About/Contact navigation links and no AI Ad Creative exposure. That layout is not live and is not the source of
-truth until it is merged into `main` and approved.
+The React Bits Lanyard (R3F, Rapier, rope joints, drag, inertia, official GLB and lanyard texture) is dynamically
+imported client-only, homepage-only, with a static reduced-motion fallback and an error-boundary fallback.
+
+- **Badge artwork is a neutral placeholder** (`public/lanyard/badge-front.svg`: brand palette, concentric-ring
+  graphic, wordmark pill, name, role). The studio headshot was rejected for the badge and is no longer used on it.
+  Final badge artwork is still undecided. Do not use another personal photo or a generated portrait.
+- **Drag limit:** while dragging, the card position is soft-limited (`softLimit` in `Lanyard.jsx`, tanh resistance)
+  to stay inside the visible stage, capped by the strap's reach, with the drag depth clamped so it cannot swell toward
+  the camera. The card meets progressive resistance and can never touch the canvas edge. Release still uses the normal
+  Rapier swing. Verified left, right, down, up and diagonal at 1440, 1024, 768 and 390.
+- **Off-screen optimization:** an IntersectionObserver (200px margin) sets `frameloop="never"` on the Canvas and
+  `paused` on Rapier's Physics while the stage is off-screen. Measured: 0 draw calls off-screen, full rate on return.
+- **Resting composition:** camera target `[0, -0.45, 0]` at z = 12; the stage is a taller panel with a fading top edge.
+- Preserve the React Bits physics. Changes to `Lanyard.jsx` are marked as local additions in comments.
+
+## SetSail (redesign complete)
+
+- **Homepage Featured Build:** a large "SetSail" title, a two-sentence first-person hook, and a purpose-built generic
+  approval card (invented bakery draft post, not a SetSail screen). Drag right to approve, left to request changes;
+  resistance, controlled rotation, stamps, spring-back, release threshold. Accessible: two real buttons, ArrowLeft and
+  ArrowRight on the focused card, `role="status"` live region, `touch-action: pan-y`, reduced-motion path. After a
+  decision the section turns: "That solved one part of it." then four typographic evidence tiles (roles, onboarding
+  stages, monthly reporting, stack) and a link to `/work/setsail`. No product screenshots or device mockups on the
+  homepage.
+- **`/work/setsail`** is the one canonical SetSail case study, about BUILDING it (friction, the swipe decision, how it
+  grew, under the hood with `<details>` and an architecture diagram, how it was built, and a bridge back to Business
+  Websites / Website Rebuilds / Landing Pages). Each section has its own composition. There is NO `/work` index (it
+  404s on purpose). The old dialog and folder components are deleted; there is one story, not two.
+- **Copy lives in `src/data/setsail.js`**, including the claim rules in its header comment.
+- **Medium:** DOM, CSS and GSAP only. No second R3F canvas (the Lanyard is the only WebGL context on the homepage and
+  the case study has none). R3F stays available for a future genuinely spatial idea.
+- **Confidentiality boundary (hard rule): demonstrate concepts, do not reproduce the product.** No fictional SetSail
+  portal, dashboard, approval queue, calendar, navigation or connected workflow. No recreated screens.
+- **Privacy-safe evidence only.** The case study uses three hard-cropped real fragments in `public/images/setsail/`
+  (`agency-workflow-fragment.png`, `lifecycle-stages-fragment.png`, `client-mobile-fragment.png`), exported so the
+  pixels contain no client or business names, initials, agency logo, testimonials, menu or place imagery, private URLs,
+  account information, or count/usage figures. Sanitization is in the exported pixels, never CSS blur, overlay or
+  clipping. Any new fragment must be inspected at full resolution first. Captions read "From the actual build" and
+  "Client information left out."
+- **Identity protection:** describe the context only as "an organic social media agency". Do not show the agency logo
+  in new imagery, name clients, or name the previous workflow software.
+- **Claims (verified against the real SetSail codebase):** say "I built...", never "is used by...". No client counts,
+  adoption, results, time-saved or performance claims. KPI reporting is monthly CSV import, not live analytics.
+  Booking is connected Calendly links, not a native scheduling engine. The Cloud Campaign integration (content
+  handoff, scheduling, analytics read, reconciliation, webhook contract) is built and tested but behind readiness
+  flags that default OFF; never say SetSail automatically schedules or publishes content. Four roles (Super Admin,
+  Admin, Creative Coordinator, Client), invitation-only access, RLS, append-only audit log, 8 onboarding and 7
+  recurring stages, Kanban and list tasks.
+- **Git history:** earlier commits of this public repository still contain the unsafe SetSail images that were removed
+  from the current tree. The current tree is safe; history is not rewritten. Whether to purge history, make the
+  repository private, or leave it is an open decision for the owner.
+
+## Parked Work
+
+AI Ad Creative is intentionally parked, not deleted, and is not part of the active direction:
+
+- No public navigation, homepage, Contact project-type option, or launch-gated schema reference to it (schema removal
+  was committed in `baa2a19`, although `src/lib/schema.js` service copy still needs the broader schema pass).
+- The `/services/ai-ad-creative` route, its components (`AiAdCreativeHero`, `SelectedCreative`, `CreativeTypes`,
+  `CreativePipeline`, `AudienceSection`, `WorkingTogether`, `AiAdCreativeCta`, and related), and
+  `src/data/ai-ad-creative.js` remain in code, reachable only by direct URL. No redirect, no placeholder.
+- Do not work on, redesign, expand, or restore it without explicit approval. Shared global styles or tokens may affect
+  it; report that rather than working on the route.
+- `next.config.js` no longer allows `i.ytimg.com` for `next/image`; re-add it only if a thumbnail is ever rendered via
+  `next/image` again.
 
 ## Brand and Contact Identity
 
 - Runtime brand: `pawlystudios.`
-- Person behind the brand: Paul Cabiles.
+- Person: Niño Paul Cabiles.
 - Approved logo source: `public/logos/portfolio logo transparent.svg`.
 - Pixel-exact optimized runtime logo: `public/logos/pawlystudios-logo.webp`.
 - Email: `ninopaul.cabiles@gmail.com`
-- WhatsApp: `https://wa.me/qr/ON77VWUSLF3MF1`
+- WhatsApp: +63 906 055 8493 (`https://wa.me/639060558493`)
 - LinkedIn: `https://www.linkedin.com/in/nino-paul-cabiles`
+
+Contact values are centralized in `src/data/contact.js` (also `whatsappDisplay`). The homepage footer shows the email as
+the dominant contact link with WhatsApp and LinkedIn beneath it. `/contact` is form-only.
 
 ## Tech Stack and Boundaries
 
-- Next.js App Router, React, JavaScript, custom CSS, GSAP, and `next/image`.
-- General Sans is self-hosted for headings; Inter is loaded through `next/font` for body copy.
-- Server components are the default. Client boundaries are isolated to browser behavior.
-- GSAP is the motion system. Motion, Tailwind, shadcn/ui, and Motion Primitives are not installed.
-- Static rendering is retained where possible.
-
-## Latest Approved Implementation (live on production, `main`)
-
-- The homepage leads with a Brand Hero, then Primary Services (Web Development / AI Ad Creative gateways), then
-  Featured Work (SetSail only), then About Preview and the final CTA.
-- Shared navigation exposes a Services disclosure (Web Development, AI Ad Creative) alongside About and Contact.
-- The crawlable Featured Build pairs approved SetSail copy with an interactive Folder containing three real sanitized
-  screenshots. Opening the Folder reveals the single Explore Project action.
-- Explore Project opens the reusable native-dialog SetSail experience with GSAP geometry animation, focus containment
-  and restoration, scroll locking, Escape and close-button behavior, responsive layouts, and reduced-motion handling.
-- Web Development pricing is intentionally absent until the commercial offer is finalized.
-- Website Maintenance remains a separate optional ongoing offer without a published price.
-- Tools uses local logos in a continuous marquee with a static reduced-motion fallback.
-- The homepage uses a lightweight About preview; `/about` keeps its copy server-rendered and isolates its ProfileCard
-  tilt and Contact action in a small client component with reduced-motion support.
-- Contact is form-only. Footer renders the alternate contact destinations as accessible icon-only links sourced from
-  `src/data/contact.js`:
-  - Email: `ninopaul.cabiles@gmail.com`
-  - WhatsApp: `https://wa.me/qr/ON77VWUSLF3MF1`
-  - LinkedIn: `https://www.linkedin.com/in/nino-paul-cabiles`
-- The inquiry form has client/server validation and a honeypot, but no delivery provider. It must continue to report
-  `NOT_CONFIGURED`; never fake success.
-- The current global title, description, and gated schema remain Web Development-oriented; broadening them is a
-  future SEO/launch task, not an architecture-housekeeping change.
-- A branded 1200 × 630 social preview is generated at `/social-preview` with the approved logo and palette. It is not
-  attached to Open Graph/Twitter metadata until a custom domain can provide truthful absolute URLs.
-- Server-rendered Person, WebSite, and Service schema architecture is prepared but remains gated off until a real
-  production URL exists and launch is approved. SetSail SoftwareApplication schema remains pending.
-- Baseline security headers and a conservative Permissions Policy are configured; the Next.js signature is disabled.
-  HSTS and CSP remain launch review items.
-- `src/app/robots.js` preserves pre-launch crawling behavior without publishing a sitemap URL.
-- `SITE_IS_LAUNCHED` is `false`; the site remains noindex.
-- Final visual, responsive, accessibility, motion, content, and implementation QA passed at 1920, 1440, 1024, 768,
-  and 375 pixels. The latest launch-readiness pass covered 1440, 768, 375, and reduced-motion modes. Tests, lint,
-  production build, production dependency audit, and whitespace validation passed.
-
-None of this list includes the portfolio-first content pass (`8a4345e`), the site restructure (`09fcb44`, `10ef7d2`),
-the SetSail redesign (`5d67e0a`), the web-only public scope narrowing (`baa2a19`), or the Next.js security patch
-(`a96da75`) — see **Repository State** and **Current Branch Architecture** above for what exists beyond production
-and where it lives.
+- Next.js 16 App Router, React 19, JavaScript, custom CSS, GSAP, `next/image`.
+- Fonts: see **Design System**.
+- 3D for the Lanyard only: `three`, `@react-three/fiber`, `@react-three/drei`, `@react-three/rapier`, `meshline`.
+- Not installed: Motion, Tailwind, shadcn/ui, Motion Primitives. (`shadcn/ui` and `Motion Primitives` appear in the "Tools I Use" marquee as tools the owner uses; they are not
+  dependencies of this repository.)
 
 ## Asset State
 
-- Three new SetSail screenshots are committed and referenced in `src/data/setsail.js`: `(2).png`, `(3).png`, and
-  `(11).png` (committed in `5d67e0a`).
-- The other 11 SetSail screenshots generated during the redesign were unused (not referenced anywhere in code) and
-  have been deleted from the working tree.
-- `qa/` holds local QA screenshots only, is not part of any deliverable, and is gitignored — it will not appear in
-  `git status` and should not be staged.
-- The AI Ad Creative thumbnail asset (`thumbnailUrl`/`thumbnailAlt` in `src/data/ai-ad-creative.js`, hosted at
-  `i.ytimg.com`) is preserved as data but is no longer rendered anywhere in the current runtime; see **Public Launch
-  Scope** above for why its `next.config.js` remote-image pattern was removed.
+- SetSail evidence (case study only): `public/images/setsail/agency-workflow-fragment.png`,
+  `lifecycle-stages-fragment.png`, `client-mobile-fragment.png`. All other SetSail screenshots and hero mockups were
+  removed from the tree (still present in older Git history).
+- Lanyard assets: `public/lanyard/card.glb`, `lanyard.png` (official React Bits), `badge-front.svg` (neutral
+  placeholder, no photograph), `badge-back.svg`.
+- Portraits: `public/images/paul-about-portrait.jpg` (homepage About and `/about`), `paul-headshot-about.png`
+  (About ProfileCard default avatar and schema image). Neither is used on the Lanyard.
+- `qa/` holds local QA screenshots, is gitignored, and is not a deliverable.
 
 ## Next.js Security State
 
-- Runtime versions: `next@16.3.3`, `react@19.2.8`, `react-dom@19.2.8` (committed in `a96da75`).
-- The critical Next.js unauthenticated-RCE advisories (`GHSA-p293-qw3h-jr36`, `GHSA-2xp9-vwfh-vxw4`), which affected
-  `next` `16.0.0–16.3.2`, are resolved by this patch.
-- Remaining `npm audit --omit=dev` findings, both transitive through `next` itself (not direct dependencies):
-  - `sharp <0.35.4` — HIGH (libheif vulnerabilities).
-  - `baseline-browser-mapping >=2.0.0 <2.11.0` — MODERATE (DoS).
-  Do not manually pin/override either without a separate, reviewed dependency task — they follow whatever versions
-  `next` itself declares.
+- Runtime versions: `next@16.3.3`, `react@19.2.8`, `react-dom@19.2.8` (patched in `a96da75`).
+- The critical Next.js unauthenticated-RCE advisories (`GHSA-p293-qw3h-jr36`, `GHSA-2xp9-vwfh-vxw4`, affecting `next`
+  `16.0.0–16.3.2`) are resolved.
+- Remaining `npm audit --omit=dev` findings, both transitive through `next` itself: `sharp <0.35.4` (HIGH, libheif)
+  and `baseline-browser-mapping >=2.0.0 <2.11.0` (MODERATE, DoS). Do not pin/override either without a separate,
+  reviewed dependency task. The audit currently reports 4 findings in total; do not run `npm audit fix`.
 
 ## Vercel / Environment State
 
-- Vercel project: `pawlystudios`. Production URL for the initial launch: `https://pawlystudios.vercel.app` (custom
-  domain intentionally deferred).
-- Configured Vercel environment variable: `NEXT_PUBLIC_SITE_URL=https://pawlystudios.vercel.app`, scoped
-  **Production only**. Preview and Development are intentionally left unset (a preview deployment's own unique URL
-  would be wrong if it inherited the production origin for `metadataBase`/canonical).
-- Setting this variable has **not** triggered a new deployment — it only takes effect on the next Production build.
-- No other environment variables are configured yet: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`,
-  `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` are all absent from every Vercel environment. See **Contact
-  Form State** below.
-- `SITE_IS_LAUNCHED` remains `false`. Nothing from `portfolio-first-restructure` has been pushed or deployed.
+- Vercel project: `pawlystudios`. Pre-launch production URL: `https://pawlystudios.vercel.app` (custom domain
+  intentionally deferred).
+- `NEXT_PUBLIC_SITE_URL=https://pawlystudios.vercel.app` is configured in Vercel, **Production only**. Preview and
+  Development are intentionally unset (a preview deployment inheriting the production origin would produce a wrong
+  `metadataBase`/canonical).
+- No other environment variables were configured as of the last documented check: `RESEND_API_KEY`,
+  `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Verify in Vercel
+  before relying on this. Do not change environment variables without a task.
+- `SITE_IS_LAUNCHED` is `false` (`src/lib/seo-config.js`); the site emits `noindex, nofollow` and the JSON-LD graph is
+  gated off. `src/app/robots.js` preserves pre-launch crawling behavior without a sitemap URL. Global title,
+  description, and gated schema are still Web Development-oriented; broadening them (and the SEO/GEO/AEO work) is a
+  future task.
+- A branded 1200 × 630 social preview exists at `/social-preview` and is not yet attached to Open Graph/Twitter
+  metadata.
+- Baseline security headers and a report-only CSP are configured in `next.config.js`; the Next.js signature is
+  disabled. HSTS and enforcing CSP remain launch review items.
 
 ## Contact Form State
 
 - Flow: `InquiryForm.jsx` (client) → `submitContactForm.js` (`'use server'` Server Action) → server validation +
   honeypot → optional rate limiting → `contactSubmission.js`'s `processContactForm` → Resend delivery.
-- Project types: `Web Development`, `Website Maintenance`, `Other / Not Sure Yet` (AI Ad Creative removed, see
-  **Public Launch Scope**).
-- **Required** for real delivery (currently unset — see **Vercel / Environment State**): `RESEND_API_KEY`,
-  `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`. Missing any one of these makes `getDelivery()` return `null`, and
-  `processContactForm` returns `NOT_CONFIGURED` — the honest, non-fake-success state currently shown to visitors.
-- **Optional**, safe to defer: `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` (sliding-window rate limit, 5
-  requests/10 minutes, IP-hash keyed). Absent config skips rate limiting entirely; a runtime failure fails open
-  (still delivers, logs a warning). Neither absence nor failure blocks or misleads a legitimate visitor.
-- Never fake successful delivery. Do not configure credentials without an approved provider and real server-side
-  values — do not store real credentials in this file or any repository documentation.
+- Project types: `Web Development`, `Website Maintenance`, `Other / Not Sure Yet`.
+- **Required** for real delivery: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`. Missing any one makes
+  `getDelivery()` return `null` and `processContactForm` return `NOT_CONFIGURED`, which is the honest state shown to
+  visitors. Never fake success.
+- **Optional:** `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` (sliding-window rate limit, 5 requests per 10
+  minutes, IP-hash keyed). Absent config skips rate limiting; a runtime failure fails open.
+- Do not configure credentials without an approved provider and real server-side values, and do not store real
+  credentials in this file or any repository documentation.
 
-## Deployment Checkpoint
+## Deployment Notes
 
-- GitHub: `https://github.com/UnpopularClwn/pawlystudios..git`
-- Branch: `main`; Vercel production branch: `main`.
-- Vercel project: `pawlystudios`.
-- Pre-launch production URL: `https://pawlystudios.vercel.app` (not a final custom domain).
-- The GitHub repository is connected to Vercel; pushes to `main` trigger production deployments and non-main/PR work
-  can create preview deployments.
-- Hosted QA passed on desktop, tablet, and mobile with no console, hydration, asset, font, or horizontal-overflow
-  errors. Security headers and the honest unconfigured-form response were verified.
-- Lighthouse baseline: Performance 96, Accessibility 100, Best Practices 96, SEO 66 (expected while noindex is
-  active), LCP 2.7 s, CLS 0, and TBT 90 ms.
-- `NEXT_PUBLIC_SITE_URL` is now configured in Vercel (Production only — see **Vercel / Environment State**), but no
-  new Production deployment has run yet, so `metadataBase`/canonical are not active in the live site today. No
-  delivery environment variables are configured. Sitemap and JSON-LD publication remain unset. The page emits
-  `noindex, nofollow` and schema remains unpublished.
+- GitHub: `https://github.com/UnpopularClwn/pawlystudios..git`. Vercel production branch: `main`. Pushes to `main`
+  trigger production deployments; non-main and PR work can create preview deployments.
+- Earlier hosted QA and a Lighthouse baseline (Performance 96, Accessibility 100, Best Practices 96, SEO 66 while
+  noindex, LCP 2.7 s, CLS 0, TBT 90 ms) were recorded against the older pre-launch deployment, before the current
+  homepage. Re-run them after the creative work; do not treat them as current.
 
 ## Resume Rules
 
-- Do not fabricate contact details, client identities, business claims, metrics, testimonials, or domains.
+- Do not fabricate contact details, client identities, business claims, metrics, statistics, testimonials, or domains.
 - Do not configure inquiry delivery without an approved provider and real server-side credentials.
 - Do not enable indexing until the production domain, metadata, launch QA, and explicit approval are complete.
-- Preserve the approved architecture and data-driven content organization. Do not broadly refactor because a
-  different implementation style is preferred.
+- Preserve approved content and the data-driven content organization. Prefer focused changes and reuse of existing
+  components. Do not broadly refactor.
+- No em dashes in public copy. No unsupported claims. `pawlystudios.` is a personal creative identity, not an agency.
+- The owner is the creative director: research before major creative changes, improvement loops max three passes.
 - The client owns the finished website. Ongoing support is optional.
 - Update `docs/implementation-status.md` after future implementation sessions.
 
 **Do not, without explicit approval:**
-- Restore AI Ad Creative to public launch scope, or expose it in nav/homepage/contact/schema — the parked
-  implementation stays in code (see **Public Launch Scope**), not deleted.
-- Restore `/work` (intentionally absent / 404).
-- Redesign the approved About page.
-- Modify SetSail unless a genuine bug is found.
+
+- Restore or work on AI Ad Creative, or expose it in nav, homepage, contact, or schema.
+- Create a `/work` index or add other projects.
+- Put SetSail product screenshots, mockups, or any recreated SetSail UI back on the site, or weaken the SetSail
+  confidentiality and claim rules.
+- Change the Lanyard physics, or treat its placeholder artwork as final.
+- Redesign `/about` or `/services/web-development` outside their planned consistency review.
 - Flip `SITE_IS_LAUNCHED` or otherwise enable indexing.
-- Push directly to `main` — pushes to `main` trigger a Vercel production deployment.
-- Add pricing content (none is approved yet).
+- Push, deploy, rewrite Git history, or change environment variables.
+- Add pricing content (none is approved).
+- Install Motion, Tailwind, shadcn/ui, or Motion Primitives.
 
-## Remaining Launch Order
+## Creative and Launch Backlog
 
-Initial launch uses `https://pawlystudios.vercel.app` — a custom domain is intentionally deferred, not required for
-launch.
+Future work (creative phase is closed):
+
+1. Supporting-page consistency review: `/about` and `/services/web-development`.
+2. Final Lanyard badge artwork (owner to decide).
+3. Git-history privacy decision for the public repository (unsafe SetSail images remain in old commits).
+4. Confirm the Tools entries shadcn/ui and Motion Primitives.
+
+Launch (in order, each after explicit approval where noted):
 
 1. Configure Resend contact delivery (`RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`, Production only).
 2. Test a real contact submission end to end.
-3. Add a sitemap.
+3. SEO / GEO / AEO: homepage and page metadata, canonicals, structured data (Person and `pawlystudios.` entity
+   consistency), sitemap, robots/indexing, Open Graph/Twitter, headings, image metadata.
 4. Attach `/social-preview` to Open Graph/Twitter metadata.
 5. Review final launch configuration.
 6. Set `SITE_IS_LAUNCHED` to `true` (only after explicit approval).
 7. Run final test/lint/build/security audit.
 8. Final desktop/tablet/mobile smoke test.
-9. Merge/push/deploy (only after explicit approval — pushes to `main` trigger a Vercel production deployment).
+9. Merge/push/deploy (only after explicit approval).
 10. Verify the actual Vercel production deployment.
 11. Verify canonical, robots, schema, social metadata, and contact delivery in production.
 
-Deferred, not required for this launch: custom domain, Upstash rate limiting (safe to add later), final commercial
-pricing, HSTS/CSP hardening beyond the current baseline, SetSail `SoftwareApplication` schema.
+Deferred, not required for launch: custom domain, Upstash rate limiting, final commercial pricing, HSTS/CSP hardening
+beyond the baseline, SetSail `SoftwareApplication` schema.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

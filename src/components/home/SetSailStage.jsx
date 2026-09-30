@@ -1,120 +1,81 @@
 'use client'
 
-import Image from 'next/image'
-import { useRef } from 'react'
+import { useState } from 'react'
 import Container from '../shared/Container.jsx'
-import SetSailDialog from '../projects/setsail/SetSailDialog.jsx'
+import Button from '../shared/Button.jsx'
+import ApprovalIdea from './ApprovalIdea.jsx'
+import { setsail } from '../../data/setsail.js'
 import './SetSailStage.css'
 
-// Homepage entry to the SetSail case study. The laptop and phone are the
-// approved transparent device mockups and sit directly on the page: the laptop
-// is lifted across the hero's bottom edge (geometry lives in HomeSequence.css).
-// The approved SetSailDialog is unchanged and opened from a visible button.
-const laptop = {
-  src: '/images/hero/laptop-agency-overview.webp',
-  width: 2000,
-  height: 1149,
-  alt: 'SetSail agency workspace on a laptop, showing client counts, onboarding status, pending approvals and client growth.',
-}
-
-const phone = {
-  src: '/images/hero/phone-approvals.webp',
-  width: 720,
-  height: 1468,
-  alt: 'SetSail client view on a phone, showing a social media post waiting for approval.',
-}
+// Homepage entry to the SetSail case study.
+//
+// This section demonstrates ONE product decision (approve right, ask for changes left) with a
+// purpose-built generic card, then says plainly that it was only part of the project and points
+// to /work/setsail. It contains no product screens or mockups on purpose. All copy lives in
+// src/data/setsail.js. The whole story reads without JavaScript or motion; the card is an
+// enhancement.
+const { home } = setsail
 
 export default function SetSailStage() {
-  const dialogRef = useRef(null)
-  const devicesRef = useRef(null)
-  const triggerRef = useRef(null)
-
-  function openCaseStudy() {
-    dialogRef.current?.open(devicesRef.current, triggerRef.current)
-  }
+  const [decided, setDecided] = useState(false)
 
   return (
-    <section className="ss" id="work" aria-labelledby="setsail-stage-heading">
-      <Container className="ss-inner">
-        <div className="ss-copy">
-          <p className="ss-eyebrow">Featured Build</p>
-          <h2 className="ss-title" id="setsail-stage-heading">
-            SetSail
-          </h2>
-          <div className="ss-description">
-            <p>SetSail started as my first web app project for an organic social media agency.</p>
-            <p>
-              The problem was simple: clients were using the agency&rsquo;s project management tool to review,
-              approve, and give feedback on content. It worked for the team, but it wasn&rsquo;t built for the
-              client experience.
-            </p>
-            <p>
-              I started by looking at where the team struggled most. Tracking client KPIs. Getting content
-              approved. Booking strategy calls. Keeping clients updated on what stage they were in. Scheduling
-              content. Managing the work behind each account.
-            </p>
-            <p className="ss-pivot">Those problems became SetSail.</p>
-            <p>
-              A client portal and agency workspace with KPI tracking, project stages, strategy call booking,
-              automatic scheduling, and a lightweight project management system.
-            </p>
-            <p>
-              For content approvals, I borrowed a familiar interaction from Tinder: swipe right to approve a post,
-              swipe left to request changes.
-            </p>
-            <p>
-              SetSail also connects with a third-party social media platform, allowing approved content to move into
-              scheduling and publishing across connected social accounts.
-            </p>
-          </div>
-          <div className="ss-actions">
-            <button
-              type="button"
-              className="btn btn--primary"
-              ref={triggerRef}
-              aria-haspopup="dialog"
-              aria-controls="setsail-project-dialog-home"
-              onClick={openCaseStudy}
-            >
-              <span>See how I built SetSail</span>
-              <span className="btn__arrow" aria-hidden="true">
-                ↗
+    <section className="ss" id="work" aria-labelledby="setsail-heading">
+      <Container>
+        <div className="ss-top">
+          <div className="ss-copy">
+            <h2 className="ss-title" id="setsail-heading">
+              {setsail.name}
+            </h2>
+            {home.hook.map((line) => (
+              <p className="ss-hook" key={line}>
+                {line}
+              </p>
+            ))}
+            <p className="ss-prompt">
+              <span className="ss-prompt-arrow" aria-hidden="true">
+                →
               </span>
-            </button>
+              Try the idea.
+            </p>
           </div>
+
+          <div className="ss-play">
+            <ApprovalIdea onDecision={() => setDecided(true)} />
+          </div>
+        </div>
+
+        <div className="ss-bridge" data-decided={decided}>
+          <h3 className="ss-bridge-heading">
+            <span className="ss-bridge-mark">{home.bridge.heading}</span>
+          </h3>
+          <p className="ss-bridge-body">{home.bridge.body}</p>
+        </div>
+
+        <ul className="ss-evidence">
+          {home.evidence.map((item) => (
+            <li className="ss-evidence-item" key={item.label}>
+              <p className="ss-evidence-figure">
+                <span className="ss-evidence-value">{item.figure}</span>
+                <span className="ss-evidence-label">{item.label}</span>
+              </p>
+              <p className="ss-evidence-note">{item.note}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="ss-cta">
+          <Button href={setsail.href} arrow>
+            {home.cta}
+          </Button>
+          {/* Decorative hand-drawn arrow: leads the eye from the evidence row to the button. */}
+          <svg className="ss-scribble" viewBox="0 0 150 70" fill="none" aria-hidden="true" focusable="false">
+            <path d="M144 6 C126 3 104 8 88 22 C77 32 74 44 60 48 C48 52 34 46 20 38" />
+            <path d="M19 38 C25 33 29 27 31 20" />
+            <path d="M19 38 C27 40 34 45 38 52" />
+          </svg>
         </div>
       </Container>
-
-      <div className="ss-devices" ref={devicesRef}>
-        <figure className="ss-figure">
-          <Image
-            src={laptop.src}
-            alt={laptop.alt}
-            width={laptop.width}
-            height={laptop.height}
-            sizes="(max-width: 640px) 116vw, (max-width: 1180px) 92vw, min(66vw, 1080px)"
-            className="ss-device"
-            priority
-          />
-        </figure>
-      </div>
-
-      <div className="ss-phone">
-        <div className="ss-phone-inner">
-          <figure className="ss-figure">
-            <Image
-              src={phone.src}
-              alt={phone.alt}
-              width={phone.width}
-              height={phone.height}
-              sizes="(max-width: 640px) 190px, (max-width: 1180px) 24vw, 280px"
-              className="ss-device"
-            />
-          </figure>
-        </div>
-      </div>
-
-      <SetSailDialog ref={dialogRef} id="setsail-project-dialog-home" />
     </section>
   )
 }

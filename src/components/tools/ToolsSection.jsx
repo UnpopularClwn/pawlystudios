@@ -25,12 +25,12 @@ function ToolList({ items, duplicate = false, eager = false }) {
   )
 }
 
-export default function ToolsSection({ withoutReveal = false }) {
+export default function ToolsSection({ withoutReveal = false, eyebrowVariant }) {
   const items = tools.groups.flatMap((group) => group.items)
   const content = (
     <>
       <div className="tools-intro">
-        <SectionEyebrow>{tools.eyebrow}</SectionEyebrow>
+        <SectionEyebrow variant={eyebrowVariant}>{tools.eyebrow}</SectionEyebrow>
         <h2 className="tools-heading">{tools.heading}</h2>
       </div>
 
@@ -44,7 +44,7 @@ export default function ToolsSection({ withoutReveal = false }) {
   )
 
   return (
-    <Section background="white" className="tools-section" aria-label="Tools I use">
+    <Section background="white" className={`tools-section${withoutReveal ? ' tools-section--home' : ''}`} aria-label="Tools I use">
       {withoutReveal ? (
         <div className="tools-content">{content}</div>
       ) : (

@@ -11,7 +11,7 @@ export const SITE_IS_LAUNCHED = false
 export const SITE_NAME = BRAND_NAME
 export const SITE_TITLE = 'Web Development | pawlystudios.'
 export const SITE_DESCRIPTION =
-  'pawlystudios. is the web development and digital product practice of Paul Cabiles, building functional websites and tools around real problems.'
+  'pawlystudios. is the web development and digital product practice of Niño Paul Cabiles, building functional websites and tools around real problems.'
 
 // Intentionally unset until a production domain is assigned — do not fabricate one.
 // Once known, set NEXT_PUBLIC_SITE_URL and read it here for `metadataBase`.

@@ -40,8 +40,17 @@
 
   /* ---------- Typography ---------- */
   /* --font-general-sans / --font-inter are injected by next/font in app/layout.js */
-  --font-heading: var(--font-general-sans), 'Segoe UI', system-ui, sans-serif;
-  --font-body: var(--font-inter), system-ui, sans-serif;
+  /* Three roles, no arbitrary mixing:
+     UI          functional text: body, nav, buttons, FAQ answers
+     DISPLAY     General Sans: H1/H2, project titles, major statements
+     EXPRESSIVE  Sofia Sans Extra Condensed: small labels and oversized numerals only */
+  --font-ui: -apple-system, BlinkMacSystemFont, var(--font-inter), 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-general-sans), 'Segoe UI', system-ui, sans-serif;
+  --font-expressive: var(--font-sofia), 'Arial Narrow', 'Roboto Condensed', sans-serif;
+
+  /* Legacy names kept so secondary pages resolve to the same roles. */
+  --font-body: var(--font-ui);
+  --font-heading: var(--font-display);
 
   --weight-heading: 500;
   --weight-body: 400;
@@ -55,8 +64,21 @@
 
   --tracking-tight: -0.02em;
 
+  /* Homepage type scale. Display and H2 reuse --text-h1 / --text-h2 above. */
+  --type-h3: clamp(1.25rem, 1.1rem + 0.55vw, 1.5rem); /* ~20px -> 24px */
+  --type-lead: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem); /* ~17px -> 20px, intro paragraphs */
+  --type-body: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem); /* 16px -> 17px, running text */
+  --type-ui: 0.9375rem; /* 15px: buttons, nav */
+  --type-small: 0.875rem; /* 14px: supporting links, captions */
+  --type-label: clamp(1.125rem, 1.05rem + 0.3vw, 1.375rem); /* expressive label, 18px -> 22px: narrow letterforms read small */
+  --type-number: clamp(6rem, 4rem + 6vw, 9.5rem); /* expressive oversized number */
+  --type-number-sm: clamp(2.5rem, 2rem + 1.4vw, 3.25rem); /* expressive step number */
+
+  --leading-body: 1.65;
+  --tracking-label: 0.2em; /* expressive uppercase label */
+
   /* ---------- Layout ---------- */
-  --container-max: 1180px;
+  --container-max: clamp(1180px, 86vw, 1320px); /* 1180 -> 1320 as the viewport widens */
   --text-max: 720px;
   --container-pad: 24px;
 

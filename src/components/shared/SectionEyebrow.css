@@ -1,9 +1,27 @@
 .section-eyebrow {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-weight: var(--weight-body-medium);
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-secondary);
   margin-bottom: 12px;
+}
+
+.section-eyebrow--expressive {
+  font-family: var(--font-expressive);
+  font-weight: 400;
+  font-size: var(--type-label);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.2;
+  color: var(--text-heading);
+}
+
+.section-eyebrow--quiet {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-body-medium);
+  font-size: var(--type-ui);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-secondary);
 }

@@ -45,7 +45,7 @@
 }
 
 .tools-item span {
-  font-size: 14px;
+  font-size: var(--type-ui);
   font-weight: var(--weight-body-medium);
   white-space: nowrap;
 }
@@ -95,5 +95,35 @@
 
   .tools-track-group[aria-hidden='true'] {
     display: none;
+  }
+}
+
+/* Homepage only: a compact, denser band between two roomy sections, with a
+   marquee big enough to hold its own. */
+@media (min-width: 901px) {
+  .section.tools-section--home {
+    padding: 56px 0 72px;
+  }
+
+  .tools-section--home .tools-intro {
+    margin-bottom: 32px;
+  }
+
+  .tools-section--home .tools-marquee {
+    --tools-gap: 72px;
+    padding: 28px 0;
+  }
+
+  .tools-section--home .tools-logo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .tools-section--home .tools-item {
+    gap: 14px;
+  }
+
+  .tools-section--home .tools-item span {
+    font-size: 1.0625rem;
   }
 }

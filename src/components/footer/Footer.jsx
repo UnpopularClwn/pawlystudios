@@ -22,7 +22,12 @@ export default function Footer({ withLanyard = false }) {
       )}
       <div className="footer-contact-secondary">
         {contact.whatsapp && (
-          <a href={contact.whatsapp} target="_blank" rel="noreferrer noopener">
+          <a
+            href={contact.whatsapp}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={`Message me on WhatsApp, ${contact.whatsappDisplay}`}
+          >
             Message me on WhatsApp
           </a>
         )}

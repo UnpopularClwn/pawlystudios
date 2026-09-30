@@ -14,8 +14,8 @@ export default function SiteNavigation() {
 
   return (
     <nav className={`site-navigation ${pathname === '/' ? 'site-navigation--home' : ''}`} aria-label="Primary navigation">
-      <Link href="/" className="site-header-brand" aria-label="Paul Cabiles, home">
-        <span className="site-header-name">Paul Cabiles</span>
+      <Link href="/" className="site-header-brand" aria-label="Niño Paul Cabiles, home">
+        <span className="site-header-name">Niño Paul Cabiles</span>
         <span className="site-header-signature">pawlystudios.</span>
       </Link>
 

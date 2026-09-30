@@ -11,7 +11,7 @@ export default function HowIWork() {
   return (
     <Section background="white" className="hiw-section" aria-labelledby="hiw-heading" id="how-i-work">
       <Reveal as="div" className="hiw-intro" preset="content">
-        <SectionEyebrow>How I Work</SectionEyebrow>
+        <SectionEyebrow variant="quiet">How I Work</SectionEyebrow>
         <h2 id="hiw-heading">From onboarding to launch.</h2>
       </Reveal>
 

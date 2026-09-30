@@ -1,13 +1,13 @@
+/* Compact SetSail pointer on the Web Development page. */
 .setsail-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
-  align-items: center;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px 48px;
 }
 
-.setsail-intro {
-  max-width: 60ch;
-  margin-bottom: 32px;
+.setsail-copy {
+  max-width: 64ch;
 }
 
 .setsail-heading {
@@ -15,72 +15,14 @@
 }
 
 .setsail-description {
-  font-size: 16px;
-  line-height: 1.7;
   color: var(--text-body);
-}
-
-/* ---------- Build summary + stack ---------- */
-.setsail-build {
-  background: var(--color-white);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  padding: 24px;
-}
-
-.setsail-build-label {
-  font-family: var(--font-body);
-  font-weight: var(--weight-body-medium);
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.setsail-build-copy {
-  font-size: 15px;
+  font-size: var(--type-body);
   line-height: 1.7;
-  color: var(--text-body);
-  max-width: 64ch;
-  margin-bottom: 20px;
 }
 
-.setsail-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  list-style: none;
-}
-
-.setsail-stack-item {
-  font-family: var(--font-body);
-  font-weight: var(--weight-body-medium);
-  font-size: 12px;
-  letter-spacing: 0.03em;
-  color: var(--text-heading);
-  border-bottom: 1px solid var(--color-border);
-  padding: 4px 0;
-}
-
-/* ---------- Folder block ---------- */
-.setsail-folder-block {
-  display: flex;
-  justify-content: center;
-}
-
-@media (max-width: 960px) {
+@media (max-width: 720px) {
   .setsail-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .setsail-folder-block {
-    order: 2;
-  }
-
-  .setsail-copy {
-    order: 1;
+    align-items: start;
   }
 }

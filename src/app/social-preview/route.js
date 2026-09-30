@@ -81,7 +81,7 @@ export async function GET() {
           Web Development
         </div>
         <div style={{ display: 'flex', fontSize: '28px', color: '#c6e79e' }}>
-          Paul Cabiles / pawlystudios.
+          Niño Paul Cabiles / pawlystudios.
         </div>
       </div>
     </div>,

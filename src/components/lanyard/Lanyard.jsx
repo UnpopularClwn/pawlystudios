@@ -8,8 +8,8 @@ import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 // Official React Bits assets, adapted for Next.js: a plain ES import of a
 // binary .glb (or a bundler-resolved image path) isn't supported here, so the
 // two official assets are served as static files from /public/lanyard and
-// referenced by URL instead. No other line in this file differs from the
-// official Lanyard-JS-CSS registry source.
+// referenced by URL instead. Local additions: the front/back atlas compositor
+// and the `target` prop (camera lookAt).
 const cardGLB = '/lanyard/card.glb';
 const lanyard = '/lanyard/lanyard.png';
 
@@ -17,6 +17,18 @@ import * as THREE from 'three';
 import './Lanyard.css';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
+
+// Local addition: soft limits while dragging. Inside [min + k, max - k] the card follows the
+// pointer 1:1; past that it meets progressively stronger resistance and can only approach `max`
+// asymptotically, so the lanyard feels like it has reached its length instead of the card
+// running into the canvas edge. Release is untouched: the rope and Rapier take over as before.
+function softLimit(v, min, max, k) {
+  const lo = min + k;
+  const hi = max - k;
+  if (v > hi) return hi + k * Math.tanh((v - hi) / k);
+  if (v < lo) return lo - k * Math.tanh((lo - v) / k);
+  return v;
+}
 
 // 1x1 transparent pixel — lets useTexture be called unconditionally when a
 // front/back image isn't supplied.
@@ -32,6 +44,7 @@ const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
 export default function Lanyard({
   position = [0, 0, 30],
+  target = [0, 0, 0],
   gravity = [0, -40, 0],
   fov = 20,
   transparent = true,
@@ -42,6 +55,19 @@ export default function Lanyard({
   lanyardWidth = 1
 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
+  // Local addition: render and simulate only while the stage is near the viewport.
+  const wrapperRef = useRef(null);
+  const [inView, setInView] = useState(true);
+
+  useEffect(() => {
+    const node = wrapperRef.current;
+    if (!node || typeof IntersectionObserver === 'undefined') return undefined;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      rootMargin: '200px 0px',
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -50,16 +76,21 @@ export default function Lanyard({
   }, []);
 
   return (
-    <div className="lanyard-wrapper">
+    <div className="lanyard-wrapper" ref={wrapperRef}>
       <Canvas
+        frameloop={inView ? 'always' : 'never'}
         camera={{ position: position, fov: fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+        onCreated={({ gl, camera }) => {
+          gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1);
+          camera.lookAt(...target);
+        }}
       >
         <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60} paused={!inView}>
           <Band
+            centerY={target[1]}
             isMobile={isMobile}
             frontImage={frontImage}
             backImage={backImage}
@@ -103,6 +134,7 @@ export default function Lanyard({
   );
 }
 function Band({
+  centerY = 0,
   maxSpeed = 50,
   minSpeed = 0,
   isMobile = false,
@@ -204,7 +236,21 @@ function Band({
       dir.copy(vec).sub(state.camera.position).normalize();
       vec.add(dir.multiplyScalar(state.camera.position.length()));
       [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
-      card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
+      // Keep the whole card inside the visible stage, and never farther than the strap can reach.
+      const view = state.viewport.getCurrentViewport(state.camera, [0, 0, 0]);
+      const halfW = view.width / 2;
+      const halfH = view.height / 2;
+      let tx = vec.x - dragged.x;
+      let ty = vec.y - dragged.y;
+      tx = softLimit(tx, -(halfW - 1.45), halfW - 1.45, 0.45);
+      ty = softLimit(ty, centerY - halfH + 2.5, centerY + halfH - 3.0, 0.6);
+      const reach = Math.hypot(tx, ty - 4);
+      if (reach > 4.6) {
+        const scale = 4.6 / reach;
+        tx *= scale;
+        ty = 4 + (ty - 4) * scale;
+      }
+      card.current?.setNextKinematicTranslation({ x: tx, y: ty, z: Math.min(vec.z - dragged.z, 0.3) });
     }
     if (fixed.current) {
       [j1, j2].forEach(ref => {

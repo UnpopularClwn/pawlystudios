@@ -1,159 +1,225 @@
 .ss {
   position: relative;
-  z-index: 2;
-  overflow-x: clip;
-  min-height: calc(var(--ss-w) * 0.53 + 88px);
-  padding: clamp(64px, 6.5vw, 96px) 0 clamp(72px, 7vw, 104px);
+  padding: clamp(56px, 6vw, 88px) 0 clamp(56px, 6vw, 80px);
   background: var(--color-surface-warm);
-  /* Land on #work with the rising laptop in view. */
-  scroll-margin-top: calc(var(--ss-lift) + 24px);
+  scroll-margin-top: 72px;
 }
 
-.ss-copy {
-  position: relative;
-  z-index: 3;
-  max-width: 520px;
-}
-
-.ss-eyebrow {
-  font-family: var(--font-body);
-  font-weight: var(--weight-body-medium);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
+/* ---------- The moment: name, hook, and the card to play with ---------- */
+.ss-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 96px);
 }
 
 .ss-title {
-  margin-bottom: 28px;
+  margin-bottom: clamp(16px, 2vw, 28px);
+  font-size: clamp(4.5rem, 2.25rem + 8vw, 8.5rem);
   font-weight: 600;
-  font-size: clamp(3.5rem, 2rem + 5.4vw, 5.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
 }
 
-.ss-description {
-  max-width: 50ch;
+.ss-hook {
+  max-width: 34ch;
   color: var(--text-body);
-  font-size: clamp(1rem, 0.96rem + 0.25vw, 1.125rem);
-  line-height: 1.65;
-}
-
-.ss-description p {
-  margin-bottom: 1.1em;
+  font-size: var(--type-lead);
+  line-height: 1.5;
   text-wrap: pretty;
 }
 
-.ss-description p:last-child {
-  margin-bottom: 0;
-}
-
-/* "Those problems became SetSail." is the narrative pivot from problem to
-   product: same sentence, isolated as its own beat rather than another
-   paragraph in the run. Mirrors the accent treatment used for the About
-   section's own pivot line (.about-paul-turn). */
-.ss-description p.ss-pivot {
-  margin: 1.6em 0;
-  padding-left: 20px;
-  border-left: 3px solid var(--color-accent);
+.ss-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(20px, 3vw, 36px);
   color: var(--color-brand);
-  font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 1.05rem + 0.7vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  font-family: var(--font-expressive);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  line-height: 1;
 }
 
-.ss-actions {
-  margin-top: 40px;
+.ss-prompt-arrow {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0;
 }
 
-/* ---------- Devices sit directly on the page (transparent mockups) ---------- */
-.ss-devices {
-  position: absolute;
-  z-index: 3;
-  top: calc(var(--ss-lift) * -1);
-  right: calc(var(--ss-bleed) * -1);
-  width: var(--ss-w);
-  pointer-events: none;
+/* ---------- The turn: it was only one part ---------- */
+.ss-bridge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(16px, 4vw, 96px);
+  margin-top: clamp(48px, 6vw, 88px);
+  padding-top: clamp(24px, 3vw, 40px);
+  border-top: 1px solid var(--color-border);
 }
 
-.ss-phone {
-  position: absolute;
-  z-index: 4;
-  top: 8px;
-  right: calc(var(--ss-bleed) * -1 + var(--ss-w) * 0.68);
-  width: calc(var(--ss-w) * 0.26);
-  pointer-events: none;
+.ss-bridge-heading {
+  font-size: var(--text-h2);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
-.ss-figure {
+/* The underline is drawn once the visitor has made a decision. It is decoration on top of text
+   that is fully readable either way. */
+.ss-bridge-mark {
+  background: linear-gradient(var(--color-secondary), var(--color-secondary)) 0 92% / 0% 0.3em no-repeat;
+  transition: background-size 600ms var(--ease-standard);
+}
+
+.ss-bridge[data-decided='true'] .ss-bridge-mark {
+  background-size: 100% 0.3em;
+}
+
+.ss-bridge-body {
+  max-width: 44ch;
+  color: var(--text-body);
+  font-size: var(--type-lead);
+  line-height: 1.5;
+}
+
+/* ---------- Evidence: typographic, not screens ---------- */
+.ss-evidence {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: clamp(28px, 3vw, 44px);
+  list-style: none;
+  border-top: 1px solid var(--color-border);
+}
+
+.ss-evidence-item {
+  padding: 24px clamp(16px, 2vw, 32px) 4px 0;
+}
+
+.ss-evidence-item + .ss-evidence-item {
+  padding-left: clamp(16px, 2vw, 32px);
+  border-left: 1px solid var(--color-border);
+}
+
+.ss-evidence-figure {
+  margin-bottom: 10px;
+  color: var(--color-brand);
+}
+
+.ss-evidence-value {
   display: block;
+  font-family: var(--font-expressive);
+  font-size: clamp(2.75rem, 2rem + 2.4vw, 4.25rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
 }
 
-.ss-device {
-  width: 100%;
+.ss-evidence-label {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: var(--type-ui);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.ss-evidence-note {
+  max-width: 28ch;
+  color: var(--text-secondary);
+  font-size: var(--type-ui);
+  line-height: 1.5;
+}
+
+.ss-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(20px, 2.4vw, 36px);
+}
+
+/* Imperfect stroke on purpose. Sits beside the button, never over it. */
+.ss-scribble {
+  flex: none;
+  width: clamp(110px, 11vw, 150px);
   height: auto;
-  /* One restrained shadow follows the device outline across both surfaces. */
-  filter: drop-shadow(0 18px 24px rgba(29, 47, 88, 0.26));
+  margin-top: -18px;
+  overflow: visible;
+  pointer-events: none;
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: rotate(-4deg) scaleY(-1);
 }
 
-/* ---------- Tablet: the laptop rises into the hero above the copy ---------- */
-@media (max-width: 1180px) {
-  .ss {
-    display: flex;
-    min-height: 0;
-    flex-direction: column;
-    padding: 0 0 72px;
+/* ---------- Tablet ---------- */
+@media (max-width: 960px) {
+  .ss-top {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
-  .ss-inner {
-    width: 100%;
-    padding-top: calc(var(--ss-w) * 0.32 + 24px);
+  .ss-prompt {
+    margin-top: 16px;
   }
 
-  .ss-devices {
-    position: relative;
-    top: auto;
-    right: auto;
-    order: -1;
-    margin: calc(var(--ss-lift) * -1) calc(var(--ss-bleed) * -1) 0 auto;
+  .ss-bridge {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 12px;
+  }
+
+  .ss-evidence {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ss-evidence-item {
+    padding: 24px 24px 12px 0;
+  }
+
+  .ss-evidence-item + .ss-evidence-item {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .ss-evidence-item:nth-child(even) {
+    padding-left: 24px;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .ss-evidence-item:nth-child(n + 3) {
+    border-top: 1px solid var(--color-border);
   }
 }
 
-/* ---------- Mobile: laptop only above the copy, phone rises below it ---------- */
-@media (max-width: 640px) {
-  .ss {
-    padding-bottom: 64px;
+/* ---------- Mobile ---------- */
+@media (max-width: 560px) {
+  .ss-title {
+    font-size: clamp(4rem, 22vw, 5.5rem);
   }
 
-  .ss-inner {
-    padding-top: 32px;
+  .ss-evidence-item:nth-child(even) {
+    padding-left: 16px;
   }
 
-  .ss-phone {
-    position: relative;
-    top: auto;
-    right: auto;
-    order: 1;
-    display: flex;
-    justify-content: center;
+  .ss-evidence-item {
+    padding-right: 12px;
+  }
+
+  .ss-cta .btn {
     width: 100%;
-    height: auto;
-    margin-top: 40px;
-  }
-
-  .ss-phone-inner {
-    width: min(190px, 52vw);
-  }
-
-  .ss-actions,
-  .ss-actions .btn {
-    width: 100%;
-  }
-
-  .ss-actions .btn {
     justify-content: center;
+  }
+
+  .ss-scribble {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-bridge-mark {
+    transition: none;
   }
 }

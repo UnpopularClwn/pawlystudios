@@ -12,7 +12,7 @@ export default function HomePage() {
     <>
       <HomeSequence />
       <WhatIBuild />
-      <ToolsSection withoutReveal />
+      <ToolsSection withoutReveal eyebrowVariant="quiet" />
       <Experience />
       <HowIWork />
       <AboutPaul />

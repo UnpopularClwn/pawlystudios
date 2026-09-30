@@ -5,7 +5,7 @@ export default function ProfileCardExperience({ avatarUrl = '/images/paul-headsh
   return (
     <div className="about-profile-card">
       <ProfileCard
-        name="Paul Cabiles"
+        name="Niño Paul Cabiles"
         title="Web Developer"
         handle="pawlystudios"
         contactText="Start a Project"

@@ -1,90 +1,185 @@
 # Product
 
+Active design and product context for agents. Where this file and `docs/archive/` disagree, this file wins. Detailed
+repository, launch, and environment state lives in `CLAUDE.md` and `docs/implementation-status.md`.
+
 ## Register
 
-`pawlystudios.` — the portfolio brand for Paul Cabiles.
+Brand / portfolio. The design is part of the product.
+
+## Identity
+
+**Niño Paul Cabiles.** `pawlystudios.` is Niño's creative identity and signature, not a multi-person agency. Do not
+write copy, schema, or design that implies a team, a studio staff, or agency scale.
 
 ## Users
 
-Business owners and teams considering web development or AI-generated advertising creative. They need quick proof
-that Paul is credible, practical, and capable of handling the work directly.
+Business owners and teams who need a new website, a rebuild of one that has fallen behind, or a focused landing page.
+They want quick proof that Niño is credible, practical, and able to handle the work directly.
 
 ## Product Purpose
 
-Confirm Paul's credibility, show real work, introduce the two primary services, and make it easy to start a direct
-conversation without presenting Paul as a larger agency.
+Confirm Niño's credibility, show real work, explain what he builds and how he works, establish who is behind the work,
+and make it easy to start a direct conversation. The portfolio is capability-first, not a generic agency site.
+
+## Positioning
+
+Primary work:
+
+- Business Websites
+- Website Rebuilds
+- Landing Pages
+
+SetSail (a larger web application) demonstrates deeper product and build capability. It does not redefine the primary
+service offering. Do not reposition the portfolio around web portals, SaaS development, AI consulting, marketing
+services, or broad agency services.
+
+**AI Ad Creative is parked and is not part of the active portfolio direction.** The `/services/ai-ad-creative` route
+exists only as an unlinked draft. Do not use it to inform positioning, copy, or design, and do not restore it without
+explicit approval.
 
 ## Brand Personality
 
-Direct, capable, and personal. The experience should feel calm, specific, and human.
+Direct, capable, and personal. Calm, specific, and human. Restrained but memorable.
 
 ## Anti-references
 
-Generic agency templates, corporate consultant copy, AI-influencer language, fake proof, stock-photo portfolios, intrusive popups, and overbuilt interactions that hide the work or slow the page down.
+- Generic agency templates and corporate consultant copy
+- AI-influencer language and marketing buzzwords
+- Fake proof, fake statistics, unsupported claims, stock-photo portfolios
+- shadcn-style card soup, bento-grid defaults, glassmorphism
+- Intrusive popups
+- Decorative interaction with no purpose; overbuilt interactions that hide the work or slow the page
 
 ## Design Principles
 
 - Show real work and real assets.
 - Put the visitor's problem before the solution.
-- Keep Paul's voice short, direct, and specific.
+- Keep Niño's voice short, direct, and specific. First person, conversational, no em dashes.
 - Use interaction to support credibility, never to obscure it.
+- Use the viewport: intentional density rather than macro-whitespace. Give typography room and separate ideas, but
+  avoid large accidental dead zones.
+- Strong visual hierarchy; vary rhythm and composition so sections do not read as identical stacked blocks.
 - Keep the contact path honest and easy to find.
 
-## Accessibility & Inclusion
+## Current Homepage (`/`)
 
-Preserve semantic HTML, keyboard access, visible focus, readable contrast, responsive layouts, and useful reduced-motion alternatives. Meaningful content must remain available without animation, WebGL, or client-side JavaScript.
+1. Hero
+2. SetSail Featured Build
+3. What I Build
+4. Tools
+5. Experience
+6. How I Work
+7. About
+8. FAQ
+9. Contact-focused Footer with the Lanyard
 
-## Approved Page Architecture
+Navigation is Work, About, Contact (in-page anchors). Footer navigation is Work, About, Web Development, FAQ.
 
-1. Brand Hero
-2. Primary Services: Web Development and AI Ad Creative
-3. Featured Work
-4. About Preview
-5. Final CTA
-6. Footer
+Routes: `/`, `/work/setsail`, `/about`, `/contact`, `/services/web-development`, `/social-preview`.
+`/services/ai-ad-creative` is parked and unlinked. There is no `/work` index (intentionally 404).
 
-Approved routes are `/`, `/services/web-development`, `/services/ai-ad-creative`, `/about`, and `/contact`.
-The shared navigation is a Services disclosure for the two service routes, About, Contact, and Start a Project.
+`/about` and `/services/web-development` predate the current positioning and are queued for a consistency review. They
+are not the design reference for the homepage. `/contact` and its inquiry form are intentionally preserved even though
+the homepage does not use the form.
 
-Detailed Web Development content lives at `/services/web-development`. AI Ad Creative content lives at
-`/services/ai-ad-creative`. The full SetSail showcase lives with the Web Development service, and the homepage Featured
-Work links directly to `/services/web-development#work`; the full About experience lives at `/about`; the inquiry form
-lives at `/contact`. Footer contains accessible icon links for Email, WhatsApp, and LinkedIn.
+The Hero is a two-column desktop composition (headline left, supporting copy and CTA right); copy is approved and
+unchanged. Spacing follows the density direction in Design Principles: varied section rhythm, a fluid container
+(`clamp(1180px, 86vw, 1320px)`), no macro-whitespace.
+
+## Typography
+
+Three roles. Every typography rule maps to exactly one of them.
+
+- **UI** (body, navigation, buttons, FAQ answers, functional text): Apple system stack with Inter as the non-Apple
+  fallback: `-apple-system, BlinkMacSystemFont, Inter, "Segoe UI", Roboto, sans-serif`. Apple's SF is never bundled.
+- **DISPLAY** (H1/H2, project titles, major statements, the pawlystudios. identity): General Sans, self-hosted.
+- **EXPRESSIVE** (selected labels, metadata, oversized numbers, small editorial moments): Sofia Sans Extra Condensed,
+  light or regular, tracked, uppercase where appropriate. Never for paragraphs or long sentences. Use it as
+  punctuation, not wallpaper.
+
+## Motion and Interaction
+
+GSAP (with ScrollTrigger) is the primary motion system. React Three Fiber, Three.js, and Rapier are already present for
+the Lanyard. 3D may be explored elsewhere only where it materially improves storytelling. Motion, Tailwind, shadcn/ui,
+and Motion Primitives are not installed and are not to be added without a new approved requirement.
+
+## Accessibility and Inclusion
+
+Content must remain understandable without motion, WebGL, or client-side JavaScript. Reduced-motion preferences must be
+respected. Preserve semantic HTML, keyboard access, visible focus, readable contrast, and responsive layouts. Do not
+sacrifice keyboard, touch, or responsive behavior for visual effects.
+
+## SetSail and Lanyard (current state)
+
+- **Homepage Featured Build:** a large "SetSail" title, a two-sentence first-person hook, and a purpose-built generic
+  approval card (invented bakery draft post, not a SetSail screen). Drag right to approve, left to request changes;
+  resistance, controlled rotation, stamps, spring-back, release threshold. Accessible: two real buttons, ArrowLeft and
+  ArrowRight on the focused card, `role="status"` live region, `touch-action: pan-y`, reduced-motion path. After a
+  decision the section turns: "That solved one part of it." then four typographic evidence tiles (roles, onboarding
+  stages, monthly reporting, stack) and a link to `/work/setsail`. No product screenshots or device mockups on the
+  homepage.
+- **`/work/setsail`** is the one canonical SetSail case study, about BUILDING it (friction, the swipe decision, how it
+  grew, under the hood with `<details>` and an architecture diagram, how it was built, and a bridge back to Business
+  Websites / Website Rebuilds / Landing Pages). Each section has its own composition. There is NO `/work` index (it
+  404s on purpose). The old dialog and folder components are deleted; there is one story, not two.
+- **Copy lives in `src/data/setsail.js`**, including the claim rules in its header comment.
+- **Medium:** DOM, CSS and GSAP only. No second R3F canvas (the Lanyard is the only WebGL context on the homepage and
+  the case study has none). R3F stays available for a future genuinely spatial idea.
+- **Confidentiality boundary (hard rule): demonstrate concepts, do not reproduce the product.** No fictional SetSail
+  portal, dashboard, approval queue, calendar, navigation or connected workflow. No recreated screens.
+- **Privacy-safe evidence only.** The case study uses three hard-cropped real fragments in `public/images/setsail/`
+  (`agency-workflow-fragment.png`, `lifecycle-stages-fragment.png`, `client-mobile-fragment.png`), exported so the
+  pixels contain no client or business names, initials, agency logo, testimonials, menu or place imagery, private URLs,
+  account information, or count/usage figures. Sanitization is in the exported pixels, never CSS blur, overlay or
+  clipping. Any new fragment must be inspected at full resolution first. Captions read "From the actual build" and
+  "Client information left out."
+- **Identity protection:** describe the context only as "an organic social media agency". Do not show the agency logo
+  in new imagery, name clients, or name the previous workflow software.
+- **Claims (verified against the real SetSail codebase):** say "I built...", never "is used by...". No client counts,
+  adoption, results, time-saved or performance claims. KPI reporting is monthly CSV import, not live analytics.
+  Booking is connected Calendly links, not a native scheduling engine. The Cloud Campaign integration (content
+  handoff, scheduling, analytics read, reconciliation, webhook contract) is built and tested but behind readiness
+  flags that default OFF; never say SetSail automatically schedules or publishes content. Four roles (Super Admin,
+  Admin, Creative Coordinator, Client), invitation-only access, RLS, append-only audit log, 8 onboarding and 7
+  recurring stages, Kanban and list tasks.
+- **Git history:** earlier commits of this public repository still contain the unsafe SetSail images that were removed
+  from the current tree. The current tree is safe; history is not rewritten. Whether to purge history, make the
+  repository private, or leave it is an open decision for the owner.
+
+**Lanyard**
+
+The React Bits Lanyard (R3F, Rapier, rope joints, drag, inertia, official GLB and lanyard texture) is dynamically
+imported client-only, homepage-only, with a static reduced-motion fallback and an error-boundary fallback.
+
+- **Badge artwork is a neutral placeholder** (`public/lanyard/badge-front.svg`: brand palette, concentric-ring
+  graphic, wordmark pill, name, role). The studio headshot was rejected for the badge and is no longer used on it.
+  Final badge artwork is still undecided. Do not use another personal photo or a generated portrait.
+- **Drag limit:** while dragging, the card position is soft-limited (`softLimit` in `Lanyard.jsx`, tanh resistance)
+  to stay inside the visible stage, capped by the strap's reach, with the drag depth clamped so it cannot swell toward
+  the camera. The card meets progressive resistance and can never touch the canvas edge. Release still uses the normal
+  Rapier swing. Verified left, right, down, up and diagonal at 1440, 1024, 768 and 390.
+- **Off-screen optimization:** an IntersectionObserver (200px margin) sets `frameloop="never"` on the Canvas and
+  `paused` on Rapier's Physics while the stage is off-screen. Measured: 0 draw calls off-screen, full rate on return.
+- **Resting composition:** camera target `[0, -0.45, 0]` at z = 12; the stage is a taller panel with a fading top edge.
+- Preserve the React Bits physics. Changes to `Lanyard.jsx` are marked as local additions in comments.
+
+## Design Skills in This Environment
+
+Design skills are installed (`impeccable`, `design-taste-frontend`, and others). Some of their advice conflicts with
+this project's direction; this file takes precedence. In particular, several skills say to double or greatly increase
+whitespace, and this project wants intentional density instead.
 
 ## Approved Contact Details
 
 - Email: `ninopaul.cabiles@gmail.com`
-- WhatsApp: `https://wa.me/qr/ON77VWUSLF3MF1`
+- WhatsApp: +63 906 055 8493 (`https://wa.me/639060558493`)
 - LinkedIn: `https://www.linkedin.com/in/nino-paul-cabiles`
 
-## Current Delivery and Launch State
+The canonical source is `src/data/contact.js`; components read from it.
 
-Inquiry delivery is not configured and must continue to fail safely with `NOT_CONFIGURED`. `SITE_IS_LAUNCHED` remains
-`false`; indexing and final launch work are intentionally pending. All useful launch-readiness work not dependent on
-the custom domain or inquiry provider has passed implementation and production-style browser QA.
+## Launch State
 
-The approved `main` branch is connected from `https://github.com/UnpopularClwn/pawlystudios..git` to the Vercel
-project `pawlystudios`. The pre-launch production deployment is available at `https://pawlystudios.vercel.app`; this
-is not a final custom domain. Hosted desktop, tablet, mobile, interaction, form, asset, console, and security-header QA
-passed. The Lighthouse baseline is Performance 96, Accessibility 100, Best Practices 96, SEO 66 (expected while
-noindex is active), LCP 2.7 seconds, CLS 0, and TBT 90 milliseconds.
-
-The current pre-launch global title, description, and gated schema remain Web Development-oriented. Broadening them
-for the studio architecture is deliberately deferred to the future SEO/launch phase. Person, WebSite, and Service
-schema must not render until the production URL exists and launch is approved. SetSail SoftwareApplication schema
-remains a separate launch decision.
-
-A branded 1200 × 630 preview is generated at `/social-preview` from the approved logo and Pine/Lime identity. It stays
-detached from Open Graph and Twitter metadata until a custom domain exists, preventing Next.js from publishing a
-fabricated absolute image URL. Web Development and Website Maintenance pricing are intentionally not published while
-the commercial offer remains pending.
-
-Current security preparation keeps the existing nosniff, strict-origin referrer, and frame-denial headers; adds a
-conservative camera, microphone, and geolocation Permissions Policy; and disables the Next.js signature. HSTS and CSP
-remain pending production-host review.
-
-Still pending: a custom domain; `metadataBase`; absolute canonical and JSON-LD IDs; sitemap and final schema
-publication; attaching `/social-preview` to absolute Open Graph/Twitter metadata; approved production prices; the
-SetSail SoftwareApplication schema decision; inquiry provider, server-only credentials, delivery call, rate limiting,
-and retention/spam policy; final-domain HSTS verification; CSP review; final-domain Lighthouse and domain/provider
-QA; launch approval; switching `SITE_IS_LAUNCHED` to `true`; and enabling indexing.
+Pre-launch. `SITE_IS_LAUNCHED` is `false` and the site is `noindex`. Inquiry delivery is not configured and must keep
+returning `NOT_CONFIGURED`; never fake success. Do not flip the launch flag, enable indexing, push, or deploy without
+explicit approval. See `docs/implementation-status.md` for the launch order and pending items.

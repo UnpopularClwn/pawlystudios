@@ -1,5 +1,9 @@
 # Visual Identity
 
+> **ARCHIVED, historical only.** This describes an earlier design of this site (a dark amber/charcoal theme system,
+> a Resume page, and F1 / flight-simulation / coffee influences). It is not the current design source of truth. For
+> the current direction see `PRODUCT.md` (repo root) and `docs/implementation-status.md`.
+
 Session 2.3 added a scroll-aware theme system, a restrained GSAP motion layer, a Resume page, and
 CSS-only media render frames. This document records how those pieces work and the rules for
 extending them later.

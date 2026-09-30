@@ -44,7 +44,8 @@ export default function LanyardBadge() {
   return (
     <LanyardErrorBoundary fallback={<StaticBadge />}>
       <Lanyard
-        position={[0, 0, 24]}
+        position={[0, 0, 12]}
+        target={[0, -0.45, 0]}
         gravity={[0, -40, 0]}
         frontImage={FRONT_IMAGE}
         backImage={BACK_IMAGE}

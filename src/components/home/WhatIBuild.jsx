@@ -11,7 +11,7 @@ export default function WhatIBuild() {
   return (
     <Section background="white" className="wib-section" aria-labelledby="wib-heading" id="what-i-build">
       <Reveal as="div" className="wib-intro" preset="content">
-        <SectionEyebrow>{whatIBuild.eyebrow}</SectionEyebrow>
+        <SectionEyebrow variant="expressive">{whatIBuild.eyebrow}</SectionEyebrow>
         <h2 id="wib-heading">{whatIBuild.heading}</h2>
       </Reveal>
 

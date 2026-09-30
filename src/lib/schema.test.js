@@ -11,7 +11,7 @@ test('launch schema stays unpublished until launch and uses approved entities af
     schema['@graph'].map((entity) => entity['@type']),
     ['Person', 'ProfessionalService', 'WebSite', 'Service'],
   )
-  assert.equal(schema['@graph'][0].name, 'Paul Cabiles')
+  assert.equal(schema['@graph'][0].name, 'Niño Paul Cabiles')
   assert.equal(schema['@graph'][1].name, 'pawlystudios.')
   assert.deepEqual(
     schema['@graph'].filter((entity) => entity['@type'] === 'Service').map((entity) => entity.name),

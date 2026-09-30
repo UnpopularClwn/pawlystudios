@@ -1,5 +1,8 @@
 import './SectionEyebrow.css'
 
-export default function SectionEyebrow({ children }) {
-  return <p className="section-eyebrow">{children}</p>
+// variant: default (UI, uppercase; secondary pages), 'expressive' (Sofia label),
+// 'quiet' (UI, sentence case caption). Homepage uses expressive sparingly.
+export default function SectionEyebrow({ children, variant }) {
+  const className = variant ? `section-eyebrow section-eyebrow--${variant}` : 'section-eyebrow'
+  return <p className={className}>{children}</p>
 }

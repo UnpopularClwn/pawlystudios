@@ -10,7 +10,7 @@ export default function AboutPaul() {
       <Container>
         <div className="about-paul-layout">
           <div className="about-paul-story">
-            <SectionEyebrow>A little about me</SectionEyebrow>
+            <SectionEyebrow variant="quiet">A little about me</SectionEyebrow>
             <h2 className="about-paul-heading" id="about-paul-heading">Curiosity usually gets me into things.</h2>
             <p>
               My career has taken me through executive support, operations, marketing, SEO, automation, and
@@ -28,10 +28,10 @@ export default function AboutPaul() {
           <figure className="about-paul-portrait">
             <Image
               src="/images/paul-about-portrait.jpg"
-              alt="Paul Cabiles standing outdoors among trees."
+              alt="Niño Paul Cabiles standing outdoors among trees."
               width={1200}
               height={1680}
-              sizes="(max-width: 760px) calc(100vw - 48px), (max-width: 1100px) 42vw, 540px"
+              sizes="(max-width: 760px) calc(100vw - 48px), (max-width: 1100px) 42vw, 640px"
             />
             <figcaption>Paul, away from the desk.</figcaption>
           </figure>

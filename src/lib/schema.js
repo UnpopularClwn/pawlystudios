@@ -17,7 +17,7 @@ export function buildLaunchSchema({ siteUrl, isLaunched }) {
       {
         '@type': 'Person',
         '@id': personId,
-        name: 'Paul Cabiles',
+        name: 'Niño Paul Cabiles',
         url: rootUrl,
         image: new URL('/images/paul-headshot-about.png', rootUrl).toString(),
         sameAs: [contact.linkedin],
