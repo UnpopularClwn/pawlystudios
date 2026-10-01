@@ -39,6 +39,10 @@
   margin-top: 32px;
 }
 
+.footer-cta > .footer-contacts:first-child {
+  margin-top: 0;
+}
+
 .footer-contact-email {
   display: inline-flex;
   min-height: 44px;

@@ -38,10 +38,9 @@ export default function WebDevelopmentHero() {
                 built around what your business needs.
               </p>
               <p className="hero-support" data-hero="support">
-                Whether you need a new website, want to improve your current one, or need
-                something more custom, I can help from planning through launch. And if you need
-                support afterward, I can handle new pages, content updates, site changes, and
-                ongoing maintenance.
+                Whether you need your first business website, want to rebuild one that has
+                fallen behind, or need a focused landing page, I can help from planning through
+                launch.
               </p>
               <div className="hero-cta" data-hero="cta">
                 <HeroCta />

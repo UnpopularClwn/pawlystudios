@@ -4,13 +4,13 @@ import Footer from '../../components/footer/Footer.jsx'
 export const metadata = {
   title: 'About Paul',
   description:
-    'Meet Niño Paul Cabiles, the independent operator behind pawlystudios. Learn about his web development and digital product work.',
+    'I’m Niño Paul Cabiles, the person behind pawlystudios. My path through operations, marketing, SEO, and automation led me to building websites for businesses.',
 }
 
 export default function AboutPage() {
   return (
     <>
-      <AboutSection standalone />
+      <AboutSection />
       <Footer />
     </>
   )

@@ -13,7 +13,11 @@ export default function ProcessStep({ step }) {
         <span className="roadmap-step-number">{number}</span>
         <h3 className="roadmap-step-title">{title}</h3>
         {detail && <span className="roadmap-step-detail">{detail}</span>}
-        <p className="roadmap-step-copy">{description}</p>
+        {description.map((paragraph) => (
+          <p className="roadmap-step-copy" key={paragraph}>
+            {paragraph}
+          </p>
+        ))}
       </Reveal>
     </li>
   )

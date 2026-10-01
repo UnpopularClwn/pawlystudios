@@ -1,28 +1,24 @@
 import WebDevelopmentHero from '../../../components/services/web-development/WebDevelopmentHero.jsx'
-import WebDevelopmentCta from '../../../components/services/web-development/WebDevelopmentCta.jsx'
 import ServicesSection from '../../../components/services/ServicesSection.jsx'
 import SetSailSection from '../../../components/projects/setsail/SetSailSection.jsx'
 import ProcessSection from '../../../components/process/ProcessSection.jsx'
 import MaintenanceSection from '../../../components/maintenance/MaintenanceSection.jsx'
-import ToolsSection from '../../../components/tools/ToolsSection.jsx'
 import Footer from '../../../components/footer/Footer.jsx'
 
 export const metadata = {
   title: 'Web Development',
   description:
-    'Custom business websites, landing pages, web portals, and ongoing website support, planned and built by pawlystudios.',
+    'Business websites, website rebuilds, and landing pages, planned, written, and built by pawlystudios. Ongoing support is available after launch.',
 }
 
 export default function WebDevelopmentPage() {
   return (
     <>
       <WebDevelopmentHero />
-      <SetSailSection />
       <ServicesSection />
       <ProcessSection />
+      <SetSailSection />
       <MaintenanceSection />
-      <ToolsSection />
-      <WebDevelopmentCta />
       <Footer />
     </>
   )

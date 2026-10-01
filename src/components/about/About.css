@@ -27,18 +27,6 @@
   margin-bottom: 24px;
 }
 
-.about-supporting {
-  max-width: 56ch;
-  color: var(--color-lime-wash);
-  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
-  line-height: 1.7;
-  text-wrap: pretty;
-}
-
-.about-route-cta {
-  margin-top: 28px;
-}
-
 .about-profile-card {
   display: flex;
   justify-content: flex-end;
@@ -72,6 +60,30 @@
 .about-story strong {
   color: var(--color-lime);
   font-weight: var(--weight-body-medium);
+}
+
+.about-story .about-story-link-row {
+  margin-top: 0.75em;
+}
+
+.about-story-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--color-lime);
+  color: var(--color-lime);
+  font-weight: var(--weight-body-medium);
+}
+
+.about-story-link span {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-story-link:hover span {
+    transform: translate(2px, -2px);
+  }
 }
 
 .about-layout--standalone .about-profile-card {

@@ -139,6 +139,10 @@
   max-width: 52ch;
 }
 
+.roadmap-step-copy + .roadmap-step-copy {
+  margin-top: 10px;
+}
+
 /* Turnover (final step) carries slightly stronger emphasis. */
 .roadmap-step:last-child .roadmap-node-base {
   width: 20px;
@@ -155,44 +159,6 @@
   background: var(--color-lime-wash);
   border-radius: var(--radius-md);
   padding: 20px 24px;
-}
-
-/* ---------- Optional ongoing-support branch ---------- */
-.roadmap-support {
-  position: relative;
-  margin-top: 48px;
-  margin-left: calc(var(--roadmap-node-col) + var(--roadmap-gap));
-  max-width: 52ch;
-  background: var(--color-white);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 24px 28px;
-}
-
-.roadmap-support::before {
-  content: '';
-  position: absolute;
-  left: calc(var(--roadmap-line-x) - var(--roadmap-node-col) - var(--roadmap-gap));
-  top: -32px;
-  height: 32px;
-  border-left: 2px dashed var(--color-lime-deep);
-}
-
-.roadmap-support-label {
-  font-family: var(--font-body);
-  font-weight: var(--weight-body-medium);
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-
-.roadmap-support-copy {
-  font-size: 15px;
-  line-height: 1.65;
-  color: var(--text-body);
 }
 
 /* ---------- Tablet: slightly tighter rhythm ---------- */

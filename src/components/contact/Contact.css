@@ -19,6 +19,45 @@
   color: var(--text-body);
 }
 
+/* ---------- Direct contact (intro and error states) ---------- */
+.contact-direct-block {
+  margin-top: 28px;
+}
+
+.contact-direct-label {
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+  font-size: var(--type-small);
+}
+
+.direct-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+}
+
+.direct-contact a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--text-heading);
+  font-size: 15px;
+  font-weight: var(--weight-body-medium);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+
+.form-error-banner .direct-contact {
+  margin-top: 4px;
+}
+
+.form-error-banner .direct-contact a {
+  color: var(--color-error);
+}
+
 /* ---------- Form surface ---------- */
 .contact-form-surface {
   background: var(--color-white);
@@ -57,7 +96,7 @@
 .field-group input[type='email'],
 .field-group textarea {
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px; /* 16px or larger keeps iOS Safari from zooming on focus */
   color: var(--text-body);
   background: var(--color-white);
   border: 1px solid var(--color-border);
@@ -175,6 +214,10 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.form-success:focus {
+  outline: none;
 }
 
 .form-success-heading {

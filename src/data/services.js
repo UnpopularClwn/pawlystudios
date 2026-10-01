@@ -1,31 +1,26 @@
-// What I Build — service list content. PM-approved copy.
+// /services/web-development: the three primary offers. Same offers as the
+// homepage What I Build section (src/data/whatIBuild.js), with a little more
+// context for the deeper service page.
 export const services = [
   {
     number: '01',
     title: 'Business Websites',
+    prompt: 'Need your first website?',
     description:
-      'Professional websites built around your business, services, and the information your customers need.',
+      'A website built around your business, your services, and what your customers need to know. Something that represents your business clearly and gives people an easy way to take the next step. I plan the pages, write the content, and build the site so you can run it yourself afterward.',
   },
   {
     number: '02',
-    title: 'Landing Pages',
-    description: 'Focused pages for a service, campaign, offer, or idea, built to give visitors a clear next step.',
+    title: 'Website Rebuilds',
+    prompt: 'Has your current website fallen behind?',
+    description:
+      'If your website feels outdated, no longer represents your business, or has become difficult to work with, I can rebuild it around what you need today. We look at what is worth keeping and what needs to change.',
   },
   {
     number: '03',
-    title: 'Web Portals',
-    description: 'Private web experiences for clients, teams, or customers who need more than a standard website.',
-  },
-  {
-    number: '04',
-    title: 'Custom Web Builds',
+    title: 'Landing Pages',
+    prompt: 'Need one page for something specific?',
     description:
-      'When an off-the-shelf setup does not fit, I can build something around the workflow or functionality your business needs.',
-  },
-  {
-    number: '05',
-    title: 'Website Improvements',
-    description:
-      'Already have a website? I can improve existing pages, add new functionality, clean up the experience, or build what is missing.',
+      'A focused page for a service, campaign, product, or offer, built around one clear message and one clear action. A good fit when a full website is more than you need.',
   },
 ]

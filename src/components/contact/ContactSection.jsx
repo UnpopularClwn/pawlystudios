@@ -2,11 +2,12 @@ import Section from '../shared/Section.jsx'
 import SectionEyebrow from '../shared/SectionEyebrow.jsx'
 import Reveal from '../shared/Reveal.jsx'
 import InquiryForm from './InquiryForm.jsx'
+import DirectContactLinks from './DirectContactLinks.jsx'
 import './Contact.css'
 
 export default function ContactSection() {
   return (
-    <Section background="sand" className="contact-section" aria-label="Contact" id="contact">
+    <Section background="sand" className="contact-section" aria-label="Contact">
       <div className="contact-grid">
         <Reveal as="div" className="contact-intro" preset="content">
           <SectionEyebrow>Ready to talk?</SectionEyebrow>
@@ -15,6 +16,10 @@ export default function ContactSection() {
             Send me a few details about what you&rsquo;re looking to build. I&rsquo;ll take a look and we can
             figure out the right next step.
           </p>
+          <div className="contact-direct-block">
+            <p className="contact-direct-label">Prefer to reach out directly?</p>
+            <DirectContactLinks />
+          </div>
         </Reveal>
 
         <Reveal

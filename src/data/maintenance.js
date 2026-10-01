@@ -12,7 +12,6 @@ export const maintenance = {
       'Website fixes',
       'Routine maintenance',
       'Ongoing improvements',
-      'Priority support for existing clients',
     ],
     ctaLabel: 'Ask About Ongoing Support',
   },

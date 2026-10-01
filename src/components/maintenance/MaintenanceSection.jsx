@@ -10,7 +10,7 @@ export default function MaintenanceSection() {
 
   return (
     <Section
-      background="white"
+      background="sand"
       className="maintenance-section"
       aria-labelledby="maintenance-heading"
       id="maintenance"

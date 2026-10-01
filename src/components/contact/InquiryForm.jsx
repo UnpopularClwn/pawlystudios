@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from '../shared/Button.jsx'
+import DirectContactLinks from './DirectContactLinks.jsx'
 import { submitContactForm } from '../../lib/submitContactForm.js'
 import { contactFieldLimits, projectTypes } from '../../data/contact.js'
 
@@ -36,6 +37,12 @@ export default function InquiryForm() {
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle') // idle | submitting | success | error | unconfigured | rate-limited
   const fieldRefs = useRef({})
+  const successRef = useRef(null)
+
+  // The form is replaced by the success message, so move focus there instead of dropping it.
+  useEffect(() => {
+    if (status === 'success') successRef.current?.focus()
+  }, [status])
 
   const setField = (name, value) => setFields((prev) => ({ ...prev, [name]: value }))
 
@@ -78,7 +85,7 @@ export default function InquiryForm() {
 
   if (status === 'success') {
     return (
-      <div className="form-success" role="status">
+      <div className="form-success" role="status" tabIndex={-1} ref={successRef}>
         <p className="form-success-heading">Thanks, I got your inquiry.</p>
         <p className="form-success-copy">I&rsquo;ll review the details and get back to you.</p>
       </div>
@@ -232,13 +239,16 @@ export default function InquiryForm() {
       </div>
 
       {(status === 'error' || status === 'unconfigured' || status === 'rate-limited') && (
-        <p className="form-error-banner" role="alert">
-          {status === 'rate-limited'
-            ? 'Too many attempts. Please wait a few minutes and try again.'
-            : status === 'unconfigured'
-            ? 'Online inquiries aren’t available yet. For now, contact me by email, WhatsApp, or LinkedIn using the links in the footer.'
-            : 'Something went wrong while sending your inquiry. Please try again.'}
-        </p>
+        <div className="form-error-banner" role="alert">
+          <p>
+            {status === 'rate-limited'
+              ? 'Too many attempts. Please wait a few minutes and try again.'
+              : status === 'unconfigured'
+                ? 'Online inquiries are temporarily unavailable, and your message was not sent. You can reach me directly instead:'
+                : 'Something went wrong, and your inquiry was not sent. You can try again, or reach me directly:'}
+          </p>
+          {status !== 'rate-limited' && <DirectContactLinks />}
+        </div>
       )}
 
       <div className="form-actions">

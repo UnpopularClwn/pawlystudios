@@ -1,5 +1,4 @@
 import Section from '../shared/Section.jsx'
-import SectionEyebrow from '../shared/SectionEyebrow.jsx'
 import Reveal from '../shared/Reveal.jsx'
 import ServiceRow from './ServiceRow.jsx'
 import { services } from '../../data/services.js'
@@ -9,11 +8,10 @@ export default function ServicesSection() {
   return (
     <Section background="white" className="services-section" aria-label="What I build" id="services">
       <Reveal as="div" className="services-intro" preset="content">
-        <SectionEyebrow>What I Build</SectionEyebrow>
-        <h2 className="services-heading">From simple websites to more custom builds.</h2>
+        <h2 className="services-heading">Three ways I can help with your website.</h2>
         <p className="services-lead">
-          Whether you need a new site, a focused landing page, or something more tailored to how your business
-          works, I can help plan and build it from start to launch.
+          Whether you are starting fresh, updating a site that has fallen behind, or need one page that does one
+          job, this is what I build.
         </p>
       </Reveal>
 

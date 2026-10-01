@@ -8,7 +8,7 @@ import './SetSail.css'
 // story lives at /work/setsail (see src/data/setsail.js for the copy and claim rules).
 export default function SetSailSection() {
   return (
-    <Section background="sand" className="setsail-section" aria-labelledby="setsail-heading" id="work">
+    <Section background="white" className="setsail-section" aria-labelledby="setsail-heading" id="work">
       <div className="setsail-layout">
         <div className="setsail-copy">
           <SectionEyebrow>A build behind the websites</SectionEyebrow>

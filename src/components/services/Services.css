@@ -50,8 +50,19 @@
   margin: 0;
 }
 
-.service-description {
+.service-body {
   grid-area: desc;
+}
+
+.service-prompt {
+  margin-bottom: 8px;
+  color: var(--text-heading);
+  font-size: 15px;
+  font-weight: var(--weight-body-medium);
+  line-height: 1.5;
+}
+
+.service-description {
   font-size: 15px;
   line-height: 1.65;
   color: var(--text-secondary);

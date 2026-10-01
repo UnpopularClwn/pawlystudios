@@ -45,7 +45,7 @@ export function buildLaunchSchema({ siteUrl, isLaunched }) {
         name: 'Web Development',
         serviceType: 'Web Development',
         url: new URL('/services/web-development', rootUrl).toString(),
-        description: 'Custom business websites, landing pages, web portals, and ongoing website support.',
+        description: 'Business websites, website rebuilds, and landing pages, with optional ongoing website support.',
         provider: { '@id': businessId },
       },
     ],

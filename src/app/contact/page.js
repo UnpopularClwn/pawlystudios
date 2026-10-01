@@ -10,7 +10,7 @@ export default function ContactPage() {
   return (
     <>
       <ContactSection />
-      <Footer />
+      <Footer showCtaCopy={false} />
     </>
   )
 }
