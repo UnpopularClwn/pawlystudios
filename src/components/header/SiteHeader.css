@@ -13,7 +13,7 @@
 
 .site-navigation {
   display: flex;
-  min-height: 72px;
+  min-height: var(--header-height);
   align-items: center;
   justify-content: space-between;
   gap: 24px;
@@ -89,7 +89,6 @@
 
 @media (max-width: 540px) {
   .site-navigation {
-    min-height: 64px;
     gap: 8px;
   }
 

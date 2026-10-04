@@ -10,15 +10,29 @@
   outline-width: 3px;
 }
 
+/* The Night Shift scene is a decorative layer behind everything here (see nightshift/). It is drawn
+   bottom-anchored, so the upper part of the hero belongs to the copy and the lower part to the scene. */
+.brand-hero-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Copy: small screens stack, one column ---------- */
 .brand-hero-copy {
   display: flex;
-  max-width: 820px;
+  max-width: 640px;
   flex-direction: column;
   align-items: flex-start;
 }
 
-/* Identity is a small kicker line: name plus a one-line role, never competing
-   with the headline below it. */
+.brand-hero-lede,
+.brand-hero-support {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Identity is a small kicker line: name plus a one-line role, never competing with the headline. */
 .brand-hero-identity {
   color: var(--color-secondary);
   font-family: var(--font-ui);
@@ -27,18 +41,18 @@
   letter-spacing: 0;
 }
 
-/* The headline carries the statement of what Paul builds: full-sentence H1,
-   sized from the shared display scale rather than a bespoke clamp. Width is
-   governed by .brand-hero-copy so it wraps into a deliberate 2-3 line break
-   instead of a narrow column. */
 .brand-hero-headline {
   max-width: 100%;
-  margin-top: clamp(10px, 1.2vw, 16px);
+  margin-top: clamp(14px, 1.6vw, 24px);
   color: var(--color-white);
   font-size: var(--text-h1);
   line-height: 1.05;
   letter-spacing: var(--tracking-tight);
   text-wrap: balance;
+}
+
+.brand-hero-support {
+  margin-top: 4px;
 }
 
 .brand-hero-lead {
@@ -61,60 +75,10 @@
   margin-top: 28px;
 }
 
-/* Desktop: the headline takes the left, the supporting copy and CTA sit beside it. Uses the
-   width without adding anything; the copy itself is unchanged. */
-@media (min-width: 1025px) {
-  .brand-hero-copy {
-    display: grid;
-    max-width: none;
-    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-    grid-template-rows: auto auto auto 1fr;
-    column-gap: clamp(40px, 6vw, 96px);
-    align-items: start;
-  }
-
-  .brand-hero-identity {
-    grid-column: 1 / -1;
-  }
-
-  .brand-hero-headline {
-    grid-column: 1;
-    grid-row: 2 / span 4;
-    margin-top: clamp(10px, 1.2vw, 16px);
-  }
-
-  .brand-hero-copy > .brand-hero-lead {
-    grid-column: 2;
-    margin-top: 0;
-    padding-top: 0;
-  }
-
-  .brand-hero-copy > [data-hero='body1'] {
-    grid-row: 2;
-    margin-top: clamp(14px, 1.6vw, 22px);
-  }
-
-  .brand-hero-copy > [data-hero='body2'] {
-    grid-row: 3;
-    margin-top: 10px;
-  }
-
-  .brand-hero-actions {
-    grid-column: 2;
-    grid-row: 4;
-  }
-}
-
-@media (max-width: 1024px) {
-  .brand-hero-copy {
-    max-width: 640px;
-  }
-}
-
 @media (max-width: 640px) {
   .brand-hero {
     padding-top: 32px;
-    padding-bottom: 40px;
+    padding-bottom: calc(68.6% + 44px);
   }
 
   .brand-hero-actions,
@@ -124,5 +88,167 @@
 
   .brand-hero-actions .btn {
     justify-content: center;
+  }
+}
+
+/* The CTA is a nowrap pill; on very narrow phones its label may wrap instead of overflowing. */
+@media (max-width: 380px) {
+  .brand-hero-actions .btn {
+    white-space: normal;
+    text-align: left;
+  }
+}
+
+/* ---------- Tablet and up: the headline stands on the left, the supporting copy and its CTA
+   form one compact block on the right, and the headline is revealed line by line ---------- */
+@media (min-width: 769px) {
+  .brand-hero-headline {
+    font-size: min(var(--text-h1), 5.4vw);
+  }
+
+  .brand-hero-line {
+    display: block;
+    overflow: hidden;
+    /* Room for ascenders and descenders inside the line mask. */
+    padding-block: 0.08em 0.16em;
+    margin-block: -0.08em -0.16em;
+    white-space: nowrap;
+  }
+
+  .brand-hero-line-text {
+    display: block;
+  }
+
+  .brand-hero-support {
+    margin-top: 0;
+  }
+
+  .brand-hero-lead {
+    max-width: 34ch;
+    margin-top: 0;
+    font-size: var(--type-body);
+    line-height: 1.55;
+  }
+
+  .brand-hero-lead + .brand-hero-lead {
+    margin-top: 10px;
+  }
+
+  .brand-hero-actions {
+    margin-top: 24px;
+  }
+}
+
+/* Two columns from 900px. The right column is never narrower than the CTA, which does not wrap. */
+@media (min-width: 900px) {
+  .brand-hero-copy {
+    display: grid;
+    max-width: none;
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 34%);
+    column-gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+}
+
+/* Tablet (769 to 1180): the scene sits below the copy in its own aspect-ratio box. */
+@media (max-width: 1180px) {
+  .brand-hero {
+    padding-bottom: calc(47.8% + 32px);
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-hero {
+    padding-bottom: calc(68.6% + 44px);
+  }
+}
+
+/* ---------- Desktop (1181px and up): the hero is most of the first screen. The scene owns the lower
+   hero; the copy keeps the upper hero, with the headline on the left and the compact support block
+   on the right, clear of the character. ---------- */
+@media (min-width: 1181px) {
+  .brand-hero {
+    /* About 90svh on a typical laptop; the proportional floor keeps the copy clear of the scene's page
+       on shorter or narrower screens. */
+    min-height: max(clamp(640px, 90svh, 1000px), min(57vw, 840px));
+    padding-top: clamp(56px, 8svh, 104px);
+  }
+
+  .brand-hero-copy {
+    grid-template-columns: minmax(0, 1fr) clamp(340px, 24vw, 360px);
+    column-gap: clamp(40px, 6vw, 96px);
+  }
+
+  .brand-hero-headline {
+    font-size: min(4.5vw, 4.25rem);
+  }
+}
+
+/* ---------- Entrance: plays once, then the typography stays still ----------
+   Plain CSS keyframes so the text is on screen from the first paint (no hydration flash) and the
+   sequence still works without JavaScript. The delays overlap on purpose: identity, the four
+   headline lines, then the supporting copy and CTA, all within about a second. Small screens
+   fade the whole headline up once instead of masking lines. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-line-rise {
+  from {
+    transform: translateY(105%);
+  }
+
+  to {
+    transform: none;
+  }
+}
+
+.brand-hero [data-hero] {
+  animation: hero-rise 0.6s var(--ease-standard) both;
+}
+
+.brand-hero [data-hero='identity'] {
+  animation-delay: 0ms;
+}
+
+.brand-hero [data-hero='headline'] {
+  animation-delay: 70ms;
+}
+
+.brand-hero [data-hero='body1'] {
+  animation-delay: 380ms;
+}
+
+.brand-hero [data-hero='body2'] {
+  animation-delay: 430ms;
+}
+
+.brand-hero [data-hero='actions'] {
+  animation-delay: 490ms;
+}
+
+@media (min-width: 769px) {
+  .brand-hero [data-hero='headline'] {
+    animation: none;
+  }
+
+  .brand-hero-line-text {
+    animation: hero-line-rise 0.8s var(--ease-standard) both;
+    animation-delay: calc(80ms + var(--i) * 75ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-hero [data-hero],
+  .brand-hero-line-text {
+    animation: none;
   }
 }

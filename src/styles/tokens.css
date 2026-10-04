@@ -81,6 +81,8 @@
   --container-max: clamp(1180px, 86vw, 1320px); /* 1180 -> 1320 as the viewport widens */
   --text-max: 720px;
   --container-pad: 24px;
+  /* Sticky header height (nav min-height). One source for the header and for anchor/focus offsets. */
+  --header-height: 72px;
 
   /* ---------- Radii ---------- */
   --radius-sm: 8px;

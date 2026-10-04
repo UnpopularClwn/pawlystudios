@@ -2,7 +2,6 @@
   position: relative;
   padding: clamp(56px, 6vw, 88px) 0 clamp(56px, 6vw, 80px);
   background: var(--color-surface-warm);
-  scroll-margin-top: 72px;
 }
 
 /* ---------- The moment: name, hook, and the card to play with ---------- */

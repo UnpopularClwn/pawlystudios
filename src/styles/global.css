@@ -7,7 +7,23 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Keep anchor targets, route-change scrolls and focused elements clear of the sticky header
+     (+1px for its bottom border). */
+  scroll-padding-top: calc(var(--header-height) + 1px);
+}
+
+@media (max-width: 540px) {
+  :root {
+    --header-height: 64px;
+  }
+}
+
+/* Smooth anchor scrolling is opt-in: enabled after hydration by SmoothScroll.jsx, and never for
+   visitors who ask for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-smooth-scroll='on'] {
+    scroll-behavior: smooth;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

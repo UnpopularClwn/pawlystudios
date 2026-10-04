@@ -13,7 +13,6 @@
 .footer-cta {
   max-width: 620px;
   padding-bottom: clamp(40px, 4.5vw, 64px);
-  scroll-margin-top: 72px;
 }
 
 .footer-cta-heading {

@@ -1,7 +1,6 @@
 .about-paul {
   padding: clamp(72px, 7vw, 96px) 0 clamp(80px, 7.5vw, 104px);
   background: var(--color-secondary-wash);
-  scroll-margin-top: 72px;
 }
 
 .about-paul-layout {
@@ -103,7 +102,6 @@
 @media (max-width: 900px) {
   .about-paul {
     padding: 72px 0 96px;
-    scroll-margin-top: 72px;
   }
 
   .about-paul-layout {
@@ -120,7 +118,6 @@
 @media (max-width: 540px) {
   .about-paul {
     padding: 64px 0 88px;
-    scroll-margin-top: 64px;
   }
 
   .about-paul-layout {
