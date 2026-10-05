@@ -7,7 +7,7 @@ import { BRAND_NAME } from '../data/brand.js'
 // below): flip to true once the full multi-page site is ready for search engines.
 // Do not flip this based on NODE_ENV alone — `next build` sets NODE_ENV=production
 // for local builds too.
-export const SITE_IS_LAUNCHED = false
+export const SITE_IS_LAUNCHED = true
 
 export const SITE_NAME = BRAND_NAME
 export const SITE_TITLE = 'Niño Paul Cabiles | Web Developer · pawlystudios.'

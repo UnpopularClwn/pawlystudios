@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { INDEXING_ENABLED, SITE_IS_LAUNCHED, isIndexingEnabled, parseSiteUrl } from './seo-config.js'
+import { SITE_IS_LAUNCHED, isIndexingEnabled, parseSiteUrl } from './seo-config.js'
 
 const srcDir = fileURLToPath(new URL('..', import.meta.url))
 
@@ -38,25 +38,37 @@ test('only a boolean true launch flag can enable indexing', () => {
   }
 })
 
-test('the committed pre-launch state is not indexable for any site url', () => {
-  assert.equal(SITE_IS_LAUNCHED, false)
-  assert.equal(INDEXING_ENABLED, false)
-
-  for (const url of ['https://example.com', '', 'not a url']) {
-    const out = execFileSync(
-      process.execPath,
-      [
-        '--input-type=module',
-        '-e',
-        `const { default: robots } = await import('./src/app/robots.js')
-         const { default: sitemap } = await import('./src/app/sitemap.js')
-         console.log(JSON.stringify({ robots: robots(), sitemap: sitemap() }))`,
-      ],
-      { cwd: join(srcDir, '..'), env: { ...process.env, NEXT_PUBLIC_SITE_URL: url }, encoding: 'utf8' },
+test('robots.txt and sitemap follow the derived indexing state for any site url', () => {
+  const run = (url) =>
+    JSON.parse(
+      execFileSync(
+        process.execPath,
+        [
+          '--input-type=module',
+          '-e',
+          `const { default: robots } = await import('./src/app/robots.js')
+           const { default: sitemap } = await import('./src/app/sitemap.js')
+           console.log(JSON.stringify({ robots: robots(), sitemap: sitemap() }))`,
+        ],
+        { cwd: join(srcDir, '..'), env: { ...process.env, NEXT_PUBLIC_SITE_URL: url }, encoding: 'utf8' },
+      ),
     )
-    const { robots, sitemap } = JSON.parse(out)
-    assert.deepEqual(robots, { rules: { userAgent: '*', disallow: '/' } })
-    assert.deepEqual(sitemap, [])
+
+  const origin = 'https://example.com'
+  const valid = run(origin)
+  if (SITE_IS_LAUNCHED) {
+    assert.deepEqual(valid.robots, { rules: { userAgent: '*', allow: '/' }, sitemap: `${origin}/sitemap.xml` })
+    assert.equal(valid.sitemap.length, 5)
+  } else {
+    assert.deepEqual(valid.robots, { rules: { userAgent: '*', disallow: '/' } })
+    assert.deepEqual(valid.sitemap, [])
+  }
+
+  // Whatever the launch flag says, a missing or malformed url never opens the site.
+  for (const url of ['', 'not a url', 'pawlystudios.vercel.app']) {
+    const closed = run(url)
+    assert.deepEqual(closed.robots, { rules: { userAgent: '*', disallow: '/' } }, `url=${url}`)
+    assert.deepEqual(closed.sitemap, [], `url=${url}`)
   }
 })
 
