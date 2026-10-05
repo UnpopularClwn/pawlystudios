@@ -13,8 +13,8 @@ the site, including an older design identity. It is not a source of truth.
   capability without redefining the offering.
 - AI Ad Creative is parked and not part of the active direction.
 - Phase: pre-launch; creative refinement closed. `SITE_IS_LAUNCHED` is `false`; the site is `noindex`.
-- Supporting pages, the Website Machine hero and Lenis smooth scrolling are done and committed locally. Next work is
-  SEO / GEO / AEO, then launch.
+- Supporting pages, the Website Machine hero and Lenis smooth scrolling are done and committed locally. The SEO
+  metadata/indexing/social foundation is built (see Foundation). Schema, GEO and AEO content work are still pending.
 
 ## Repository State
 
@@ -131,8 +131,19 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 - Contact system: client and server validation, shared field limits, project-type allowlist (`Web Development`,
   `Website Maintenance`, `Other / Not Sure Yet`), malformed-payload handling, honeypot, optional rate limiting, Resend
   delivery that reports `NOT_CONFIGURED` until configured.
-- SEO scaffolding: root metadata, gated Person / ProfessionalService / WebSite / Service JSON-LD (builder in
-  `src/lib/schema.js`, gated by `SITE_IS_LAUNCHED` and a real site URL), `robots.js` without a sitemap, `noindex`.
+- SEO foundation (central config in `src/lib/seo-config.js`):
+  - `SITE_URL` is validated once (absolute http/https, normalized to its origin; missing or malformed is `undefined`).
+  - Each of the five public routes has its own title, description, self-referencing canonical (`canonicalFor`) and
+    Open Graph / Twitter metadata (`socialFor`, `summary_large_image`, one shared 1200x630 card, no social handles).
+  - `/services/ai-ad-creative` carries its own `noindex, nofollow` at any launch state. `/social-preview` (the card,
+    a static `ImageResponse` in the brand blue/cream/red, default card font) is served with
+    `X-Robots-Tag: noindex, nofollow`. Neither is in the sitemap, and robots does not block them so crawlers can
+    see the noindex.
+  - `robots.js`: `Disallow: /` and no sitemap while `SITE_IS_LAUNCHED` is false; `Allow: /` plus the absolute sitemap
+    URL when launched with a valid `SITE_URL`. `sitemap.js`: empty until launched with a valid `SITE_URL`, then
+    exactly `/`, `/about`, `/contact`, `/services/web-development`, `/work/setsail`.
+  - Gated Person / ProfessionalService / WebSite / Service JSON-LD (builder in `src/lib/schema.js`) is unchanged and
+    still pending its own restructure. `SITE_IS_LAUNCHED` remains `false`; the site is `noindex`.
 - Security headers: `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, a conservative
   `Permissions-Policy`, a report-only CSP; the Next.js signature is disabled.
 - Pixel-exact optimized runtime logo and favicon derived from the unchanged approved transparent SVG.
@@ -169,14 +180,17 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 - As of the last documented check no delivery variables are set: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`,
   `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Verify in Vercel before relying on this.
 - `SITE_IS_LAUNCHED` remains `false`.
+- Launch dependency: `SITE_IS_LAUNCHED` must NOT be enabled in production unless `NEXT_PUBLIC_SITE_URL` is also present
+  and valid. With the flag true and a missing or invalid URL, pages go `index, follow` without canonicals, schema or a
+  sitemap. Check this explicitly in launch rehearsal.
 
 ## Remaining Launch Order
 
 1. Configure Resend contact delivery (`RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`, Production only).
 2. Test a real contact submission end to end.
-3. SEO / GEO / AEO: metadata, canonicals, structured data (Person and `pawlystudios.` entity consistency), sitemap,
-   robots/indexing, Open Graph/Twitter, headings, image metadata.
-4. Attach `/social-preview` to Open Graph/Twitter metadata.
+3. SEO / GEO / AEO: metadata, canonicals, sitemap, robots/indexing and Open Graph/Twitter are done. Still pending:
+   structured data (Person and `pawlystudios.` entity consistency), GEO/AEO content answers, heading and image review.
+4. (Done) `/social-preview` is attached to Open Graph/Twitter metadata.
 5. Review final launch configuration.
 6. Set `SITE_IS_LAUNCHED` to `true` (only after explicit approval).
 7. Run final test/lint/build/security audit.

@@ -1,10 +1,19 @@
 import AboutSection from '../../components/about/AboutSection.jsx'
 import Footer from '../../components/footer/Footer.jsx'
+import { canonicalFor, socialFor } from '../../lib/seo-config.js'
+
+const description =
+  'Learn about Niño Paul Cabiles, the person behind pawlystudios., and the experience that shaped how he approaches building websites for businesses.'
 
 export const metadata = {
-  title: 'About Paul',
-  description:
-    'I’m Niño Paul Cabiles, the person behind pawlystudios. My path through operations, marketing, SEO, and automation led me to building websites for businesses.',
+  title: 'About Niño Paul Cabiles',
+  description,
+  alternates: canonicalFor('/about'),
+  ...socialFor({
+    title: 'About Niño Paul Cabiles | pawlystudios.',
+    description,
+    path: '/about',
+  }),
 }
 
 export default function AboutPage() {

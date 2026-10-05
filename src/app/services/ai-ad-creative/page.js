@@ -13,6 +13,8 @@ export const metadata = {
   title: 'AI Ad Creative',
   description:
     'Fully AI-generated advertising creative for e-commerce brands and service businesses, from concept through post-production.',
+  // Parked work: stays out of search even if SITE_IS_LAUNCHED flips.
+  robots: { index: false, follow: false },
 }
 
 export default function AiAdCreativePage() {

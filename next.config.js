@@ -27,6 +27,11 @@ const nextConfig = {
           { key: 'Content-Security-Policy-Report-Only', value: contentSecurityPolicyReportOnly },
         ],
       },
+      // Image response, not HTML: a header is the only way to keep it out of search.
+      {
+        source: '/social-preview',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
     ]
   },
 }

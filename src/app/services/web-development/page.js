@@ -4,11 +4,20 @@ import SetSailSection from '../../../components/projects/setsail/SetSailSection.
 import ProcessSection from '../../../components/process/ProcessSection.jsx'
 import MaintenanceSection from '../../../components/maintenance/MaintenanceSection.jsx'
 import Footer from '../../../components/footer/Footer.jsx'
+import { canonicalFor, socialFor } from '../../../lib/seo-config.js'
+
+const description =
+  'Business websites, website rebuilds, and landing pages built around what your business needs and what visitors need to understand.'
 
 export const metadata = {
-  title: 'Web Development',
-  description:
-    'Business websites, website rebuilds, and landing pages, planned, written, and built by pawlystudios. Ongoing support is available after launch.',
+  title: 'Business Websites, Rebuilds & Landing Pages',
+  description,
+  alternates: canonicalFor('/services/web-development'),
+  ...socialFor({
+    title: 'Business Websites, Rebuilds & Landing Pages | pawlystudios.',
+    description,
+    path: '/services/web-development',
+  }),
 }
 
 export default function WebDevelopmentPage() {

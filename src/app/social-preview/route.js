@@ -1,12 +1,26 @@
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
+import { SOCIAL_IMAGE } from '../../lib/seo-config.js'
 
 export const dynamic = 'force-static'
 
-export async function GET() {
-  const logo = await readFile(join(process.cwd(), 'src/app/icon.png'))
+const BLUE = '#2A3F73'
+const CREAM = '#FEEEA6'
+const RED = '#D82C31'
 
+// Flat pawn silhouette, the same visual language as the hero. Decorative only.
+function pawn(fill) {
+  return (
+    <g fill={fill}>
+      <circle cx="100" cy="70" r="46" />
+      <rect x="56" y="108" width="88" height="16" rx="8" />
+      <path d="M78 122 L122 122 C124 170 140 205 162 247 L38 247 C60 205 76 170 78 122 Z" />
+      <rect x="28" y="244" width="144" height="26" rx="9" />
+      <rect x="16" y="266" width="168" height="24" rx="9" />
+    </g>
+  )
+}
+
+export async function GET() {
   return new ImageResponse(
     <div
       style={{
@@ -15,76 +29,83 @@ export async function GET() {
         display: 'flex',
         position: 'relative',
         overflow: 'hidden',
-        padding: '62px 72px 60px',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        background: '#183a33',
-        color: '#ffffff',
-        fontFamily: 'sans-serif',
+        background: BLUE,
+        color: CREAM,
       }}
     >
+      {/* Cream tile, bleeding off the bottom-right corner */}
       <div
         style={{
           position: 'absolute',
-          inset: '0 0 auto 0',
+          right: '-60px',
+          bottom: '-60px',
+          width: '420px',
+          height: '420px',
+          display: 'flex',
+          background: CREAM,
+        }}
+      />
+      <svg
+        width="220"
+        height="330"
+        viewBox="0 0 200 300"
+        style={{ position: 'absolute', right: '92px', bottom: '48px' }}
+      >
+        <g transform="translate(14 10)">
+          {pawn(BLUE)}
+        </g>
+        {pawn(RED)}
+      </svg>
+      <div
+        style={{
+          position: 'absolute',
+          left: '72px',
+          top: '0px',
+          width: '88px',
           height: '14px',
           display: 'flex',
-          background: '#c6e79e',
+          background: RED,
         }}
       />
+
       <div
         style={{
           position: 'absolute',
-          right: '-92px',
-          bottom: '-110px',
-          width: '390px',
-          height: '390px',
+          left: '72px',
+          top: '96px',
           display: 'flex',
-          background: '#22483f',
-          transform: 'rotate(16deg)',
+          fontSize: '146px',
+          lineHeight: 1,
+          // The default card font ships one weight; a stroke gives the wordmark heft.
+          WebkitTextStroke: `4px ${CREAM}`,
+          letterSpacing: '-0.04em',
         }}
-      />
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
-        <div
-          style={{
-            width: '70px',
-            height: '70px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: '10px',
-            background: '#f1f7e8',
-          }}
-        >
-          <img
-            src={Uint8Array.from(logo).buffer}
-            alt=""
-            width={56}
-            height={56}
-            style={{ objectFit: 'contain' }}
-          />
-        </div>
-        <div style={{ display: 'flex', fontSize: '34px', letterSpacing: '-0.02em' }}>pawlystudios.</div>
+      >
+        pawlystudios.
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '26px' }}>
-        <div
-          style={{
-            maxWidth: '910px',
-            display: 'flex',
-            fontSize: '76px',
-            lineHeight: 1.02,
-            letterSpacing: '-0.035em',
-          }}
-        >
-          Web Development
+      <div
+        style={{
+          position: 'absolute',
+          left: '72px',
+          bottom: '66px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '22px',
+        }}
+      >
+        <div style={{ display: 'flex', fontSize: '52px', WebkitTextStroke: `1.5px ${CREAM}`, letterSpacing: '-0.02em' }}>
+          Niño Paul Cabiles
         </div>
-        <div style={{ display: 'flex', fontSize: '28px', color: '#c6e79e' }}>
-          Niño Paul Cabiles / pawlystudios.
+        <div style={{ display: 'flex', width: '56px', height: '4px', background: RED }} />
+        <div style={{ display: 'flex', fontSize: '27px', letterSpacing: '0.01em' }}>
+          Business Websites · Website Rebuilds · Landing Pages
         </div>
       </div>
     </div>,
-    { width: 1200, height: 630 },
+    {
+      width: SOCIAL_IMAGE.width,
+      height: SOCIAL_IMAGE.height,
+    },
   )
 }

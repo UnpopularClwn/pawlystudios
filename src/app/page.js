@@ -6,6 +6,21 @@ import HowIWork from '../components/home/HowIWork.jsx'
 import AboutPaul from '../components/home/AboutPaul.jsx'
 import Faq from '../components/home/Faq.jsx'
 import Footer from '../components/footer/Footer.jsx'
+import { SITE_TITLE, canonicalFor, socialFor } from '../lib/seo-config.js'
+
+const description =
+  'Niño Paul Cabiles builds business websites, website rebuilds, and landing pages through pawlystudios.'
+
+export const metadata = {
+  title: { absolute: SITE_TITLE },
+  description,
+  alternates: canonicalFor('/'),
+  ...socialFor({
+    title: SITE_TITLE,
+    description,
+    path: '/',
+  }),
+}
 
 export default function HomePage() {
   return (

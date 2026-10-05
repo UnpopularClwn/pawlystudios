@@ -1,17 +1,12 @@
 import { inter, generalSans, sofiaCondensed } from './fonts.js'
 import SiteHeader from '../components/header/SiteHeader.jsx'
 import SmoothScroll from '../components/shared/SmoothScroll.jsx'
-import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, SITE_URL, SITE_IS_LAUNCHED } from '../lib/seo-config.js'
+import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, SITE_URL, SITE_IS_LAUNCHED, socialFor } from '../lib/seo-config.js'
 import { buildLaunchSchema, serializeJsonLd } from '../lib/schema.js'
 import '../styles/global.css'
 
 export const metadata = {
-  ...(SITE_URL
-    ? {
-        metadataBase: new URL(SITE_URL),
-        alternates: { canonical: '/' },
-      }
-    : {}),
+  ...(SITE_URL ? { metadataBase: new URL(SITE_URL) } : {}),
   title: {
     default: SITE_TITLE,
     template: `%s | ${SITE_NAME}`,
@@ -20,17 +15,7 @@ export const metadata = {
   robots: SITE_IS_LAUNCHED
     ? { index: true, follow: true }
     : { index: false, follow: false },
-  openGraph: {
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
-    siteName: SITE_NAME,
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary',
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
-  },
+  ...socialFor({ title: SITE_TITLE, description: SITE_DESCRIPTION }),
 }
 
 export default function RootLayout({ children }) {
