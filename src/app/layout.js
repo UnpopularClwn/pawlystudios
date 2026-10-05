@@ -1,7 +1,7 @@
 import { inter, generalSans, sofiaCondensed } from './fonts.js'
 import SiteHeader from '../components/header/SiteHeader.jsx'
 import SmoothScroll from '../components/shared/SmoothScroll.jsx'
-import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, SITE_URL, SITE_IS_LAUNCHED, socialFor } from '../lib/seo-config.js'
+import { SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, SITE_URL, INDEXING_ENABLED, socialFor } from '../lib/seo-config.js'
 import '../styles/global.css'
 
 export const metadata = {
@@ -11,7 +11,7 @@ export const metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
-  robots: SITE_IS_LAUNCHED
+  robots: INDEXING_ENABLED
     ? { index: true, follow: true }
     : { index: false, follow: false },
   ...socialFor({ title: SITE_TITLE, description: SITE_DESCRIPTION }),

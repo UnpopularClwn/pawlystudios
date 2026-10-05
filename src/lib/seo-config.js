@@ -3,9 +3,10 @@ import { BRAND_NAME } from '../data/brand.js'
 // Central place for site-identity constants the Metadata API and future
 // JSON-LD (see lib/schema.js) both read from.
 //
-// SITE_IS_LAUNCHED gates indexing: flip to true once the full multi-page site
-// is ready for search engines. Do not flip this based on
-// NODE_ENV alone — `next build` sets NODE_ENV=production for local builds too.
+// SITE_IS_LAUNCHED is one of the two conditions for indexing (see INDEXING_ENABLED
+// below): flip to true once the full multi-page site is ready for search engines.
+// Do not flip this based on NODE_ENV alone — `next build` sets NODE_ENV=production
+// for local builds too.
 export const SITE_IS_LAUNCHED = false
 
 export const SITE_NAME = BRAND_NAME
@@ -19,7 +20,7 @@ export const SITE_DESCRIPTION =
 // URL is normalized to its origin (no path, no trailing slash); anything missing
 // or malformed becomes `undefined`, so canonicals, the sitemap, robots and schema
 // all stay silent instead of emitting broken URLs.
-function parseSiteUrl(raw) {
+export function parseSiteUrl(raw) {
   if (!raw) return undefined
   try {
     const url = new URL(raw)
@@ -30,6 +31,17 @@ function parseSiteUrl(raw) {
 }
 
 export const SITE_URL = parseSiteUrl(process.env.NEXT_PUBLIC_SITE_URL)
+
+// The single indexing switch. The site is indexable only when it is launched AND
+// has a valid origin, so a launch with a missing or malformed NEXT_PUBLIC_SITE_URL
+// fails closed (noindex, robots Disallow, empty sitemap, no schema) instead of
+// exposing a half-configured site. Every indexing decision reads this, never
+// SITE_IS_LAUNCHED directly.
+export function isIndexingEnabled({ isLaunched, siteUrl }) {
+  return isLaunched === true && Boolean(siteUrl)
+}
+
+export const INDEXING_ENABLED = isIndexingEnabled({ isLaunched: SITE_IS_LAUNCHED, siteUrl: SITE_URL })
 
 // The only routes that belong in the sitemap. Parked or internal routes
 // (/services/ai-ad-creative, /social-preview) are deliberately absent.

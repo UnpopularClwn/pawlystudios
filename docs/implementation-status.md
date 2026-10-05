@@ -183,9 +183,11 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 - As of the last documented check no delivery variables are set: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`,
   `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Verify in Vercel before relying on this.
 - `SITE_IS_LAUNCHED` remains `false`.
-- Launch dependency: `SITE_IS_LAUNCHED` must NOT be enabled in production unless `NEXT_PUBLIC_SITE_URL` is also present
-  and valid. With the flag true and a missing or invalid URL, pages go `index, follow` without canonicals, schema or a
-  sitemap. Check this explicitly in launch rehearsal.
+- Launch invariant: indexing is enabled only when `SITE_IS_LAUNCHED` is true AND `NEXT_PUBLIC_SITE_URL` is a valid
+  http(s) origin (`INDEXING_ENABLED` in `src/lib/seo-config.js`, the only value indexing code reads). Otherwise the site
+  fails closed: `noindex, nofollow`, `robots.txt` `Disallow: /`, empty sitemap, no JSON-LD. Both settings are
+  build-time (the flag is a source constant), so changing either needs a redeploy; still confirm them in launch
+  rehearsal.
 
 ## Remaining Launch Order
 
