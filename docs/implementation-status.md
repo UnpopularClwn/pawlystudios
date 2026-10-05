@@ -142,8 +142,11 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
   - `robots.js`: `Disallow: /` and no sitemap while `SITE_IS_LAUNCHED` is false; `Allow: /` plus the absolute sitemap
     URL when launched with a valid `SITE_URL`. `sitemap.js`: empty until launched with a valid `SITE_URL`, then
     exactly `/`, `/about`, `/contact`, `/services/web-development`, `/work/setsail`.
-  - Gated Person / ProfessionalService / WebSite / Service JSON-LD (builder in `src/lib/schema.js`) is unchanged and
-    still pending its own restructure. `SITE_IS_LAUNCHED` remains `false`; the site is `noindex`.
+  - Structured data (`src/lib/schema.js`, rendered per page by `src/components/seo/JsonLd.jsx`) is emitted only when
+    launched with a valid `SITE_URL`. Each page graph holds Person, Brand (`pawlystudios.`, not a LocalBusiness or
+    Organization), WebSite, and a page node (WebPage / AboutPage / ContactPage). The web development page adds a
+    Service and a breadcrumb; SetSail is a plain WebPage with a breadcrumb. No FAQPage, ratings, offers, address or
+    SoftwareApplication. `SITE_IS_LAUNCHED` remains `false`; the site is `noindex`.
 - Security headers: `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, a conservative
   `Permissions-Policy`, a report-only CSP; the Next.js signature is disabled.
 - Pixel-exact optimized runtime logo and favicon derived from the unchanged approved transparent SVG.
@@ -188,8 +191,8 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 
 1. Configure Resend contact delivery (`RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`, Production only).
 2. Test a real contact submission end to end.
-3. SEO / GEO / AEO: metadata, canonicals, sitemap, robots/indexing and Open Graph/Twitter are done. Still pending:
-   structured data (Person and `pawlystudios.` entity consistency), GEO/AEO content answers, heading and image review.
+3. SEO / GEO / AEO: metadata, canonicals, sitemap, robots/indexing, Open Graph/Twitter and structured data are done.
+   Still pending: GEO/AEO content answers, heading and image review.
 4. (Done) `/social-preview` is attached to Open Graph/Twitter metadata.
 5. Review final launch configuration.
 6. Set `SITE_IS_LAUNCHED` to `true` (only after explicit approval).

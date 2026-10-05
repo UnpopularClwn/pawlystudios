@@ -7,6 +7,7 @@ import AboutPaul from '../components/home/AboutPaul.jsx'
 import Faq from '../components/home/Faq.jsx'
 import Footer from '../components/footer/Footer.jsx'
 import { SITE_TITLE, canonicalFor, socialFor } from '../lib/seo-config.js'
+import JsonLd from '../components/seo/JsonLd.jsx'
 
 const description =
   'Niño Paul Cabiles builds business websites, website rebuilds, and landing pages through pawlystudios.'
@@ -25,6 +26,7 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
+      <JsonLd route="home" title={SITE_TITLE} description={description} />
       <HomeSequence />
       <WhatIBuild />
       <ToolsSection withoutReveal eyebrowVariant="quiet" />

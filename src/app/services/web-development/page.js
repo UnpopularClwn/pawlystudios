@@ -5,7 +5,9 @@ import ProcessSection from '../../../components/process/ProcessSection.jsx'
 import MaintenanceSection from '../../../components/maintenance/MaintenanceSection.jsx'
 import Footer from '../../../components/footer/Footer.jsx'
 import { canonicalFor, socialFor } from '../../../lib/seo-config.js'
+import JsonLd from '../../../components/seo/JsonLd.jsx'
 
+const fullTitle = 'Business Websites, Rebuilds & Landing Pages | pawlystudios.'
 const description =
   'Business websites, website rebuilds, and landing pages built around what your business needs and what visitors need to understand.'
 
@@ -14,7 +16,7 @@ export const metadata = {
   description,
   alternates: canonicalFor('/services/web-development'),
   ...socialFor({
-    title: 'Business Websites, Rebuilds & Landing Pages | pawlystudios.',
+    title: fullTitle,
     description,
     path: '/services/web-development',
   }),
@@ -23,6 +25,7 @@ export const metadata = {
 export default function WebDevelopmentPage() {
   return (
     <>
+      <JsonLd route="webDevelopment" title={fullTitle} description={description} />
       <WebDevelopmentHero />
       <ServicesSection />
       <ProcessSection />
