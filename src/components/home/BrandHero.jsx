@@ -18,7 +18,7 @@ export default function BrandHero() {
         <div className="brand-hero-copy">
           <div className="brand-hero-lede">
             <p className="brand-hero-identity" data-hero="identity">
-              Niño Paul Cabiles <span aria-hidden="true">·</span> AI-forward builder
+              Niño Paul Cabiles
             </p>
             <h1 className="brand-hero-headline" id="brand-hero-heading" data-hero="headline">
               {HEADLINE_LINES.map((line, index) => (
