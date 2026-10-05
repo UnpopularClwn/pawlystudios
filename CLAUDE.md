@@ -27,8 +27,8 @@ versions of the site. Current code, `PRODUCT.md`, and the status document take p
 Facts from git (use `git log` for the exact checkpoint commit):
 
 - Active branch: the Orca worktree branch `UnpopularClwn/project-synchronization-review`
-  (`~/orca/workspaces/Portfolio/bladderwrack`). Its latest commit is the local "finalize pawlystudios. portfolio
-  experience" checkpoint, on top of `8938684` ("feat: rebuild pawlystudios portfolio experience").
+  (`~/orca/workspaces/Portfolio/bladderwrack`). It carries several local checkpoint commits (see `git log`; the latest is
+  the Website Machine hero + Lenis checkpoint), built on `8938684` ("feat: rebuild pawlystudios portfolio experience").
 - Local `main` and `origin/main` are identical at `9c3f2139fdbcd10ef390ba0146eefa7618840ea1`. The working branch is
   ahead of them and has NOT been pushed.
 - **Not verified:** what the live Vercel production deployment serves. Pushes to `main` trigger production
@@ -85,8 +85,10 @@ Three font roles; every typography rule maps to one of them (tokens in `src/styl
 - Container: `--container-max: clamp(1180px, 86vw, 1320px)`. Text stays on this grid; visuals may bleed past it.
 - Layout intent: intentional density, varied section rhythm, no macro-whitespace, no bento default, no card soup, no
   glassmorphism, no decorative interaction without purpose.
-- Motion: GSAP with ScrollTrigger is the motion system (`src/lib/motion.js`, `Reveal`, `useReveal`, hero entrance).
-  Reduced motion is respected. React Three Fiber, Three.js, `@react-three/drei`, `@react-three/rapier`, and `meshline`
+- Motion: GSAP with ScrollTrigger is the motion system (`src/lib/motion.js`, `Reveal`, `useReveal`). The hero text
+  entrance is CSS keyframes and the hero art (`src/components/home/machine/`) is Canvas 2D, not WebGL. Smooth scrolling is
+  Lenis (`SmoothScroll.jsx`, lerp 0.12; do not add CSS `scroll-behavior: smooth` or another scroll library). Reduced
+  motion is respected. React Three Fiber, Three.js, `@react-three/drei`, `@react-three/rapier`, and `meshline`
   exist for the Lanyard. Motion, Tailwind, shadcn/ui, and Motion Primitives are not installed and must not be added
   without a new approved requirement.
 - Server components are the default; client boundaries are isolated to browser behavior; static rendering is retained
@@ -175,7 +177,7 @@ the dominant contact link with WhatsApp and LinkedIn beneath it. `/contact` is f
 
 ## Tech Stack and Boundaries
 
-- Next.js 16 App Router, React 19, JavaScript, custom CSS, GSAP, `next/image`.
+- Next.js 16 App Router, React 19, JavaScript, custom CSS, GSAP, Lenis (smooth scrolling), `next/image`.
 - Fonts: see **Design System**.
 - 3D for the Lanyard only: `three`, `@react-three/fiber`, `@react-three/drei`, `@react-three/rapier`, `meshline`.
 - Not installed: Motion, Tailwind, shadcn/ui, Motion Primitives. (`shadcn/ui` and `Motion Primitives` appear in the "Tools I Use" marquee as tools the owner uses; they are not

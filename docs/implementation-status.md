@@ -1,6 +1,6 @@
 # Implementation Status
 
-Last updated: 2026-09-30 (final housekeeping checkpoint closing the creative refinement session).
+Last updated: 2026-10-05 (Website Machine hero and Lenis smooth-scrolling checkpoint).
 
 This is the active status document. Product direction and design principles live in `PRODUCT.md`; agent rules and
 boundaries live in `CLAUDE.md`. Everything under `docs/archive/` is historical and may describe earlier versions of
@@ -13,13 +13,15 @@ the site, including an older design identity. It is not a source of truth.
   capability without redefining the offering.
 - AI Ad Creative is parked and not part of the active direction.
 - Phase: pre-launch; creative refinement closed. `SITE_IS_LAUNCHED` is `false`; the site is `noindex`.
-- Creative refinement is closed and committed locally. Next work is supporting pages, then SEO and launch.
+- Supporting pages, the Website Machine hero and Lenis smooth scrolling are done and committed locally. Next work is
+  SEO / GEO / AEO, then launch.
 
 ## Repository State
 
 - Active branch: Orca worktree `~/orca/workspaces/Portfolio/bladderwrack`, branch
-  `UnpopularClwn/project-synchronization-review`. The latest commit is the local "finalize pawlystudios. portfolio
-  experience" checkpoint, on top of `8938684`. Not pushed. Working tree is clean apart from documented exclusions.
+  `UnpopularClwn/project-synchronization-review`. Several local checkpoint commits sit ahead of `origin/main` (see
+  `git log`; the latest is the Website Machine hero + Lenis checkpoint). Not pushed. Working tree is clean apart from
+  documented exclusions.
 - `main` and `origin/main` are at `9c3f2139fdbcd10ef390ba0146eefa7618840ea1`. What the live Vercel deployment serves is
   NOT verified from this repository.
 - `personal-portfolio-redesign` (original worktree `~/Documents/Projects/Portfolio`) points at `8938684`. Do not touch
@@ -31,8 +33,12 @@ the site, including an older design identity. It is not a source of truth.
 Order: Hero, SetSail Featured Build, What I Build, Tools, Experience, How I Work, About, FAQ, Contact-focused Footer
 with Lanyard.
 
-- Hero: identity line, H1 "I build modern websites and landing pages for businesses.", supporting copy and one CTA;
-  two-column on desktop.
+- Hero: identity line, H1 "I build modern websites and landing pages for businesses.", supporting copy and one CTA over
+  the decorative "Website Machine" artwork (`src/components/home/machine/`: a Canvas 2D port of the approved prototype,
+  no WebGL, aria-hidden). Desktop: the art fills the hero and the copy sits in its left quiet zone. Tablet: an art band
+  with the identity and headline over it, the rest of the copy below. Phone: art band above the copy. One 11 second
+  loop on one animation-frame loop that pauses offscreen and in a hidden tab; reduced motion shows a still poster. The
+  text entrance is CSS keyframes and plays once. Night Shift (the previous hero art) is retired.
 - SetSail Featured Build: see SetSail Status.
 - What I Build: Business Websites, Website Rebuilds, Landing Pages (three-column rows on desktop).
 - Tools: "Tools I Use" marquee (includes Claude Code and ChatGPT), static reduced-motion fallback. shadcn/ui and Motion
@@ -116,6 +122,10 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 ## Foundation and Infrastructure (still true)
 
 - Next.js App Router, shared tokens, containers, sections, buttons, GSAP motion system with reduced-motion handling.
+- Smooth scrolling: Lenis 1.3.26 (`src/components/shared/SmoothScroll.jsx`; lerp 0.12, wheelMultiplier 1, one rAF loop
+  paused when the tab is hidden). Touch, keyboard, find-in-page and nested scrollers stay native; reduced motion
+  creates no Lenis instance. Same-page hash clicks use `lenis.scrollTo` and land at the `--header-height` offset (via
+  `scroll-padding-top`); there is no CSS `scroll-behavior: smooth`.
 - Accessibility baseline: skip link, visible focus, muted-text contrast, dialog focus containment and restoration,
   keyboard operation, semantic structure, reduced-motion alternatives.
 - Contact system: client and server validation, shared field limits, project-type allowlist (`Web Development`,
@@ -134,6 +144,9 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 
 - Several installed design skills advise increasing whitespace; this project wants intentional density (see
   `PRODUCT.md`).
+- Flagged for the accessibility / SEO launch audit: same-page hash links go through Next `<Link>`, which scrolls
+  without moving the browser's sequential focus starting point (identical with Lenis on or off); only the skip link is
+  a native anchor and is left native.
 - Flagged for later consideration only: the number of small labels above headings; a 3px accent side-border on the About
   turn line; the Tools marquee has no pause on hover/focus; no
   `not-found` page and no privacy link near the contact form.

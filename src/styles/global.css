@@ -18,13 +18,8 @@ html {
   }
 }
 
-/* Smooth anchor scrolling is opt-in: enabled after hydration by SmoothScroll.jsx, and never for
-   visitors who ask for reduced motion. */
-@media (prefers-reduced-motion: no-preference) {
-  html[data-smooth-scroll='on'] {
-    scroll-behavior: smooth;
-  }
-}
+/* Smoothing is done by Lenis (SmoothScroll.jsx), not by CSS `scroll-behavior`, so the two never animate
+   the same navigation. Native jumps (focus, cross-page hashes, reduced motion) stay instant. */
 
 @media (prefers-reduced-motion: reduce) {
   html {

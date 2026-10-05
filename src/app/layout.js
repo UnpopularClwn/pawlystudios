@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
   const structuredData = buildLaunchSchema({ siteUrl: SITE_URL, isLaunched: SITE_IS_LAUNCHED })
 
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${generalSans.variable} ${sofiaCondensed.variable}`}>
+    <html lang="en" className={`${inter.variable} ${generalSans.variable} ${sofiaCondensed.variable}`}>
       <head>
         {structuredData && (
           <script

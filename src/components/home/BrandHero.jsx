@@ -1,18 +1,19 @@
 import Container from '../shared/Container.jsx'
 import Button from '../shared/Button.jsx'
-import NightShiftArt from './nightshift/NightShiftArt.jsx'
+import MachineArt from './machine/MachineArt.jsx'
 import './BrandHero.css'
 
-// Opens the homepage sequence. The Night Shift illustration (decorative, aria-hidden) fills the hero
-// behind the copy: the lower hero belongs to the scene, the upper hero to the content. The headline
-// is one sentence split into four line spans so the entrance can reveal each line through a mask on
-// desktop; on small screens the spans simply flow inline and wrap naturally.
-const HEADLINE_LINES = ['I build modern', 'websites and', 'landing pages', 'for businesses.']
+// Opens the homepage. The decorative "Move" artwork (aria-hidden) is the hero's environment. Desktop:
+// it fills the hero and all the copy sits in its quiet left zone. Tablet: it is a band, with the
+// identity and headline over its quiet upper left and the rest of the copy right below. Phone: the art
+// is a band above all the copy. The headline is one sentence split into three line spans so it can be
+// revealed line by line; on phones the spans flow inline and wrap naturally.
+const HEADLINE_LINES = ['I build modern websites', 'and landing pages', 'for businesses.']
 
 export default function BrandHero() {
   return (
     <section className="brand-hero" aria-labelledby="brand-hero-heading">
-      <NightShiftArt />
+      <MachineArt />
       <Container className="brand-hero-container">
         <div className="brand-hero-copy">
           <div className="brand-hero-lede">
@@ -32,7 +33,6 @@ export default function BrandHero() {
               ))}
             </h1>
           </div>
-
           <div className="brand-hero-support">
             <p className="brand-hero-lead" data-hero="body1">
               Maybe you need your first website. Maybe your current one feels outdated, doesn&rsquo;t show your work

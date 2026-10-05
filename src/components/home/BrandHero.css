@@ -1,8 +1,9 @@
 .brand-hero {
   position: relative;
   z-index: 1;
-  padding: clamp(40px, 4.5vw, 72px) 0 clamp(48px, 5vw, 80px);
   background: var(--color-brand);
+  /* cqw below is a percentage of the hero's own width. */
+  container-type: inline-size;
 }
 
 .brand-hero :focus-visible {
@@ -10,14 +11,19 @@
   outline-width: 3px;
 }
 
-/* The Night Shift scene is a decorative layer behind everything here (see nightshift/). It is drawn
-   bottom-anchored, so the upper part of the hero belongs to the copy and the lower part to the scene. */
+/* ---------- Phone (default): the art is a band above all the copy ----------
+   The band is the top 58% of the design's 390 x 844 phone frame, so it is about 1.256 times the width. */
+.brand-hero .wm {
+  aspect-ratio: 390 / 490;
+}
+
 .brand-hero-container {
   position: relative;
   z-index: 1;
+  padding-top: 28px;
+  padding-bottom: 48px;
 }
 
-/* ---------- Copy: small screens stack, one column ---------- */
 .brand-hero-copy {
   display: flex;
   max-width: 640px;
@@ -43,21 +49,21 @@
 
 .brand-hero-headline {
   max-width: 100%;
-  margin-top: clamp(14px, 1.6vw, 24px);
+  margin-top: 14px;
   color: var(--color-white);
   font-size: var(--text-h1);
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: var(--tracking-tight);
   text-wrap: balance;
 }
 
 .brand-hero-support {
-  margin-top: 4px;
+  margin-top: 20px;
 }
 
 .brand-hero-lead {
   max-width: 42ch;
-  margin-top: 16px;
   color: var(--color-on-brand-muted);
   font-size: var(--type-lead);
   line-height: 1.55;
@@ -70,25 +76,15 @@
 
 .brand-hero-actions {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 28px;
 }
 
-@media (max-width: 640px) {
-  .brand-hero {
-    padding-top: 32px;
-    padding-bottom: calc(68.6% + 44px);
-  }
-
-  .brand-hero-actions,
-  .brand-hero-actions .btn {
-    width: 100%;
-  }
-
-  .brand-hero-actions .btn {
-    justify-content: center;
-  }
+.brand-hero-actions .btn {
+  width: 100%;
+  justify-content: center;
 }
 
 /* The CTA is a nowrap pill; on very narrow phones its label may wrap instead of overflowing. */
@@ -99,11 +95,30 @@
   }
 }
 
-/* ---------- Tablet and up: the headline stands on the left, the supporting copy and its CTA
-   form one compact block on the right, and the headline is revealed line by line ---------- */
-@media (min-width: 769px) {
+/* ---------- Tablet (641 to 1024): the art is a 4:3 band (shorter on wide-and-short screens). The
+   identity and headline sit over its quiet upper left; the rest of the copy follows right below. ---------- */
+@media (min-width: 641px) {
+  .brand-hero .wm {
+    aspect-ratio: 4 / 3;
+    max-height: 70svh;
+  }
+
+  .brand-hero-container {
+    position: static;
+    padding-top: clamp(28px, 4cqw, 40px);
+    padding-bottom: clamp(44px, 7cqw, 72px);
+  }
+
+  .brand-hero-lede {
+    position: absolute;
+    z-index: 1;
+    top: clamp(24px, 6.5cqw, 64px);
+    left: var(--container-pad);
+  }
+
   .brand-hero-headline {
-    font-size: min(var(--text-h1), 5.4vw);
+    margin-top: 12px;
+    font-size: clamp(1.875rem, 4.4cqw, 3rem);
   }
 
   .brand-hero-line {
@@ -123,72 +138,68 @@
     margin-top: 0;
   }
 
-  .brand-hero-lead {
-    max-width: 34ch;
-    margin-top: 0;
-    font-size: var(--type-body);
-    line-height: 1.55;
-  }
-
-  .brand-hero-lead + .brand-hero-lead {
-    margin-top: 10px;
-  }
-
   .brand-hero-actions {
-    margin-top: 24px;
+    width: auto;
+  }
+
+  .brand-hero-actions .btn {
+    width: auto;
   }
 }
 
-/* Two columns from 900px. The right column is never narrower than the CTA, which does not wrap. */
-@media (min-width: 900px) {
+/* ---------- Desktop (1025px and up): the art is the hero's environment and all the copy sits in its
+   left quiet zone, clear of the board's near corner (about 31% of the hero's width). The hero fills
+   the viewport under the header; the cap keeps the art near the 16:9 to 2:1 it was composed for. ---------- */
+@media (min-width: 1025px) {
+  .brand-hero {
+    min-height: clamp(600px, calc(100svh - var(--header-height)), min(66.7vw, 960px));
+  }
+
+  .brand-hero .wm {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+    max-height: none;
+  }
+
+  .brand-hero-container {
+    position: relative;
+    padding-top: clamp(32px, 5.2cqw, 96px);
+    padding-bottom: clamp(36px, 4cqw, 64px);
+  }
+
   .brand-hero-copy {
-    display: grid;
     max-width: none;
-    grid-template-columns: minmax(0, 1fr) minmax(340px, 34%);
-    column-gap: clamp(32px, 5vw, 72px);
-    align-items: start;
-  }
-}
-
-/* Tablet (769 to 1180): the scene sits below the copy in its own aspect-ratio box. */
-@media (max-width: 1180px) {
-  .brand-hero {
-    padding-bottom: calc(47.8% + 32px);
-  }
-}
-
-@media (max-width: 640px) {
-  .brand-hero {
-    padding-bottom: calc(68.6% + 44px);
-  }
-}
-
-/* ---------- Desktop (1181px and up): the hero is most of the first screen. The scene owns the lower
-   hero; the copy keeps the upper hero, with the headline on the left and the compact support block
-   on the right, clear of the character. ---------- */
-@media (min-width: 1181px) {
-  .brand-hero {
-    /* About 90svh on a typical laptop; the proportional floor keeps the copy clear of the scene's page
-       on shorter or narrower screens. */
-    min-height: max(clamp(640px, 90svh, 1000px), min(57vw, 840px));
-    padding-top: clamp(56px, 8svh, 104px);
   }
 
-  .brand-hero-copy {
-    grid-template-columns: minmax(0, 1fr) clamp(340px, 24vw, 360px);
-    column-gap: clamp(40px, 6vw, 96px);
+  .brand-hero-lede {
+    position: static;
   }
 
   .brand-hero-headline {
-    font-size: min(4.5vw, 4.25rem);
+    margin-top: clamp(12px, 1.2cqw, 20px);
+    font-size: clamp(2.5rem, 4.1cqw, 4.25rem);
+  }
+
+  .brand-hero-support {
+    margin-top: clamp(16px, 1.6cqw, 24px);
+  }
+
+  .brand-hero-lead {
+    max-width: max(250px, 20.5cqw);
+    font-size: clamp(0.9375rem, 1.1cqw, 1.0625rem);
+  }
+
+  .brand-hero-actions {
+    margin-top: clamp(18px, 1.8cqw, 26px);
   }
 }
 
 /* ---------- Entrance: plays once, then the typography stays still ----------
    Plain CSS keyframes so the text is on screen from the first paint (no hydration flash) and the
-   sequence still works without JavaScript. The delays overlap on purpose: identity, the four
-   headline lines, then the supporting copy and CTA, all within about a second. Small screens
-   fade the whole headline up once instead of masking lines. */
+   sequence works without JavaScript: identity, the headline, the supporting copy, then the CTA,
+   with overlapping delays, all within about a second. Tablet and desktop reveal the three headline
+   lines through masks; phones fade the whole headline up once. */
 @keyframes hero-rise {
   from {
     opacity: 0;
@@ -224,18 +235,18 @@
 }
 
 .brand-hero [data-hero='body1'] {
-  animation-delay: 380ms;
+  animation-delay: 340ms;
 }
 
 .brand-hero [data-hero='body2'] {
-  animation-delay: 430ms;
+  animation-delay: 390ms;
 }
 
 .brand-hero [data-hero='actions'] {
-  animation-delay: 490ms;
+  animation-delay: 450ms;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 641px) {
   .brand-hero [data-hero='headline'] {
     animation: none;
   }
