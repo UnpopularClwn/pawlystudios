@@ -28,7 +28,7 @@ export const faq = [
   {
     question: 'How long does it take to build a website?',
     answer:
-      "It depends on what we're building. A focused landing page will usually take less time than a complete business website or a larger website rebuild.\n\nFor a typical website, I generally plan around 1–3 weeks, depending on the size of the site, the content and assets available, the functionality needed, and how quickly we move through feedback and revisions.",
+      'For a typical website, I generally plan around 1–3 weeks. A focused landing page will usually take less time than a complete business website or a larger website rebuild.\n\nThe timeline depends on the size of the site, the content and assets available, the functionality needed, and how quickly we move through feedback and revisions.',
   },
   {
     question: 'Will I own my website after it’s finished?',

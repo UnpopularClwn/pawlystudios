@@ -17,7 +17,10 @@ export default function AboutPaul() {
               eventually web development. I have a habit of finding something interesting, learning how it works, and
               seeing what I can build with it.
             </p>
-            <p className="about-paul-turn">pawlystudios. is where a lot of that curiosity ends up.</p>
+            <p className="about-paul-turn">
+              pawlystudios. is where a lot of that curiosity ends up. It&rsquo;s the name I build websites under and where I bring
+              that work together.
+            </p>
             <p>
               Outside of work, I&rsquo;m usually somewhere between finding a good cup of coffee, watching F1, learning
               something completely unrelated, or spending way too much time flying an A320neo in a simulator.
