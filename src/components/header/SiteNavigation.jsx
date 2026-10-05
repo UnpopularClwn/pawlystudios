@@ -17,7 +17,7 @@ export default function SiteNavigation() {
 
   return (
     <nav className={`site-navigation ${isHome ? 'site-navigation--home' : ''}`} aria-label="Primary navigation">
-      <Link href="/" className="site-header-brand" aria-label="Niño Paul Cabiles, home">
+      <Link href="/" className="site-header-brand">
         <span className="site-header-name">Niño Paul Cabiles</span>
         <span className="site-header-signature">pawlystudios.</span>
       </Link>

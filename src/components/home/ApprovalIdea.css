@@ -275,7 +275,8 @@
 .idea-btn--changes {
   border: 1px solid var(--color-accent);
   background: transparent;
-  color: var(--color-accent);
+  /* Slightly deeper than the brand red so the label clears 4.5:1 on the card, including the hover tint. */
+  color: #c42629;
 }
 
 .idea-btn--approve {
