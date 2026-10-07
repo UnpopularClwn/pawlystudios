@@ -85,8 +85,8 @@ Three font roles; every typography rule maps to one of them (tokens in `src/styl
 - Container: `--container-max: clamp(1180px, 86vw, 1320px)`. Text stays on this grid; visuals may bleed past it.
 - Layout intent: intentional density, varied section rhythm, no macro-whitespace, no bento default, no card soup, no
   glassmorphism, no decorative interaction without purpose.
-- Motion: GSAP with ScrollTrigger is the motion system (`src/lib/motion.js`, `Reveal`, `useReveal`). The hero text
-  entrance is CSS keyframes and the hero art (`src/components/home/machine/`) is Canvas 2D, not WebGL. Smooth scrolling is
+- Motion: GSAP with ScrollTrigger is the motion system (`src/lib/motion.js`, `Reveal`, `useReveal`). The homepage
+  hero is static (its canvas art and text entrance were removed). Smooth scrolling is
   Lenis (`SmoothScroll.jsx`, lerp 0.12; do not add CSS `scroll-behavior: smooth` or another scroll library). Reduced
   motion is respected. React Three Fiber, Three.js, `@react-three/drei`, `@react-three/rapier`, and `meshline`
   exist for the Lanyard. Motion, Tailwind, shadcn/ui, and Motion Primitives are not installed and must not be added

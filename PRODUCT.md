@@ -83,9 +83,8 @@ Routes: `/`, `/work/setsail`, `/about`, `/contact`, `/services/web-development`,
 are not the design reference for the homepage. `/contact` and its inquiry form are intentionally preserved even though
 the homepage does not use the form.
 
-The Hero is one art-directed composition over the decorative "Website Machine" canvas artwork (`src/components/home/machine/`):
-on desktop the copy sits in the art's left quiet zone, on tablet the headline overlays an art band, on phones the art is a
-band above the copy. Copy is approved and unchanged. Spacing follows the density direction in Design Principles: varied section rhythm, a fluid container
+The Hero is a static typographic composition on the brand color: identity line, headline, supporting copy and one CTA.
+It has no artwork and no entrance animation (the "Website Machine" canvas art was removed on 2026-10-07). Copy is approved and unchanged. Spacing follows the density direction in Design Principles: varied section rhythm, a fluid container
 (`clamp(1180px, 86vw, 1320px)`), no macro-whitespace.
 
 ## Typography
@@ -101,8 +100,8 @@ Three roles. Every typography rule maps to exactly one of them.
 
 ## Motion and Interaction
 
-GSAP (with ScrollTrigger) is the primary motion system. The hero text entrance is CSS keyframes and the hero artwork is a
-Canvas 2D port (no WebGL). Smooth wheel scrolling is Lenis (`SmoothScroll.jsx`: lerp 0.12, touch and keyboard native,
+GSAP (with ScrollTrigger) is the primary motion system. The homepage hero is static (no artwork, no entrance
+animation). Smooth wheel scrolling is Lenis (`SmoothScroll.jsx`: lerp 0.12, touch and keyboard native,
 bypassed under reduced motion); do not add CSS `scroll-behavior: smooth` or another scroll library. React Three Fiber,
 Three.js, and Rapier are already present for the Lanyard. 3D may be explored elsewhere only where it materially improves storytelling. Motion, Tailwind, shadcn/ui,
 and Motion Primitives are not installed and are not to be added without a new approved requirement.

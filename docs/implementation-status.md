@@ -1,6 +1,6 @@
 # Implementation Status
 
-Last updated: 2026-10-05 (Website Machine hero and Lenis smooth-scrolling checkpoint).
+Last updated: 2026-10-07 (hero animation and artwork removed).
 
 This is the active status document. Product direction and design principles live in `PRODUCT.md`; agent rules and
 boundaries live in `CLAUDE.md`. Everything under `docs/archive/` is historical and may describe earlier versions of
@@ -33,12 +33,9 @@ the site, including an older design identity. It is not a source of truth.
 Order: Hero, SetSail Featured Build, What I Build, Tools, Experience, How I Work, About, FAQ, Contact-focused Footer
 with Lanyard.
 
-- Hero: identity line, H1 "I build modern websites and landing pages for businesses.", supporting copy and one CTA over
-  the decorative "Website Machine" artwork (`src/components/home/machine/`: a Canvas 2D port of the approved prototype,
-  no WebGL, aria-hidden). Desktop: the art fills the hero and the copy sits in its left quiet zone. Tablet: an art band
-  with the identity and headline over it, the rest of the copy below. Phone: art band above the copy. One 11 second
-  loop on one animation-frame loop that pauses offscreen and in a hidden tab; reduced motion shows a still poster. The
-  text entrance is CSS keyframes and plays once. Night Shift (the previous hero art) is retired.
+- Hero: identity line, H1 "I build modern websites and landing pages for businesses.", supporting copy and one CTA on
+  the brand color. Static: the "Website Machine" canvas artwork (`src/components/home/machine/`) and the CSS text
+  entrance were removed on 2026-10-07 at the owner's request. Night Shift (the earlier hero art) is also retired.
 - SetSail Featured Build: see SetSail Status.
 - What I Build: Business Websites, Website Rebuilds, Landing Pages (three-column rows on desktop).
 - Tools: "Tools I Use" marquee (includes Claude Code and ChatGPT), static reduced-motion fallback. shadcn/ui and Motion
