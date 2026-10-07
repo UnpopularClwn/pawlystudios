@@ -77,9 +77,12 @@ Direct, capable, and personal. Calm, specific, and human. Restrained but memorab
 The homepage is about Paul first. SetSail is selected work, not the centerpiece; its detail lives on `/work/setsail`.
 The Experience numbers are historical figures from Paul's remote roles, never pawlystudios. client counts.
 
-Navigation is Work, About, Contact (in-page anchors). Footer navigation is Work, About, Web Development, FAQ.
+Navigation is Work, About, Contact (in-page anchors). Footer navigation is Work, About, Resume, Web Development, FAQ.
 
-Routes: `/`, `/work/setsail`, `/about`, `/contact`, `/services/web-development`, `/social-preview`.
+Routes: `/`, `/work/setsail`, `/resume`, `/about`, `/contact`, `/services/web-development`, `/social-preview`.
+
+`/resume` is the structured professional record (roles, figures from past roles, SetSail as one short entry,
+training, grouped tools). `/about` stays the personal narrative; the two complement each other.
 `/services/ai-ad-creative` is parked and unlinked. There is no `/work` index (intentionally 404).
 
 `/about` and `/services/web-development` predate the current positioning and are queued for a consistency review. They

@@ -45,7 +45,7 @@ export const INDEXING_ENABLED = isIndexingEnabled({ isLaunched: SITE_IS_LAUNCHED
 
 // The only routes that belong in the sitemap. Parked or internal routes
 // (/services/ai-ad-creative, /social-preview) are deliberately absent.
-export const INDEXABLE_ROUTES = ['/', '/about', '/contact', '/services/web-development', '/work/setsail']
+export const INDEXABLE_ROUTES = ['/', '/about', '/contact', '/services/web-development', '/work/setsail', '/resume']
 
 // Each route owns its canonical path. Resolved against `metadataBase`, so it is
 // only emitted once SITE_URL is known and is never inherited from the root layout.

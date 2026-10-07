@@ -54,10 +54,10 @@ Facts from git (use `git log` for the exact checkpoint commit):
 8. `Faq`
 9. `Footer withLanyard` (contact-focused footer with the React Bits Lanyard)
 
-Navigation: Work, About, Contact (in-page anchors). Footer navigation: Work, About, Web Development, FAQ.
-Routes: `/`, `/work/setsail`, `/about`, `/contact`, `/services/web-development`, `/social-preview`, parked
+Navigation: Work, About, Contact (in-page anchors). Footer navigation: Work, About, Resume, Web Development, FAQ.
+Routes: `/`, `/work/setsail`, `/resume`, `/about`, `/contact`, `/services/web-development`, `/social-preview`, parked
 `/services/ai-ad-creative`. `/work` (an index) does NOT exist and intentionally 404s. Copy is data-driven from
-`src/data/` (`whatIBuild.js`, `experience.js`, `homeProcess.js`, `faq.js`, `tools.js`, `setsail.js`). Approved content stays as written
+`src/data/` (`whatIBuild.js`, `experience.js`, `resume.js`, `homeProcess.js`, `faq.js`, `tools.js`, `setsail.js`). Approved content stays as written
 unless a task says otherwise. Header wordmark, footer and the About profile card use the full identity "Niño Paul
 Cabiles"; conversational copy ("Hi, I'm Paul.") is intentionally informal.
 

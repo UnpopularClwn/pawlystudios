@@ -1,6 +1,6 @@
 # Implementation Status
 
-Last updated: 2026-10-07 (static hero; homepage restructure with Experience and Selected Work).
+Last updated: 2026-10-07 (static hero; homepage restructure; `/resume` page).
 
 This is the active status document. Product direction and design principles live in `PRODUCT.md`; agent rules and
 boundaries live in `CLAUDE.md`. Everything under `docs/archive/` is historical and may describe earlier versions of
@@ -52,12 +52,21 @@ Lanyard.
 
 Design system: three font roles (UI system stack with Inter fallback, DISPLAY General Sans, EXPRESSIVE Sofia Sans
 Extra Condensed), fluid container, varied section rhythm, homepage type-scale tokens in `src/styles/tokens.css`.
-Navigation: Work, About, Contact. Footer navigation: Work, About, Web Development, FAQ.
+Navigation: Work, About, Contact. Footer navigation: Work, About, Resume, Web Development, FAQ. The homepage
+Experience section ends with a "View résumé" link.
 
 ## Routes
 
 - `/`: homepage above.
 - `/work/setsail`: the canonical SetSail case study. There is no `/work` index (404 by design).
+- `/resume`: the structured professional record (copy in `src/data/resume.js`, sourced only from Paul's resume PDF).
+  Introduction, at-a-glance figures from past roles (with the same "not from my website work" context line), three
+  roles (SEO for Real Estate Investors, Marketing-Mo, Peak Support), SetSail as one short entry linking to the case
+  study, Athena training, grouped tools, and the shared Footer with a "Want to talk?" heading. Indexable, canonical
+  `/resume`, ProfilePage JSON-LD with a breadcrumb. **PDF download is on hold:** the resume PDF lists automatic
+  content scheduling as a current SetSail feature, which conflicts with the SetSail claim rules. The owner will
+  revise the PDF; then add it as `public/resume/nino-paul-cabiles-resume.pdf` with a "Download PDF" action. The
+  source PDF sits untracked at `docs/AI-Forward Developer.docx.pdf` and is intentionally not committed.
 - `/about`, `/services/web-development`: exist but predate the current positioning; queued for a consistency review
   (for example the web-development metadata and the schema Service description still mention "web portals").
   `/services/web-development` carries a compact SetSail pointer to `/work/setsail` (no imagery), the six-step roadmap,
@@ -140,10 +149,10 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
     see the noindex.
   - `robots.js`: `Disallow: /` and no sitemap while `SITE_IS_LAUNCHED` is false; `Allow: /` plus the absolute sitemap
     URL when launched with a valid `SITE_URL`. `sitemap.js`: empty until launched with a valid `SITE_URL`, then
-    exactly `/`, `/about`, `/contact`, `/services/web-development`, `/work/setsail`.
+    exactly `/`, `/about`, `/contact`, `/services/web-development`, `/work/setsail`, `/resume`.
   - Structured data (`src/lib/schema.js`, rendered per page by `src/components/seo/JsonLd.jsx`) is emitted only when
     launched with a valid `SITE_URL`. Each page graph holds Person, Brand (`pawlystudios.`, not a LocalBusiness or
-    Organization), WebSite, and a page node (WebPage / AboutPage / ContactPage). The web development page adds a
+    Organization), WebSite, and a page node (WebPage / AboutPage / ContactPage / ProfilePage). The web development page adds a
     Service and a breadcrumb; SetSail is a plain WebPage with a breadcrumb. No FAQPage, ratings, offers, address or
     SoftwareApplication. `SITE_IS_LAUNCHED` remains `false`; the site is `noindex`.
 - Security headers: `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, a conservative

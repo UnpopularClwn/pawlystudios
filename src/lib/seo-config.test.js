@@ -58,7 +58,8 @@ test('robots.txt and sitemap follow the derived indexing state for any site url'
   const valid = run(origin)
   if (SITE_IS_LAUNCHED) {
     assert.deepEqual(valid.robots, { rules: { userAgent: '*', allow: '/' }, sitemap: `${origin}/sitemap.xml` })
-    assert.equal(valid.sitemap.length, 5)
+    assert.equal(valid.sitemap.length, 6)
+    assert.ok(valid.sitemap.some((entry) => entry.url === `${origin}/resume`))
   } else {
     assert.deepEqual(valid.robots, { rules: { userAgent: '*', disallow: '/' } })
     assert.deepEqual(valid.sitemap, [])

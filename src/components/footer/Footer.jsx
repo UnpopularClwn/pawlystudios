@@ -11,8 +11,18 @@ import './Footer.css'
 // interactive React Bits Lanyard badge beside the copy without loading the
 // WebGL/physics stack on every other route that reuses this same Footer.
 // `showCtaCopy={false}` drops only the heading and lead (used on /contact, where the inquiry form is
-// the ask); the direct contact links, identity and navigation stay.
-export default function Footer({ withLanyard = false, showCtaCopy = true }) {
+// the ask); the direct contact links, identity and navigation stay. `ctaHeading` / `ctaLead` replace
+// the default website-focused copy on routes with a different audience (used on /resume).
+const DEFAULT_CTA_HEADING = 'Have a website in mind? Let’s talk.'
+const DEFAULT_CTA_LEAD =
+  'If you’re starting a new website, rebuilding an existing one, or need a landing page for something specific, tell me what you have in mind.'
+
+export default function Footer({
+  withLanyard = false,
+  showCtaCopy = true,
+  ctaHeading = DEFAULT_CTA_HEADING,
+  ctaLead = DEFAULT_CTA_LEAD,
+}) {
   const year = new Date().getFullYear()
 
   const contacts = (
@@ -64,11 +74,8 @@ export default function Footer({ withLanyard = false, showCtaCopy = true }) {
           <div className="footer-cta" id="contact">
             {showCtaCopy && (
               <>
-                <h2 className="footer-cta-heading">Have a website in mind? Let&rsquo;s talk.</h2>
-                <p className="footer-cta-lead">
-                  If you&rsquo;re starting a new website, rebuilding an existing one, or need a landing page for
-                  something specific, tell me what you have in mind.
-                </p>
+                <h2 className="footer-cta-heading">{ctaHeading}</h2>
+                <p className="footer-cta-lead">{ctaLead}</p>
               </>
             )}
             {contacts}

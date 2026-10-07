@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Section from '../shared/Section.jsx'
 import SectionEyebrow from '../shared/SectionEyebrow.jsx'
 import Reveal from '../shared/Reveal.jsx'
@@ -66,6 +67,9 @@ export default function Experience() {
             </li>
           ))}
         </Reveal>
+        <Link className="experience-resume-link" href="/resume">
+          View résumé <span aria-hidden="true">→</span>
+        </Link>
       </div>
     </Section>
   )

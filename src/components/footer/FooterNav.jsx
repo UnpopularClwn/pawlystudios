@@ -3,6 +3,7 @@ import Link from 'next/link'
 const FOOTER_NAV_LINKS = [
   { label: 'Work', href: '/#work' },
   { label: 'About', href: '/about' },
+  { label: 'Resume', href: '/resume' },
   { label: 'Web Development', href: '/services/web-development' },
   { label: 'FAQ', href: '/#faq' },
 ]

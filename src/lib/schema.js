@@ -10,6 +10,7 @@ export const SCHEMA_ROUTES = {
   contact: { path: '/contact', type: 'ContactPage' },
   webDevelopment: { path: '/services/web-development', type: 'WebPage', crumb: 'Web Development' },
   setsail: { path: '/work/setsail', type: 'WebPage', crumb: 'SetSail Case Study' },
+  resume: { path: '/resume', type: 'ProfilePage', crumb: 'Resume' },
 }
 
 const PERSON_NAME = 'Niño Paul Cabiles'
@@ -45,7 +46,7 @@ export function buildPageSchema({ siteUrl, isLaunched, route, title, description
   const extra = []
 
   if (route === 'home') page.about = { '@id': personId }
-  if (route === 'about') page.mainEntity = { '@id': personId }
+  if (route === 'about' || route === 'resume') page.mainEntity = { '@id': personId }
 
   if (route === 'webDevelopment') {
     page.mainEntity = { '@id': serviceId }

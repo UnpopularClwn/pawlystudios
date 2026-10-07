@@ -64,6 +64,16 @@ test('home, about and contact have no breadcrumb or service nodes', () => {
   }
 })
 
+test('resume is a profile page about the person, with a breadcrumb to real urls only', () => {
+  const graph = build('resume')['@graph']
+  const page = graph.find((node) => node['@id'].endsWith('#webpage'))
+  assert.equal(page['@type'], 'ProfilePage')
+  assert.equal(page.url, `${origin}/resume`)
+  assert.equal(page.mainEntity['@id'], `${origin}/#paul-cabiles`)
+  const crumbs = graph.find((node) => node['@type'] === 'BreadcrumbList').itemListElement
+  assert.deepEqual(crumbs.map((item) => item.item), [origin, `${origin}/resume`])
+})
+
 test('serialized json-ld cannot close its script tag', () => {
   assert.equal(serializeJsonLd({ value: '</script>' }).includes('</script>'), false)
 })
