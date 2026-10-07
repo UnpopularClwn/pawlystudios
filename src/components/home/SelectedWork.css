@@ -1,0 +1,84 @@
+.sw-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 112px);
+  align-items: center;
+}
+
+.sw-title {
+  margin: 4px 0 clamp(16px, 2vw, 24px);
+  font-size: clamp(3.5rem, 2rem + 5.5vw, 6.5rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.sw-description {
+  max-width: 34ch;
+  color: var(--text-body);
+  font-size: var(--type-lead);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.sw-action {
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+/* One fragment from the real build, set on the brand color so it reads as evidence, not a mockup. */
+.sw-figure {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 0 0 auto;
+}
+
+.sw-panel {
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 20px;
+  background: var(--color-brand);
+}
+
+.sw-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.sw-figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: var(--type-small);
+}
+
+.sw-figure-tag {
+  color: var(--text-secondary);
+  font-weight: var(--weight-body-medium);
+}
+
+.sw-figure-tag::after {
+  content: '·';
+  margin-left: 12px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  .sw-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .sw-figure {
+    margin: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .sw-action .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

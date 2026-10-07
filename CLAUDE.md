@@ -44,20 +44,20 @@ Facts from git (use `git log` for the exact checkpoint commit):
 
 `src/app/page.js` renders, in order:
 
-1. `HomeSequence` = `BrandHero` + `SetSailStage` (SetSail Featured Build; two separate moments, no shared device
-   geometry any more)
+1. `BrandHero` (static)
 2. `WhatIBuild`
-3. `ToolsSection` (homepage variant)
-4. `Experience`
+3. `Experience` (professional background and four numbers from past remote roles; copy in `src/data/experience.js`)
+4. `SelectedWork` (SetSail as one concise entry; `id="work"`)
 5. `HowIWork`
-6. `AboutPaul`
-7. `Faq`
-8. `Footer withLanyard` (contact-focused footer with the React Bits Lanyard)
+6. `ToolsSection` (homepage variant)
+7. `AboutPaul`
+8. `Faq`
+9. `Footer withLanyard` (contact-focused footer with the React Bits Lanyard)
 
 Navigation: Work, About, Contact (in-page anchors). Footer navigation: Work, About, Web Development, FAQ.
 Routes: `/`, `/work/setsail`, `/about`, `/contact`, `/services/web-development`, `/social-preview`, parked
 `/services/ai-ad-creative`. `/work` (an index) does NOT exist and intentionally 404s. Copy is data-driven from
-`src/data/` (`whatIBuild.js`, `homeProcess.js`, `faq.js`, `tools.js`, `setsail.js`). Approved content stays as written
+`src/data/` (`whatIBuild.js`, `experience.js`, `homeProcess.js`, `faq.js`, `tools.js`, `setsail.js`). Approved content stays as written
 unless a task says otherwise. Header wordmark, footer and the About profile card use the full identity "Niño Paul
 Cabiles"; conversational copy ("Hi, I'm Paul.") is intentionally informal.
 
@@ -113,13 +113,11 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 
 ## SetSail (redesign complete)
 
-- **Homepage Featured Build:** a large "SetSail" title, a two-sentence first-person hook, and a purpose-built generic
-  approval card (invented bakery draft post, not a SetSail screen). Drag right to approve, left to request changes;
-  resistance, controlled rotation, stamps, spring-back, release threshold. Accessible: two real buttons, ArrowLeft and
-  ArrowRight on the focused card, `role="status"` live region, `touch-action: pan-y`, reduced-motion path. After a
-  decision the section turns: "That solved one part of it." then four typographic evidence tiles (roles, onboarding
-  stages, monthly reporting, stack) and a link to `/work/setsail`. No product screenshots or device mockups on the
-  homepage.
+- **Homepage Selected Work** (`SelectedWork.jsx`, `id="work"`, since 2026-10-07): eyebrow "Selected Work", the
+  "SetSail" title, one line ("A client portal and agency workspace I designed and built around a real workflow
+  problem."), a "View case study" button to `/work/setsail`, and ONE approved privacy-safe fragment
+  (`client-mobile-fragment.png`) with the "From the actual build" caption. No counts, feature lists, stack or
+  architecture on the homepage. The interactive approval card and the evidence tiles were removed with it.
 - **`/work/setsail`** is the one canonical SetSail case study, about BUILDING it (friction, the swipe decision, how it
   grew, under the hood with `<details>` and an architecture diagram, how it was built, and a bridge back to Business
   Websites / Website Rebuilds / Landing Pages). Each section has its own composition. There is NO `/work` index (it
@@ -185,8 +183,9 @@ the dominant contact link with WhatsApp and LinkedIn beneath it. `/contact` is f
 
 ## Asset State
 
-- SetSail evidence (case study only): `public/images/setsail/agency-workflow-fragment.png`,
-  `lifecycle-stages-fragment.png`, `client-mobile-fragment.png`. All other SetSail screenshots and hero mockups were
+- SetSail evidence: `public/images/setsail/agency-workflow-fragment.png`,
+  `lifecycle-stages-fragment.png`, `client-mobile-fragment.png` (case study; `client-mobile-fragment.png` is also the one
+  homepage Selected Work visual, approved 2026-10-07). All other SetSail screenshots and hero mockups were
   removed from the tree (still present in older Git history).
 - Lanyard assets: `public/lanyard/card.glb`, `lanyard.png` (official React Bits), `badge-front.svg` (neutral
   placeholder, no photograph), `badge-back.svg`.

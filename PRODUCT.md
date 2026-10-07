@@ -65,14 +65,17 @@ Direct, capable, and personal. Calm, specific, and human. Restrained but memorab
 ## Current Homepage (`/`)
 
 1. Hero
-2. SetSail Featured Build
-3. What I Build
-4. Tools
-5. Experience
-6. How I Work
+2. What I Build
+3. Experience (professional background, numbers from past remote roles)
+4. Selected Work (SetSail, concise)
+5. How I Work
+6. Tools
 7. About
 8. FAQ
 9. Contact-focused Footer with the Lanyard
+
+The homepage is about Paul first. SetSail is selected work, not the centerpiece; its detail lives on `/work/setsail`.
+The Experience numbers are historical figures from Paul's remote roles, never pawlystudios. client counts.
 
 Navigation is Work, About, Contact (in-page anchors). Footer navigation is Work, About, Web Development, FAQ.
 
@@ -114,13 +117,11 @@ sacrifice keyboard, touch, or responsive behavior for visual effects.
 
 ## SetSail and Lanyard (current state)
 
-- **Homepage Featured Build:** a large "SetSail" title, a two-sentence first-person hook, and a purpose-built generic
-  approval card (invented bakery draft post, not a SetSail screen). Drag right to approve, left to request changes;
-  resistance, controlled rotation, stamps, spring-back, release threshold. Accessible: two real buttons, ArrowLeft and
-  ArrowRight on the focused card, `role="status"` live region, `touch-action: pan-y`, reduced-motion path. After a
-  decision the section turns: "That solved one part of it." then four typographic evidence tiles (roles, onboarding
-  stages, monthly reporting, stack) and a link to `/work/setsail`. No product screenshots or device mockups on the
-  homepage.
+- **Homepage Selected Work** (`SelectedWork.jsx`, `id="work"`, since 2026-10-07): eyebrow "Selected Work", the
+  "SetSail" title, one line ("A client portal and agency workspace I designed and built around a real workflow
+  problem."), a "View case study" button to `/work/setsail`, and ONE approved privacy-safe fragment
+  (`client-mobile-fragment.png`) with the "From the actual build" caption. No counts, feature lists, stack or
+  architecture on the homepage. The interactive approval card and the evidence tiles were removed with it.
 - **`/work/setsail`** is the one canonical SetSail case study, about BUILDING it (friction, the swipe decision, how it
   grew, under the hood with `<details>` and an architecture diagram, how it was built, and a bridge back to Business
   Websites / Website Rebuilds / Landing Pages). Each section has its own composition. There is NO `/work` index (it

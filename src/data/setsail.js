@@ -1,4 +1,4 @@
-// SetSail: single source of copy for the homepage Featured Build and /work/setsail.
+// SetSail: single source of copy for the homepage Selected Work entry and /work/setsail.
 //
 // Rules this content follows (see the SetSail research and privacy audit):
 // - Concepts only. No product screenshots, no recreated screens, no client or agency names,
@@ -13,55 +13,15 @@
 export const setsail = {
   name: 'SetSail',
   href: '/work/setsail',
+  // Link label used by the SetSail pointer on /services/web-development.
+  buildCta: 'See how I built it',
 
-  // ---------- Homepage Featured Build ----------
-  home: {
-    hook: [
-      'I was working with an organic social media agency. The team’s workflow worked. The client side didn’t, especially when a post was waiting for approval.',
-    ],
-    idea: {
-      instruction: 'Drag the card. Right approves, left asks for changes.',
-      approve: 'Approve',
-      changes: 'Request changes',
-      after: {
-        approve: 'Approved. That solved one part of it.',
-        changes: 'Changes requested. That solved one part of it.',
-      },
-      reset: 'Try again',
-      resetStatus: 'Card reset.',
-      card: {
-        title: 'Saturday, fresh out of the oven.',
-        note: 'A draft post for a neighborhood bakery.',
-        tag: 'Draft',
-      },
-    },
-    bridge: {
-      heading: 'That solved one part of it.',
-      body: 'SetSail grew into a client portal and agency workspace. Here is some of what went into it.',
-    },
-    evidence: [
-      {
-        figure: '4',
-        label: 'roles',
-        note: 'Invitation only, and every client is scoped to their own account.',
-      },
-      {
-        figure: '8',
-        label: 'onboarding stages',
-        note: 'Clients needed to know what happened next.',
-      },
-      {
-        figure: 'Monthly',
-        label: 'reporting',
-        note: 'Imported from a CSV and charted in the same workspace.',
-      },
-      {
-        figure: 'React',
-        label: 'TypeScript, Supabase, Vercel',
-        note: 'Planning through deployment, built end to end.',
-      },
-    ],
-    cta: 'See how I built it',
+  // ---------- Homepage Selected Work ----------
+  // Deliberately short: the homepage says "I built this", the case study explains why and how.
+  selected: {
+    eyebrow: 'Selected Work',
+    description: 'A client portal and agency workspace I designed and built around a real workflow problem.',
+    cta: 'View case study',
   },
 
   // ---------- /work/setsail ----------
@@ -121,7 +81,6 @@ export const setsail = {
         { text: 'Buttons do the same thing, so nobody has to swipe.', side: 'right' },
         { text: 'One gesture, one decision.', side: 'left' },
       ],
-      try: 'Try the idea on the homepage',
     },
 
     grew: {

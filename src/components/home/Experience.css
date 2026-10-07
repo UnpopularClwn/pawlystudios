@@ -1,76 +1,153 @@
+/* ---------- Introduction and story ---------- */
 .experience-layout {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   gap: clamp(40px, 7vw, 112px);
-  align-items: end;
-}
-
-.experience-mark {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-.experience-mark span {
-  color: var(--color-border);
-  font-family: var(--font-expressive);
-  font-weight: 300;
-  font-size: var(--type-number);
-  line-height: 0.85;
-  letter-spacing: 0.02em;
-}
-
-.experience-mark {
-  margin-bottom: 16px;
+  align-items: start;
 }
 
 .experience-head h2 {
-  max-width: 16ch;
-  margin: 12px 0 0;
+  max-width: 15ch;
+  margin: 0 0 clamp(20px, 2.4vw, 32px);
   text-wrap: balance;
 }
 
-.experience-body {
-  max-width: 62ch;
-}
-
-.experience-body p {
-  margin-bottom: 1.4em;
+.experience-intro {
+  max-width: 52ch;
   color: var(--text-body);
-  font-size: var(--type-body);
-  line-height: 1.75;
+  font-size: var(--type-lead);
+  line-height: 1.6;
   text-wrap: pretty;
 }
 
-.experience-body p:last-child {
-  margin-bottom: 0;
+.experience-intro + .experience-intro {
+  margin-top: 1em;
 }
 
+/* The story column starts lower, so it reads as a side note to the introduction rather than a
+   second competing column. */
+.experience-story {
+  max-width: 46ch;
+  padding-top: clamp(0px, 5vw, 72px);
+}
+
+.experience-story-label {
+  margin-bottom: 14px;
+  color: var(--color-accent);
+  font-family: var(--font-expressive);
+  font-weight: 400;
+  font-size: var(--type-label);
+  letter-spacing: var(--tracking-label);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.experience-story p:not(.experience-story-label) {
+  color: var(--text-secondary);
+  font-size: var(--type-body);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.experience-story p:not(.experience-story-label) + p {
+  margin-top: 1em;
+}
+
+/* ---------- Numbers: a ruled typographic row, not cards ---------- */
+.experience-numbers {
+  margin-top: clamp(56px, 7vw, 96px);
+  border-top: 1px solid var(--color-border);
+}
+
+.experience-numbers-context {
+  padding-top: 16px;
+  color: var(--text-muted);
+  font-size: var(--type-small);
+  line-height: 1.5;
+}
+
+.experience-numbers-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: clamp(24px, 3vw, 40px);
+  list-style: none;
+}
+
+.experience-number {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 clamp(16px, 2.4vw, 36px);
+  border-left: 1px solid var(--color-border);
+}
+
+.experience-number:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.experience-number-value {
+  color: var(--color-brand);
+  font-family: var(--font-expressive);
+  font-weight: 300;
+  font-size: clamp(3.5rem, 2.4rem + 3.4vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.experience-number-label {
+  max-width: 18ch;
+  color: var(--text-body);
+  font-size: var(--type-body);
+  font-weight: var(--weight-body-medium);
+  line-height: 1.4;
+}
+
+/* ---------- Tablet ---------- */
 @media (max-width: 900px) {
   .experience-layout {
     grid-template-columns: 1fr;
-    gap: 32px;
-    align-items: start;
+    gap: 40px;
+  }
+
+  .experience-story {
+    padding-top: 0;
+  }
+
+  .experience-numbers-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 32px;
+  }
+
+  .experience-number:nth-child(odd) {
+    padding-left: 0;
+    border-left: none;
   }
 }
 
-@media (max-width: 760px) {
-  .experience-layout {
-    gap: 20px;
-  }
-
+/* ---------- Phone ---------- */
+@media (max-width: 560px) {
   .experience-head h2 {
     max-width: 20ch;
   }
 
-  .experience-mark span {
-    font-size: 5rem;
+  .experience-number {
+    padding: 0 0 0 16px;
+  }
+
+  .experience-number:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .experience-number-label {
+    font-size: var(--type-small);
   }
 }
 
-/* Rhythm: the one section that is allowed to breathe. */
+/* Rhythm: the roomiest section on the page. */
 @media (min-width: 901px) {
   .section.experience-section {
-    padding: 112px 0;
+    padding: 112px 0 104px;
   }
 }

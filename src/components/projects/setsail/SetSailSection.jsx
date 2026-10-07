@@ -19,7 +19,7 @@ export default function SetSailSection() {
         </div>
         <div className="setsail-action">
           <Button href={setsail.href} arrow>
-            {setsail.home.cta}
+            {setsail.buildCta}
           </Button>
         </div>
       </div>

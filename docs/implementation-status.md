@@ -1,6 +1,6 @@
 # Implementation Status
 
-Last updated: 2026-10-07 (hero animation and artwork removed).
+Last updated: 2026-10-07 (static hero; homepage restructure with Experience and Selected Work).
 
 This is the active status document. Product direction and design principles live in `PRODUCT.md`; agent rules and
 boundaries live in `CLAUDE.md`. Everything under `docs/archive/` is historical and may describe earlier versions of
@@ -30,17 +30,21 @@ the site, including an older design identity. It is not a source of truth.
 
 ## Current Homepage (working tree)
 
-Order: Hero, SetSail Featured Build, What I Build, Tools, Experience, How I Work, About, FAQ, Contact-focused Footer
-with Lanyard.
+Order: Hero, What I Build, Experience, Selected Work, How I Work, Tools, About, FAQ, Contact-focused Footer with
+Lanyard.
 
 - Hero: identity line, H1 "I build modern websites and landing pages for businesses.", supporting copy and one CTA on
   the brand color. Static: the "Website Machine" canvas artwork (`src/components/home/machine/`) and the CSS text
   entrance were removed on 2026-10-07 at the owner's request. Night Shift (the earlier hero art) is also retired.
-- SetSail Featured Build: see SetSail Status.
 - What I Build: Business Websites, Website Rebuilds, Landing Pages (three-column rows on desktop).
 - Tools: "Tools I Use" marquee (includes Claude Code and ChatGPT), static reduced-motion fallback. shadcn/ui and Motion
   Primitives appear as tools the owner uses, not as dependencies of this site.
-- Experience: prior work with a digital marketing agency serving real estate investors; unnamed, no metrics.
+- Experience: "I've been working remotely for over 5 years.", two intro paragraphs, a short "How I got here" story
+  that ends on "I like knowing what I'm trying to solve before I start building.", then a ruled row of four numbers
+  (5+ years working remotely, 100+ client accounts supported, 28 team members coordinated, 30–40 client social
+  workflows managed) under the context line "Numbers from my remote roles over the years, not from my website work."
+  These are historical role figures, never pawlystudios. client counts. Copy in `src/data/experience.js`.
+- Selected Work: see SetSail Status. The case study's "Try the idea on the homepage" link was removed with the demo.
 - How I Work: three stages.
 - About: short story with the outdoor portrait.
 - FAQ: seven questions.
@@ -64,13 +68,11 @@ Navigation: Work, About, Contact. Footer navigation: Work, About, Web Developmen
 
 ## SetSail Status
 
-- **Homepage Featured Build:** a large "SetSail" title, a two-sentence first-person hook, and a purpose-built generic
-  approval card (invented bakery draft post, not a SetSail screen). Drag right to approve, left to request changes;
-  resistance, controlled rotation, stamps, spring-back, release threshold. Accessible: two real buttons, ArrowLeft and
-  ArrowRight on the focused card, `role="status"` live region, `touch-action: pan-y`, reduced-motion path. After a
-  decision the section turns: "That solved one part of it." then four typographic evidence tiles (roles, onboarding
-  stages, monthly reporting, stack) and a link to `/work/setsail`. No product screenshots or device mockups on the
-  homepage.
+- **Homepage Selected Work** (`SelectedWork.jsx`, `id="work"`, since 2026-10-07): eyebrow "Selected Work", the
+  "SetSail" title, one line ("A client portal and agency workspace I designed and built around a real workflow
+  problem."), a "View case study" button to `/work/setsail`, and ONE approved privacy-safe fragment
+  (`client-mobile-fragment.png`) with the "From the actual build" caption. No counts, feature lists, stack or
+  architecture on the homepage. The interactive approval card and the evidence tiles were removed with it.
 - **`/work/setsail`** is the one canonical SetSail case study, about BUILDING it (friction, the swipe decision, how it
   grew, under the hood with `<details>` and an architecture diagram, how it was built, and a bridge back to Business
   Websites / Website Rebuilds / Landing Pages). Each section has its own composition. There is NO `/work` index (it

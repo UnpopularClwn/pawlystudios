@@ -304,11 +304,6 @@
   color: var(--color-brand);
 }
 
-.cs-decision-link {
-  margin-top: clamp(24px, 3vw, 40px);
-}
-
-.cs-decision-link a,
 .cs-bridge-link {
   display: inline-flex;
   min-height: 44px;

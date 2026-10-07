@@ -107,11 +107,6 @@ export default function SetSailCaseStudy() {
             <p>{cs.decision.body}</p>
           </div>
           <SwipeSchematic notes={cs.decision.notes} />
-          <p className="cs-decision-link">
-            <Link href="/#work">
-              {cs.decision.try} <span aria-hidden="true">→</span>
-            </Link>
-          </p>
         </Container>
       </section>
 
