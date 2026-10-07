@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 // On the homepage the labels scroll to its sections. Everywhere else About and Contact go to their
-// dedicated routes. There is no /work index, so Work always points at the homepage Featured Build.
+// dedicated routes. There is no /work index, so Work always points at the homepage Selected Work.
 const NAV_LINKS = [
   { label: 'Work', href: '/#work' },
   { label: 'About', href: '/#about', route: '/about' },

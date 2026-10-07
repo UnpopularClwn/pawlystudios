@@ -12,21 +12,20 @@ the site, including an older design identity. It is not a source of truth.
 - Primary work: Business Websites, Website Rebuilds, Landing Pages. SetSail demonstrates deeper product/build
   capability without redefining the offering.
 - AI Ad Creative is parked and not part of the active direction.
-- Phase: pre-launch; creative refinement closed. `SITE_IS_LAUNCHED` is `false`; the site is `noindex`.
-- Supporting pages, the Website Machine hero and Lenis smooth scrolling are done and committed locally. The SEO
-  metadata/indexing/social foundation is built (see Foundation). Schema, GEO and AEO content work are still pending.
+- Phase: launched. **Production** is `origin/main` `ba139ea` with `SITE_IS_LAUNCHED` `true` (indexable). **Local
+  post-launch work**, NOT deployed: `22dc3f7` (static hero), `357018b` (homepage restructure: Experience and Selected Work), `21ac5f1` (`/resume`) and the housekeeping commit after them. Nothing after `ba139ea` is in production until pushed and deployed.
+- The Website Machine hero was removed locally on 2026-10-07 (the hero is static). Metadata, indexing, social cards and
+  structured data are built (see Foundation); GEO/AEO content work is pending.
 
 ## Repository State
 
-- Active branch: Orca worktree `~/orca/workspaces/Portfolio/bladderwrack`, branch
-  `UnpopularClwn/project-synchronization-review`. Several local checkpoint commits sit ahead of `origin/main` (see
-  `git log`; the latest is the Website Machine hero + Lenis checkpoint). Not pushed. Working tree is clean apart from
-  documented exclusions.
-- `main` and `origin/main` are at `9c3f2139fdbcd10ef390ba0146eefa7618840ea1`. What the live Vercel deployment serves is
-  NOT verified from this repository.
-- `personal-portfolio-redesign` (original worktree `~/Documents/Projects/Portfolio`) points at `8938684`. Do not touch
-  it. Its three untracked items (`portfolio logo transparent.svg`, `portfolio logo.png`, `public/images/new_img/`) are
-  intentionally not part of this repository state; `new_img` holds unredacted SetSail screenshots.
+- Working copy `~/orca/pawlystudios`, branch `main`. `origin/main` is `ba139eaa43aff890ba37075220a0e181f48ec369` (production). Local `main` is
+  ahead by the post-launch commits above; not pushed. Working tree is clean apart from the intentionally untracked
+  resume PDF `docs/AI-Forward Developer.docx.pdf` (do not commit, move, edit or delete it).
+- What Vercel serves is not re-verified from this repository; the owner reports the launched `ba139ea` build.
+- An older checkout (`~/Documents/Projects/Portfolio`, branch `personal-portfolio-redesign`) held unredacted SetSail
+  screenshots in `public/images/new_img/`. Neither that folder nor that branch exists on this machine as of 2026-10-07.
+  If it reappears, do not modify it and never move those screenshots into `public/`.
 
 ## Current Homepage (working tree)
 
@@ -138,10 +137,10 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
   keyboard operation, semantic structure, reduced-motion alternatives.
 - Contact system: client and server validation, shared field limits, project-type allowlist (`Web Development`,
   `Website Maintenance`, `Other / Not Sure Yet`), malformed-payload handling, honeypot, optional rate limiting, Resend
-  delivery that reports `NOT_CONFIGURED` until configured.
+  delivery that reports `NOT_CONFIGURED` until configured. The form is not rendered on `/contact` (since `b84357c`).
 - SEO foundation (central config in `src/lib/seo-config.js`):
   - `SITE_URL` is validated once (absolute http/https, normalized to its origin; missing or malformed is `undefined`).
-  - Each of the five public routes has its own title, description, self-referencing canonical (`canonicalFor`) and
+  - Each of the six public routes has its own title, description, self-referencing canonical (`canonicalFor`) and
     Open Graph / Twitter metadata (`socialFor`, `summary_large_image`, one shared 1200x630 card, no social handles).
   - `/services/ai-ad-creative` carries its own `noindex, nofollow` at any launch state. `/social-preview` (the card,
     a static `ImageResponse` in the brand blue/cream/red, default card font) is served with
@@ -153,8 +152,9 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
   - Structured data (`src/lib/schema.js`, rendered per page by `src/components/seo/JsonLd.jsx`) is emitted only when
     launched with a valid `SITE_URL`. Each page graph holds Person, Brand (`pawlystudios.`, not a LocalBusiness or
     Organization), WebSite, and a page node (WebPage / AboutPage / ContactPage / ProfilePage). The web development page adds a
-    Service and a breadcrumb; SetSail is a plain WebPage with a breadcrumb. No FAQPage, ratings, offers, address or
-    SoftwareApplication. `SITE_IS_LAUNCHED` remains `false`; the site is `noindex`.
+    Service and a breadcrumb; SetSail is a plain WebPage with a breadcrumb; `/resume` is a ProfilePage about the Person with a
+    breadcrumb. No FAQPage, ratings, offers, address or SoftwareApplication. `SITE_IS_LAUNCHED` is `true`; production is
+    indexable.
 - Security headers: `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`, a conservative
   `Permissions-Policy`, a report-only CSP; the Next.js signature is disabled.
 - Pixel-exact optimized runtime logo and favicon derived from the unchanged approved transparent SVG.
@@ -184,35 +184,33 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
 
 ## Vercel / Environment State
 
-- Vercel project: `pawlystudios`. Pre-launch URL: `https://pawlystudios.vercel.app` (custom domain intentionally
-  deferred, not required for the initial launch).
+- Vercel project: `pawlystudios`. Production URL: `https://pawlystudios.vercel.app` (custom domain intentionally
+  deferred).
 - `NEXT_PUBLIC_SITE_URL=https://pawlystudios.vercel.app` is configured for **Production only**; Preview and Development
   are intentionally unset.
 - As of the last documented check no delivery variables are set: `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`,
   `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Verify in Vercel before relying on this.
-- `SITE_IS_LAUNCHED` remains `false`.
+- `SITE_IS_LAUNCHED` is `true` (since `ba139ea`).
 - Launch invariant: indexing is enabled only when `SITE_IS_LAUNCHED` is true AND `NEXT_PUBLIC_SITE_URL` is a valid
   http(s) origin (`INDEXING_ENABLED` in `src/lib/seo-config.js`, the only value indexing code reads). Otherwise the site
   fails closed: `noindex, nofollow`, `robots.txt` `Disallow: /`, empty sitemap, no JSON-LD. Both settings are
   build-time (the flag is a source constant), so changing either needs a redeploy; still confirm them in launch
   rehearsal.
 
-## Remaining Launch Order
+## Post-Launch Order
 
-1. Configure Resend contact delivery (`RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`, Production only).
-2. Test a real contact submission end to end.
-3. SEO / GEO / AEO: metadata, canonicals, sitemap, robots/indexing, Open Graph/Twitter and structured data are done.
-   Still pending: GEO/AEO content answers, heading and image review.
-4. (Done) `/social-preview` is attached to Open Graph/Twitter metadata.
-5. Review final launch configuration.
-6. Set `SITE_IS_LAUNCHED` to `true` (only after explicit approval).
-7. Run final test/lint/build/security audit.
-8. Final desktop/tablet/mobile smoke test.
-9. Merge/push/deploy (only after explicit approval).
-10. Verify the actual Vercel production deployment.
-11. Verify canonical, robots, schema, social metadata, and contact delivery in production.
+Launch steps (SEO foundation, social card attachment, `SITE_IS_LAUNCHED = true`, deploy of `ba139ea`) are done. Next,
+each only after explicit approval:
 
-Deferred, not required for this launch: custom domain, Upstash rate limiting (safe to add later), final commercial
+1. Push/deploy the local post-launch commits, then verify production: homepage, `/resume`, sitemap with six routes,
+   canonicals, schema.
+2. Resume PDF: the owner revises the SetSail scheduling claim; then publish it at
+   `public/resume/nino-paul-cabiles-resume.pdf` with a Download PDF action.
+3. Configure Resend contact delivery and test a real submission.
+4. GEO/AEO content answers, heading and image review.
+5. Re-run Lighthouse and hosted QA on the current build.
+
+Deferred: custom domain, Upstash rate limiting (safe to add later), final commercial
 pricing, HSTS/CSP hardening beyond the baseline, SetSail `SoftwareApplication` schema.
 
 ## Current Contact Details
@@ -229,13 +227,12 @@ Values are centralized in `src/data/contact.js`.
   artwork; confirm the Tools entries shadcn/ui and Motion Primitives.
 - Git-history privacy decision: old commits of the public repository still contain removed SetSail images. No history
   rewrite has been done.
-- Launch and domain: custom domain, SEO/GEO/AEO pass, sitemap, absolute JSON-LD IDs, final schema publication, Open
-  Graph/Twitter attachment, SetSail `SoftwareApplication` schema decision.
+- Domain and search: custom domain, GEO/AEO content, SetSail `SoftwareApplication` schema decision.
 - Form delivery: credentials and provider verification (architecture is complete and tested).
 - Commercial content: approved prices; none are published.
 - Security and QA: HSTS verification, enforcing CSP review, Lighthouse and domain-dependent QA on the final
   configuration (earlier numbers predate the current homepage).
-- Final launch: explicit approval, `SITE_IS_LAUNCHED = true`, removing `noindex`, publishing the sitemap and schema.
+- Resume PDF: on hold until the owner revises the SetSail scheduling claim (see Routes).
 
 ## Important Project Rules
 
@@ -247,11 +244,10 @@ Values are centralized in `src/data/contact.js`.
 - Do not work on the parked AI Ad Creative route, and do not create a `/work` index.
 - Do not reintroduce SetSail product screens or recreations; do not change the Lanyard physics.
 - The client owns the finished website. Ongoing support is optional.
-- Do not enable indexing, push, deploy, or change environment variables without explicit approval.
+- Do not change indexing behavior, push, deploy, or change environment variables without explicit approval.
 
-## Not Launch Ready
+## Known Gaps (post-launch)
 
-Creative refinement is closed, but launch configuration is intentionally unfinished. The inquiry form returns
-`NOT_CONFIGURED`; no custom domain exists; domain-dependent metadata, sitemap, and schema publication are unset; the
-Lanyard artwork is a placeholder; removed SetSail images remain in old Git history; and indexing must stay disabled
-until final launch approval and QA.
+The site is launched. Still open: the local post-launch commits are not deployed; the inquiry form is not rendered and
+delivery is not configured; no custom domain exists; the resume PDF is on hold; the Lanyard artwork is a placeholder;
+and removed SetSail images remain in old Git history.

@@ -2,11 +2,11 @@
 
 ## Current Checkpoint
 
-The `pawlystudios.` portfolio (Niño Paul Cabiles) is a single-homepage, capability-first portfolio. The creative
-refinement phase (Lanyard, three-role typography, homepage composition, SetSail Featured Build and `/work/setsail`,
-privacy cleanup) is CLOSED and committed locally on the working branch. It has not been pushed or deployed.
-Pre-launch: `SITE_IS_LAUNCHED` is `false`, the site is `noindex`, inquiry delivery is not configured, and there is no
-custom domain. This project folder is the only source of truth. Do not create a duplicate app or experimental copy.
+The `pawlystudios.` portfolio (Niño Paul Cabiles) is LAUNCHED. **Production** is `origin/main` at `ba139ea` ("chore:
+enable site indexing for launch"): `SITE_IS_LAUNCHED` is `true`, the site is indexable at
+`https://pawlystudios.vercel.app`, there is no custom domain, and inquiry delivery is not configured (`/contact` shows
+direct contact links only). **Local post-launch work** on `main` is NOT deployed: `22dc3f7` (static hero), `357018b` (homepage restructure: Experience and Selected Work), `21ac5f1` (`/resume`) and the housekeeping commit after them. Nothing after `ba139ea` is
+in production until it is pushed and deployed. This project folder is the only source of truth. Do not create a duplicate app or experimental copy.
 
 Read `PRODUCT.md` (product, positioning, design direction) and `docs/implementation-status.md` (state, launch order)
 before resuming. Everything under `docs/archive/` is historical; it is not a source of truth and may describe earlier
@@ -26,17 +26,16 @@ versions of the site. Current code, `PRODUCT.md`, and the status document take p
 
 Facts from git (use `git log` for the exact checkpoint commit):
 
-- Active branch: the Orca worktree branch `UnpopularClwn/project-synchronization-review`
-  (`~/orca/workspaces/Portfolio/bladderwrack`). It carries several local checkpoint commits (see `git log`; the latest is
-  the Website Machine hero + Lenis checkpoint), built on `8938684` ("feat: rebuild pawlystudios portfolio experience").
-- Local `main` and `origin/main` are identical at `9c3f2139fdbcd10ef390ba0146eefa7618840ea1`. The working branch is
-  ahead of them and has NOT been pushed.
-- **Not verified:** what the live Vercel production deployment serves. Pushes to `main` trigger production
-  deployments; check the deployment before describing anything as live.
-- `personal-portfolio-redesign` (original worktree `~/Documents/Projects/Portfolio`) points at `8938684`. Do not
-  modify it or that worktree. It holds three intentional untracked items that are not part of this repository state:
-  `portfolio logo transparent.svg`, `portfolio logo.png`, `public/images/new_img/` (unredacted SetSail screenshots;
-  never move them into `public/`). Do not delete, stage, move, or modify them.
+- Working copy: `~/orca/pawlystudios`, branch `main`. `origin/main` is `ba139eaa43aff890ba37075220a0e181f48ec369` (production). Local `main` is
+  ahead of it by the post-launch commits listed above and has NOT been pushed
+  (`git rev-list --left-right --count origin/main...HEAD`).
+- `docs/AI-Forward Developer.docx.pdf` (the owner's resume PDF) is intentionally untracked. Do not commit, move, edit
+  or delete it (see **Resume Page**).
+- **Not re-verified from this repository:** what Vercel production serves. The owner reports the launched `ba139ea`
+  build. Pushes to `main` trigger production deployments; check the deployment before describing anything as live.
+- An older checkout (`~/Documents/Projects/Portfolio`, branch `personal-portfolio-redesign`) held unredacted SetSail
+  screenshots in `public/images/new_img/`. Neither that folder nor that branch exists on this machine as of 2026-10-07.
+  If it reappears, do not modify it and never move those screenshots into `public/`.
 - Do not merge, push, or deploy without explicit approval.
 - Do not rewrite Git history. See the SetSail section for the open history-privacy decision.
 
@@ -67,8 +66,8 @@ them. Keep it that way; the owner should confirm those two entries.
 
 Supporting pages (`/about`, `/services/web-development`, `/contact`) still exist. `/about` and
 `/services/web-development` predate the current positioning (the web-development metadata and the schema Service
-description still mention "web portals") and are queued for a consistency review. `/contact` and its inquiry form are
-preserved even though the homepage does not use the form.
+description still mention "web portals") and are queued for a consistency review. `/contact` shows direct contact links
+only; `InquiryForm.jsx` and its server action stay in code but are not rendered (since `b84357c`).
 
 ## Design System
 
@@ -146,6 +145,21 @@ imported client-only, homepage-only, with a static reduced-motion fallback and a
   from the current tree. The current tree is safe; history is not rewritten. Whether to purge history, make the
   repository private, or leave it is an open decision for the owner.
 
+## Resume Page
+
+- `/resume` is the structured professional record (copy in `src/data/resume.js`, sourced only from the owner's resume
+  PDF): introduction, at-a-glance figures from past remote roles (with the "not from my website work" context line),
+  three roles, SetSail as one short entry linking to `/work/setsail`, Athena training, grouped tools, and the shared
+  Footer with a "Want to talk?" heading (contact values from `src/data/contact.js`). `/about` stays the personal
+  narrative.
+- Indexable: own canonical and metadata, in the sitemap, ProfilePage JSON-LD with a breadcrumb. Linked from the footer
+  nav and from the homepage Experience section ("View résumé").
+- **PDF download is ON HOLD.** The source PDF describes automated scheduling of approved content through a third-party
+  platform as a current SetSail feature, which breaks the SetSail claim rules (the integration is built and tested
+  but off by default). The owner must revise it before publication. No public PDF exists and there is no Download PDF
+  action. Intended future path: `public/resume/nino-paul-cabiles-resume.pdf` (served at
+  `/resume/nino-paul-cabiles-resume.pdf`).
+
 ## Parked Work
 
 AI Ad Creative is intentionally parked, not deleted, and is not part of the active direction:
@@ -204,25 +218,29 @@ the dominant contact link with WhatsApp and LinkedIn beneath it. `/contact` is f
 
 ## Vercel / Environment State
 
-- Vercel project: `pawlystudios`. Pre-launch production URL: `https://pawlystudios.vercel.app` (custom domain
-  intentionally deferred).
+- Vercel project: `pawlystudios`. Production URL: `https://pawlystudios.vercel.app` (custom domain intentionally
+  deferred).
 - `NEXT_PUBLIC_SITE_URL=https://pawlystudios.vercel.app` is configured in Vercel, **Production only**. Preview and
   Development are intentionally unset (a preview deployment inheriting the production origin would produce a wrong
   `metadataBase`/canonical).
 - No other environment variables were configured as of the last documented check: `RESEND_API_KEY`,
   `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Verify in Vercel
   before relying on this. Do not change environment variables without a task.
-- `SITE_IS_LAUNCHED` is `false` (`src/lib/seo-config.js`); the site emits `noindex, nofollow` and the JSON-LD graph is
-  gated off. `src/app/robots.js` preserves pre-launch crawling behavior without a sitemap URL. Global title,
-  description, and gated schema are still Web Development-oriented; broadening them (and the SEO/GEO/AEO work) is a
-  future task.
-- A branded 1200 × 630 social preview exists at `/social-preview` and is not yet attached to Open Graph/Twitter
-  metadata.
+- `SITE_IS_LAUNCHED` is `true` (`src/lib/seo-config.js`, since `ba139ea`). Indexing requires it AND a valid
+  `NEXT_PUBLIC_SITE_URL` (`INDEXING_ENABLED`); otherwise everything fails closed (noindex, `Disallow: /`, empty
+  sitemap, no JSON-LD). Indexable routes (`INDEXABLE_ROUTES`): `/`, `/about`, `/contact`,
+  `/services/web-development`, `/work/setsail`, `/resume` (`/resume` exists locally only until deployed). Each has a
+  self canonical. `/services/ai-ad-creative` stays `noindex, nofollow`; `/social-preview` sends
+  `X-Robots-Tag: noindex, nofollow`.
+- The branded 1200 × 630 card at `/social-preview` is attached to Open Graph/Twitter metadata on every route
+  (`socialFor`).
 - Baseline security headers and a report-only CSP are configured in `next.config.js`; the Next.js signature is
   disabled. HSTS and enforcing CSP remain launch review items.
 
 ## Contact Form State
 
+- **Not rendered:** since `b84357c`, `/contact` shows direct contact links only. The form system below is kept in code
+  and tested.
 - Flow: `InquiryForm.jsx` (client) → `submitContactForm.js` (`'use server'` Server Action) → server validation +
   honeypot → optional rate limiting → `contactSubmission.js`'s `processContactForm` → Resend delivery.
 - Project types: `Web Development`, `Website Maintenance`, `Other / Not Sure Yet`.
@@ -246,7 +264,7 @@ the dominant contact link with WhatsApp and LinkedIn beneath it. `/contact` is f
 
 - Do not fabricate contact details, client identities, business claims, metrics, statistics, testimonials, or domains.
 - Do not configure inquiry delivery without an approved provider and real server-side credentials.
-- Do not enable indexing until the production domain, metadata, launch QA, and explicit approval are complete.
+- Do not change indexing behavior (launch flag, robots, sitemap, canonicals) without explicit approval.
 - Preserve approved content and the data-driven content organization. Prefer focused changes and reuse of existing
   components. Do not broadly refactor.
 - No em dashes in public copy. No unsupported claims. `pawlystudios.` is a personal creative identity, not an agency.
@@ -262,7 +280,8 @@ the dominant contact link with WhatsApp and LinkedIn beneath it. `/contact` is f
   confidentiality and claim rules.
 - Change the Lanyard physics, or treat its placeholder artwork as final.
 - Redesign `/about` or `/services/web-development` outside their planned consistency review.
-- Flip `SITE_IS_LAUNCHED` or otherwise enable indexing.
+- Change `SITE_IS_LAUNCHED` or indexing behavior.
+- Publish the resume PDF or add a Download PDF action before the owner supplies a revised PDF.
 - Push, deploy, rewrite Git history, or change environment variables.
 - Add pricing content (none is approved).
 - Install Motion, Tailwind, shadcn/ui, or Motion Primitives.
@@ -276,22 +295,17 @@ Future work (creative phase is closed):
 3. Git-history privacy decision for the public repository (unsafe SetSail images remain in old commits).
 4. Confirm the Tools entries shadcn/ui and Motion Primitives.
 
-Launch (in order, each after explicit approval where noted):
+Post-launch (each only after explicit approval):
 
-1. Configure Resend contact delivery (`RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`, Production only).
-2. Test a real contact submission end to end.
-3. SEO / GEO / AEO: homepage and page metadata, canonicals, structured data (Person and `pawlystudios.` entity
-   consistency), sitemap, robots/indexing, Open Graph/Twitter, headings, image metadata.
-4. Attach `/social-preview` to Open Graph/Twitter metadata.
-5. Review final launch configuration.
-6. Set `SITE_IS_LAUNCHED` to `true` (only after explicit approval).
-7. Run final test/lint/build/security audit.
-8. Final desktop/tablet/mobile smoke test.
-9. Merge/push/deploy (only after explicit approval).
-10. Verify the actual Vercel production deployment.
-11. Verify canonical, robots, schema, social metadata, and contact delivery in production.
+1. Push/deploy the local post-launch commits, then verify production: homepage, `/resume`, sitemap with six routes,
+   canonicals, schema.
+2. Resume PDF: the owner revises the SetSail scheduling claim; then publish it at the intended path with a Download PDF
+   action.
+3. Configure Resend contact delivery and test a real submission.
+4. GEO/AEO content, heading and image review.
+5. Re-run Lighthouse and hosted QA on the current build.
 
-Deferred, not required for launch: custom domain, Upstash rate limiting, final commercial pricing, HSTS/CSP hardening
+Deferred: custom domain, Upstash rate limiting, final commercial pricing, HSTS/CSP hardening
 beyond the baseline, SetSail `SoftwareApplication` schema.
 
 <!-- BEGIN:nextjs-agent-rules -->

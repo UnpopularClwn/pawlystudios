@@ -82,12 +82,14 @@ Navigation is Work, About, Contact (in-page anchors). Footer navigation is Work,
 Routes: `/`, `/work/setsail`, `/resume`, `/about`, `/contact`, `/services/web-development`, `/social-preview`.
 
 `/resume` is the structured professional record (roles, figures from past roles, SetSail as one short entry,
-training, grouped tools). `/about` stays the personal narrative; the two complement each other.
+training, grouped tools). `/about` stays the personal narrative; the two complement each other. The resume PDF download
+is on hold until the owner revises a SetSail claim in the PDF.
+
 `/services/ai-ad-creative` is parked and unlinked. There is no `/work` index (intentionally 404).
 
 `/about` and `/services/web-development` predate the current positioning and are queued for a consistency review. They
-are not the design reference for the homepage. `/contact` and its inquiry form are intentionally preserved even though
-the homepage does not use the form.
+are not the design reference for the homepage. `/contact` shows direct contact links only; the inquiry form stays in
+code but is not rendered.
 
 The Hero is a static typographic composition on the brand color: identity line, headline, supporting copy and one CTA.
 It has no artwork and no entrance animation (the "Website Machine" canvas art was removed on 2026-10-07). Copy is approved and unchanged. Spacing follows the density direction in Design Principles: varied section rhythm, a fluid container
@@ -186,6 +188,7 @@ The canonical source is `src/data/contact.js`; components read from it.
 
 ## Launch State
 
-Pre-launch. `SITE_IS_LAUNCHED` is `false` and the site is `noindex`. Inquiry delivery is not configured and must keep
-returning `NOT_CONFIGURED`; never fake success. Do not flip the launch flag, enable indexing, push, or deploy without
-explicit approval. See `docs/implementation-status.md` for the launch order and pending items.
+Launched. Production is `origin/main` at `ba139ea`: `SITE_IS_LAUNCHED` is `true` and the site is indexable. Later
+local commits (static hero, homepage restructure, `/resume`, housekeeping) are not in production until pushed and
+deployed. Inquiry delivery is not configured and the form is not rendered; never fake success. Do not change indexing,
+push, or deploy without explicit approval. See `docs/implementation-status.md` for pending items.
